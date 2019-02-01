@@ -1,4 +1,4 @@
-# GoogleHashCode
+# GogleHashCode
 Solutions for Google's HashCode competition
 
 ## 2017 Qualify
@@ -10,3 +10,4 @@ Fully implemented
 ## 2018 Qualify
 Fully implemented
 Score of 49.2M (First place was 49.7M)
+
