@@ -15,9 +15,9 @@ object InputReader {
 
     val a = Array.ofDim[Int](rows, cols)
 
-    0.until(rows - 1).foreach(r => {
+    0.until(rows).foreach(r => {
       val toppings = reader.readLine().toCharArray
-      0.until(cols - 1).foreach(c => {
+      0.until(cols).foreach(c => {
         a(r)(c) = toppings(c) match {
           case 'T' => 0
           case 'M' => 1

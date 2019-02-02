@@ -1,36 +1,38 @@
 package main
 
-import scala.collection.mutable.ArrayBuffer
-
-case class Video(id: Int, size: Int)
-
-case class Endpoint(id: Int, latency: Int, links: ArrayBuffer[Link], requests: ArrayBuffer[Requests])
-
-case class Requests(qty: Int, video: Video)
-
-case class Link(cache: Cache, latency: Int)
-
-case class Cache(id: Int, size: Int, videos: ArrayBuffer[Video])
+import scala.collection.mutable
 
 case class Slice(p1: Point, p2: Point) {
-  val size: Int = (p2.x - p1.x + 1) * (p2.y - p1.y + 1)
+  val size: Int = (Math.max(p2.row, p1.row) - Math.min(p1.row, p2.row) + 1) *
+    ((Math.max(p2.col, p1.col) - Math.min(p1.col, p2.col)) + 1)
 
-  def isValid(min: Int, pizza: Array[Array[Int]]): Boolean = {
-    var has0 = 0
-    var has1 = 0
-    p1.x.to(p2.x).foreach { x => {
-      p1.y.to(p2.y).foreach { y =>
+  // Returns if a Slice is valid
+  // Check if it is within bounds of pizza
+  // Check if it has the minimum amount of each ingredient (Tomato = 0, Mushroom = 1)
+  // Check if its size is no bigger than maximum size allowed for a Slice
+  def isValid(minOfEach: Int, maxSize: Int, pizza: Array[Array[Int]]): Boolean = {
+    if (this.size > maxSize) return false
+    if (p1.row < 0 || p2.row < 0 || p1.row >= pizza.length || p2.row >= pizza.length) return false
+    if (p1.col < 0 || p2.col < 0 || p1.col >= pizza(0).length || p2.col >= pizza(0).length) return false
+
+    var count0 = 0
+    var count1 = 0
+    val startRow = Math.max(0, Math.min(p1.row, p2.row))
+    val endRow = Math.min(pizza.length - 1, Math.max(p1.row, p2.row))
+    val startCol = Math.max(0, Math.min(p1.col, p2.col))
+    val endCol = Math.min(pizza(0).length - 1, Math.max(p1.col, p2.col))
+    startRow.to(endRow).foreach { x =>
+      startCol.to(endCol).foreach { y =>
         if (pizza(x)(y) == 0)
-          has0 += 1
+          count0 += 1
         else if (pizza(x)(y) == 1)
-          has1 += 1
+          count1 += 1
         else if (pizza(x)(y) == 3) return false
       }
-      }
     }
-    has0 >= min && has1 >= min
+    count0 >= minOfEach && count1 >= minOfEach
   }
 
 }
 
-case class Point(x: Int, y: Int)
+case class Point(row: Int, col: Int)
