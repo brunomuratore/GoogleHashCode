@@ -1,5 +1,11 @@
 package main
 
+import main.framework.{Score, ScorePrinter}
+import main.io.{InputReader, OutputWriter}
+import main.scorer.Scorer
+
+import scala.collection.mutable
+
 object Main extends App{
 
   val allFiles = List[String]("input.txt", "small.in", "medium.in", "big.in")
@@ -8,8 +14,7 @@ object Main extends App{
 //  val allFiles = List("medium.in")
 //  val allFiles = List("big.in")
 
-  var totalScore = 0
-  var maxTotalScore = 0
+  var scores = mutable.HashMap[String, Score]()
 
   allFiles.foreach { file =>
     val (array, min, max) = InputReader.read(file)
@@ -20,11 +25,7 @@ object Main extends App{
 
     OutputWriter.write(slices, file)
 
-    val score = Scorer.compute(slices)
-    val maxScore = Scorer.maxScore(array)
-    totalScore += score
-    maxTotalScore += maxScore
-    println(s"$file: $score/$maxScore")
+    scores += file -> Scorer.compute(slices, array)
   }
-  println(s"total: $totalScore/$maxTotalScore")
+  ScorePrinter.print(scores)
 }

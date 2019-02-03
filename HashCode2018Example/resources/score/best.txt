@@ -1,0 +1,5 @@
+total: 937828/1050057
+input.txt: 12/15
+big.in: 889462/1000000
+small.in: 40/42
+medium.in: 48314/50000

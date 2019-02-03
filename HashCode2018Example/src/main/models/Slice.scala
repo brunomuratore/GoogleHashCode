@@ -1,6 +1,4 @@
-package main
-
-import scala.collection.mutable
+package main.models
 
 case class Slice(p1: Point, p2: Point) {
   val size: Int = (Math.max(p2.row, p1.row) - Math.min(p1.row, p2.row) + 1) *

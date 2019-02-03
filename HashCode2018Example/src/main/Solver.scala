@@ -4,6 +4,8 @@
 
 package main
 
+import main.models.{Point, Slice}
+
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
@@ -20,11 +22,11 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
   }
 
   def getSlicesByMax(point: Point) = {
-    getEndPoints(point, point).values.map(p => Slice(point, p)).toList.sortBy(-_.size)
+    getEndPoints(point, point).values.map(p => models.Slice(point, p)).toList.sortBy(-_.size)
   }
   private val minSize = minOfEach * 2
   def getEndPoints(p1: Point, p2: Point, setPoints: mutable.HashMap[Point, Point] = mutable.HashMap()): mutable.HashMap[Point, Point] = {
-    val slice = Slice(p1, p2)
+    val slice = models.Slice(p1, p2)
     if(setPoints.contains(p2)) return null
     if(slice.size > maxSize) return null
     if (p2.row < 0 || p2.row >= pizza.length) return null

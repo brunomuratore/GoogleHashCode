@@ -1,6 +1,8 @@
-package main
+package main.io
 
 import java.io._
+
+import main.models.Slice
 
 import scala.collection.mutable.ListBuffer
 

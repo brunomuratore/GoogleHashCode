@@ -1,4 +1,4 @@
-package main
+package main.io
 
 import java.io.{BufferedReader, File, FileReader}
 
