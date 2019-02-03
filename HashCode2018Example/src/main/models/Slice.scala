@@ -1,6 +1,22 @@
 package main.models
 
+import scala.collection.mutable
+
 case class Slice(id: Int, p1: Point, p2: Point) {
+  def allPoints = {
+    val startRow = Math.min(p1.row, p2.row)
+    val endRow =  Math.max(p1.row, p2.row)
+    val startCol = Math.min(p1.col, p2.col)
+    val endCol = Math.max(p1.col, p2.col)
+    val points = mutable.MutableList[Point]()
+    startRow.to(endRow).foreach { x =>
+      startCol.to(endCol).foreach { y =>
+        points += Point(x,y)
+      }
+    }
+    points
+  }
+
   val size: Int = (Math.max(p2.row, p1.row) - Math.min(p1.row, p2.row) + 1) *
     ((Math.max(p2.col, p1.col) - Math.min(p1.col, p2.col)) + 1)
 
