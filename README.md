@@ -6,6 +6,7 @@ Not fully implemented
 
 ## 2018 Practice
 Fully implemented
+Score of 938092 (May require a few runs due to randomness)
 
 ## 2018 Qualify
 Fully implemented
