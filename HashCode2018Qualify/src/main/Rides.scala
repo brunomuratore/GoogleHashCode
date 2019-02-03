@@ -124,8 +124,7 @@ class Rides extends util.TreeMap[Int, mutable.ListBuffer[Ride]] {
     if (startTime == ride.timeStart) {
       score += bonus
     }
-    score += (ride.distance *0.5) - startTime
     val waitTime = startTime - vehicle.available
-    score - (waitTime * 5.5)
+    score - waitTime
   }
 }
