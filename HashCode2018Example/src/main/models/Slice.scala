@@ -1,6 +1,6 @@
 package main.models
 
-case class Slice(p1: Point, p2: Point) {
+case class Slice(id: Int, p1: Point, p2: Point) {
   val size: Int = (Math.max(p2.row, p1.row) - Math.min(p1.row, p2.row) + 1) *
     ((Math.max(p2.col, p1.col) - Math.min(p1.col, p2.col)) + 1)
 
@@ -25,7 +25,7 @@ case class Slice(p1: Point, p2: Point) {
           count0 += 1
         else if (pizza(x)(y) == 1)
           count1 += 1
-        else if (pizza(x)(y) == 3) return false
+        else if (pizza(x)(y) >= 3) return false
       }
     }
     count0 >= minOfEach && count1 >= minOfEach
@@ -34,3 +34,11 @@ case class Slice(p1: Point, p2: Point) {
 }
 
 case class Point(row: Int, col: Int)
+
+object Slice {
+  private var sliceId = 3
+  def getSliceId: Int = {
+    sliceId +=1
+    sliceId
+  }
+}

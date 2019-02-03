@@ -8,7 +8,7 @@ import scala.collection.mutable.ListBuffer
 
 object OutputWriter {
 
-  def write(slices: ListBuffer[Slice], fileName: String): Unit = {
+  def write(slices: Iterable[Slice], fileName: String): Unit = {
     val file = new File(s"resources/output/$fileName").getAbsolutePath
     val bw = new BufferedWriter(new FileWriter(file))
     bw.write(slices.size + "\n")

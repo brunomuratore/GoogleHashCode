@@ -21,7 +21,7 @@ object Main extends App{
 
     val solver = new Solver(array, min, max)
 
-    val slices = solver.solve()
+    val slices = solver.solve().values
 
     OutputWriter.write(slices, file)
 
