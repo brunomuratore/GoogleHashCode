@@ -4,8 +4,6 @@ import java.io._
 
 import main.models.Slice
 
-import scala.collection.mutable.ListBuffer
-
 object OutputWriter {
 
   def write(slices: Iterable[Slice], fileName: String): Unit = {

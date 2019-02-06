@@ -25,6 +25,8 @@ object InputReader {
       })
     })
 
+    reader.close()
+
     (a, min, max)
   }
 }

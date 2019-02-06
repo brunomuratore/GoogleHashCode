@@ -4,6 +4,7 @@
 
 package main
 
+import main.framework.ProgressBar
 import main.models.{Point, Slice}
 import main.models.Slice.getSliceId
 
@@ -58,10 +59,13 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
   }
 
   private def run() = {
+    val bar = new ProgressBar("Greedy solve", pizza.length * pizza(0).length)
     pizza.indices.foreach { x =>
       pizza(0).indices.foreach { y =>
-        if (pizza(x)(y) < 3)
+        if (pizza(x)(y) < 3) {
           findSlice(Point(x, y)).foreach(cutPizza)
+        }
+        bar.update()
       }
     }
 
@@ -141,6 +145,7 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
   }
 
   def improveEdges(): Unit = {
+    val bar = new ProgressBar("Random improving edges", 1000)
     0.to(1000).foreach { _ =>
       val edgePoint = getFreeEdge()
       if(edgePoint.isDefined) {
@@ -158,6 +163,7 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
           oldSlices.foreach(cutPizza)
         }
       }
+      bar.update()
     }
   }
 

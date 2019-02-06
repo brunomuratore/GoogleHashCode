@@ -3,3 +3,4 @@
 **/*.iml
 *.zip
 **/resources/output/
+*.DS_Store

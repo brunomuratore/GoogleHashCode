@@ -17,6 +17,8 @@ object Main extends App{
   var scores = mutable.HashMap[String, Score]()
 
   allFiles.foreach { file =>
+    println(s"Running $file")
+
     val (array, min, max) = InputReader.read(file)
 
     val solver = new Solver(array, min, max)
@@ -26,6 +28,8 @@ object Main extends App{
     OutputWriter.write(slices, file)
 
     scores += file -> Scorer.compute(slices, array)
+
+    println("")
   }
   ScorePrinter.print(scores)
 }
