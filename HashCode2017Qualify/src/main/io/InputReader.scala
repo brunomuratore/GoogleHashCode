@@ -1,12 +1,14 @@
-package main
+package main.io
 
 import java.io.{BufferedReader, File, FileReader}
+
+import main.models.{Cache, Endpoint, Link, Requests, Video}
 
 import scala.collection.mutable.ArrayBuffer
 
 object InputReader {
   def read(file: String): (ArrayBuffer[Cache], ArrayBuffer[Endpoint]) = {
-    val path = new File(s"resources/$file").getAbsolutePath
+    val path = new File(s"resources/input/$file").getAbsolutePath
     val reader = new BufferedReader(new FileReader(path))
 
     //first line

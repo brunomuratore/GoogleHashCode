@@ -1,4 +1,8 @@
-package main
+/*
+ * Copyright (c) 2019 Schibsted Media Group. All rights reserved.
+ */
+
+package main.models
 
 import scala.collection.mutable.ArrayBuffer
 
