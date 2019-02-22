@@ -7,7 +7,7 @@ object OutputWriter {
 
   def write(fileName: String): Unit = {
     val file = new File(s"resources/output/$fileName")
-    file.mkdirs()
+    file.getParentFile.mkdirs()
     val bw = new BufferedWriter(new FileWriter(file.getAbsolutePath))
     //bw.write(slices.size + "\n")
 

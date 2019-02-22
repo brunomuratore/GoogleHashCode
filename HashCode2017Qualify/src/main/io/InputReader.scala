@@ -4,7 +4,7 @@ import java.io.{BufferedReader, File, FileReader}
 
 import main.models.{Cache, Endpoint, Link, Requests, Video}
 
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable._
 
 object InputReader {
   def read(file: String): (ArrayBuffer[Cache], ArrayBuffer[Endpoint]) = {
@@ -21,7 +21,7 @@ object InputReader {
 
     //caches
     val caches = new ArrayBuffer[Cache](aCaches)
-    0.until(aCaches).foreach(caches += Cache(_, cacheSize, new ArrayBuffer[Video]))
+    0.until(aCaches).foreach(caches += Cache(_, cacheSize, new MutableList[Video]))
 
     //videos
     val videos = new ArrayBuffer[Video](aVideos)
