@@ -29,6 +29,8 @@ object Main extends App{
 
     scores += file -> Scorer.compute(endpoints)
 
+    println(s"free total cache space = ${caches.map(_.freeSpace).sum}")
+
     println("")
   }
   ScorePrinter.print(scores)

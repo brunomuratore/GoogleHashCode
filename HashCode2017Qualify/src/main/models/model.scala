@@ -28,4 +28,5 @@ case class Cache(id: Int, size: Int, var videos: HashMap[Int, Video]) {
       false
     }
   }
+  def freeSpace = size - videos.map(_._2.size).sum
 }
