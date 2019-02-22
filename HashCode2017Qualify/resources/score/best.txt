@@ -1,5 +1,5 @@
-total: 938092/1050057
-input.txt: 12/15
-big.in: 889688/1000000
-small.in: 40/42
-medium.in: 48358/50000
+total: 732000/0
+me_at_the_zoo.in: 280000/0
+videos_worth_spreading.in: 192000/0
+kittens.in: 257000/0
+trending_today.in: 3000/0

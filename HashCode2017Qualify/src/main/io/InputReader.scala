@@ -21,7 +21,7 @@ object InputReader {
 
     //caches
     val caches = new ArrayBuffer[Cache](aCaches)
-    0.until(aCaches).foreach(caches += Cache(_, cacheSize, new MutableList[Video]))
+    0.until(aCaches).foreach(caches += Cache(_, cacheSize, HashMap.empty))
 
     //videos
     val videos = new ArrayBuffer[Video](aVideos)

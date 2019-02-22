@@ -18,7 +18,7 @@ object ScorePrinter {
       val best = bestScores.getOrElse(file, Score(0, 0))
       val dif = score.result - best.result
       val difStr = if (dif > 0) s"  ▲ $dif" else if (dif < 0) s"  ▼ $dif" else ""
-      println(s"$file: ${score.result}/${score.max}$difStr")
+      println(s"$file: ${score.result}$difStr")
       if (dif > 0) bestScores(file) = score
     }
 
@@ -49,4 +49,4 @@ object ScorePrinter {
   }
 }
 
-case class Score (result: Int, max: Int)
+case class Score (result: Long, max: Long)

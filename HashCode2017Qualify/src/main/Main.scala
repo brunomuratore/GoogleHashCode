@@ -25,9 +25,9 @@ object Main extends App{
 
     val cachesResult = solver.solve()
 
-    OutputWriter.write(file)
+    OutputWriter.write(file, cachesResult)
 
-    scores += file -> Scorer.compute(cachesResult)
+    scores += file -> Scorer.compute(endpoints)
 
     println("")
   }

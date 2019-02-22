@@ -5,7 +5,7 @@
 package main.models
 
 import scala.collection.mutable.ArrayBuffer
-import scala.collection.mutable.MutableList
+import scala.collection.mutable.HashMap
 
 case class Video(id: Int, size: Int)
 
@@ -17,11 +17,11 @@ case class Requests(qty: Int, video: Video) {
 
 case class Link(cache: Cache, latency: Int)
 
-case class Cache(id: Int, size: Int, var videos: MutableList[Video]) {
+case class Cache(id: Int, size: Int, var videos: HashMap[Int, Video]) {
   var currentSize = 0
   def addIfHasSpace(video: Video): Boolean = {
     if (currentSize + video.size <=size) {
-      videos += video
+      videos += video.id -> video
       currentSize += video.size
       true
     } else {
