@@ -13,6 +13,7 @@ import util.control.Breaks._
 class Solver(caches: ArrayBuffer[Cache], endpoints: ArrayBuffer[Endpoint], in: Int) {
 
 
+
   def solve(): List[Cache] = {
 
     val pb = new ProgressBar("Solver", endpoints.length)
@@ -35,7 +36,5 @@ class Solver(caches: ArrayBuffer[Cache], endpoints: ArrayBuffer[Endpoint], in: I
 
     caches.toList
   }
-
-
 
 }

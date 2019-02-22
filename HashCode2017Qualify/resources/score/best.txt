@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 total: 1748000/0
 videos_worth_spreading.in: 267000/0
 me_at_the_zoo.in: 404000/0
 trending_today.in: 499000/0
 kittens.in: 578000/0
+=======
+total: 1484000/0
+me_at_the_zoo.in: 404000/0
+videos_worth_spreading.in: 267000/0
+kittens.in: 478000/0
+trending_today.in: 335000/0
+>>>>>>> b63d1c59259a91611165e3d73b317cd0498baa99
