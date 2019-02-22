@@ -16,12 +16,12 @@ object Main extends App{
 
   var scores = mutable.HashMap[String, Score]()
 
-  allFiles.foreach { file =>
+  allFiles.zipWithIndex.foreach { case (file,i) =>
     println(s"Running $file")
 
     val (caches, endpoints) = InputReader.read(file)
 
-    val solver = new Solver(caches, endpoints)
+    val solver = new Solver(caches, endpoints, i)
 
     val cachesResult = solver.solve()
 
