@@ -7,6 +7,8 @@ package main
 import main.framework.ProgressBar
 import main.models.{Point, Slice}
 import main.models.Slice.getSliceId
+import main.params.Params
+import main.params.Params.numOfSlicesToRemove
 
 import scala.collection.mutable
 import scala.collection.mutable.Set
@@ -15,7 +17,7 @@ import scala.collection.mutable.HashMap
 import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
-class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
+class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int)(implicit file: String) {
   private val originalPizza = pizza.map(_.clone)
   var result = HashMap[Int, Slice]()
   val r = new Random()
@@ -49,15 +51,19 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
     setPoints
   }
 
-  def findSlice(point: Point, order: Int = -1, random: Boolean = false): Option[Slice] = {
+  def findSlice(point: Point,
+                order: Int = -1,
+                random: Boolean = false,
+                skip: HashMap[Point, Set[Int]] = HashMap[Point, Set[Int]]()): Option[Slice] = {
     val slices =
       if (random)
         Random.shuffle(getSlicesBy(point, order))
     else
         getSlicesBy(point, order)
-
+    if (skip.contains(point) && skip(point).size == slices.length)
+      skip(point) = Set[Int]()
     for (slice <- slices) {
-      if(slice.isValid(minOfEach, maxSize, pizza))
+      if((!skip.contains(point) || !skip(point).contains(slice.id)) && slice.isValid(minOfEach, maxSize, pizza))
         return Some(slice)
     }
     None
@@ -104,7 +110,7 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
       if (!visited.contains(p) && isOnBound(p)) {
         visited += p
         if (pizza(p.row)(p.col) >= 3) {
-          if(nearestSliceIds.size < 1)
+          if(nearestSliceIds.size < numOfSlicesToRemove)
             nearestSliceIds += pizza(p.row)(p.col)
         } else {
           freeSpace += 1
@@ -118,6 +124,7 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
     (freeSpace, nearestSliceIds)
   }
 
+  val improvesTried = HashMap[Point, Set[Int]]()
   def bfsSolveFromFreePoint(start: Point): mutable.MutableList[Int] = {
     val queue = Queue[Point]()
     val visited = Set[Point]()
@@ -136,9 +143,10 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
     }
     val InsertedSlicesIds = mutable.MutableList[Int]()
 
-    findSlice(start, -1, random = true).foreach { slice =>
+    findSlice(start, -1, random = true, improvesTried).foreach { slice =>
       cutPizza(slice)
       InsertedSlicesIds += slice.id
+      improvesTried(start) = improvesTried.getOrElseUpdate(start, Set[Int]()) + slice.id
     }
     Random.shuffle(visited).foreach(p =>findSlice(p, -1, random = true).foreach{slice =>
       cutPizza(slice)
@@ -155,8 +163,8 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
   }
 
   def improveEdges(): Unit = {
-    val bar = new ProgressBar("Random improving edges", 1000)
-    0.to(1000).foreach { _ =>
+    val bar = new ProgressBar("Random improving edges", 10000)
+    0.to(10000).foreach { _ =>
       val edgePoint = getFreeEdge()
       if(edgePoint.isDefined) {
         val (prevFreeSpace, nearSliceIds) = calculateFreeSpaceAndFindNearestSlice(edgePoint.get)

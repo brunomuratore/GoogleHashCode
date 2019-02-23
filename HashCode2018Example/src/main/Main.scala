@@ -21,7 +21,7 @@ object Main extends App{
 
     val (array, min, max) = InputReader.read(file)
 
-    val solver = new Solver(array, min, max)
+    val solver = new Solver(array, min, max)(file)
 
     val slices = solver.solve().values
 
