@@ -26,6 +26,7 @@ object Main extends App{
     val slices = solver.solve().values
 
     OutputWriter.write(slices, file)
+    OutputWriter.writePizza(array, file)
 
     scores += file -> Scorer.compute(slices, array)
 

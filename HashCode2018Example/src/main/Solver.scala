@@ -99,6 +99,29 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int)(implicit fi
     None
   }
 
+  def getFreePoint(): Option[Point] = {
+    val x = r.nextInt(pizza.length)
+    val y = r.nextInt(pizza(0).length)
+    val queue = Queue[Point]()
+    val visited = Set[Point]()
+    queue += Point(x,y)
+    while(queue.nonEmpty) {
+      val p = queue.dequeue()
+      if (!visited.contains(p) && isOnBound(p)) {
+        visited += p
+        if (pizza(p.row)(p.col) <= 1) {
+          return Some(p)
+        } else {
+          queue += Point(p.row+1,p.col)
+          queue += Point(p.row,p.col+1)
+          queue += Point(p.row-1,p.col)
+          queue += Point(p.row,p.col-1)
+        }
+      }
+    }
+    None
+  }
+
   def calculateFreeSpaceAndFindNearestSlice(edgePoint: Point): (Int, Set[Int]) = {
     var nearestSliceIds = Set[Int]()
     var freeSpace = 0
@@ -165,7 +188,7 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int)(implicit fi
   def improveEdges(): Unit = {
     val bar = new ProgressBar("Random improving edges", 10000)
     0.to(10000).foreach { _ =>
-      val edgePoint = getFreeEdge()
+      val edgePoint = if (Random.nextInt(1) == 0) getFreeEdge() else getFreePoint()
       if(edgePoint.isDefined) {
         val (prevFreeSpace, nearSliceIds) = calculateFreeSpaceAndFindNearestSlice(edgePoint.get)
         val oldSlices = ListBuffer[Slice]()
