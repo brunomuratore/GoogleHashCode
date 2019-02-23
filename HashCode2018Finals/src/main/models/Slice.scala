@@ -3,8 +3,6 @@ package main.models
 import scala.collection.mutable
 
 case class Slice(id: Int, p1: Point, p2: Point) {
-  def direction = Math.abs(p1.row - p2.row) > Math.abs(p1.col - p2.col)
-
   def allPoints = {
     val startRow = Math.min(p1.row, p2.row)
     val endRow =  Math.max(p1.row, p2.row)

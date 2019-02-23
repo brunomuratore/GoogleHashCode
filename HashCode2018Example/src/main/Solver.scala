@@ -28,8 +28,8 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
     result //global, calculated by run()
   }
 
-  def getSlicesByMax(point: Point): List[Slice] = {
-    getEndPoints(point, point).values.map(p => Slice(getSliceId, point, p)).toList.sortBy(-_.size)
+  def getSlicesBy(point: Point, order: Int = -1): List[Slice] = {
+    getEndPoints(point, point).values.map(p => Slice(getSliceId, point, p)).toList.sortBy( o=> (order * o.size, o.direction))
   }
   private val minSize = minOfEach * 2
 
@@ -49,8 +49,13 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
     setPoints
   }
 
-  def findSlice(point: Point): Option[Slice] = {
-    val slices = getSlicesByMax(point)
+  def findSlice(point: Point, order: Int = -1, random: Boolean = false): Option[Slice] = {
+    val slices =
+      if (random)
+        Random.shuffle(getSlicesBy(point, order))
+    else
+        getSlicesBy(point, order)
+
     for (slice <- slices) {
       if(slice.isValid(minOfEach, maxSize, pizza))
         return Some(slice)
@@ -130,7 +135,12 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int) {
       }
     }
     val InsertedSlicesIds = mutable.MutableList[Int]()
-    visited.foreach(p =>findSlice(p).foreach{slice =>
+
+    findSlice(start, -1, random = true).foreach { slice =>
+      cutPizza(slice)
+      InsertedSlicesIds += slice.id
+    }
+    Random.shuffle(visited).foreach(p =>findSlice(p, -1, random = true).foreach{slice =>
       cutPizza(slice)
       InsertedSlicesIds += slice.id
     })
