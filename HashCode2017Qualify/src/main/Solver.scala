@@ -16,6 +16,8 @@ class Solver(caches: ArrayBuffer[Cache], endpoints: ArrayBuffer[Endpoint], in: I
 
     distributeVideosToCaches()
 
+    caches.foreach(_.trimCache())
+
     ArrayBuffer[Cache]()
   }
 

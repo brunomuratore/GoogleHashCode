@@ -35,13 +35,13 @@ object InputReader {
       val latency = line(0).toInt
       val linksA = line(1).toInt
       val links = HashMap[Int, Int]()
-      0.until(linksA).foreach { endpointId =>
+      0.until(linksA).foreach { _ =>
         line = reader.readLine().split(" ")
         val cacheId = line(0).toInt
         val cacheLatency = line(1).toInt
         links += cacheId -> cacheLatency
 
-        caches(cacheId).endpoints += endpointId -> cacheLatency
+        caches(cacheId).endpoints += e -> cacheLatency
       }
       endpoints += Endpoint(e, latency, links, new ArrayBuffer[Requests])
     }

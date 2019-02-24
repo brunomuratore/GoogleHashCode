@@ -8,8 +8,8 @@ import scala.collection.mutable
 
 object Main extends App{
 
-  val allFiles = List[String]("kittens.in", "me_at_the_zoo.in", "trending_today.in", "videos_worth_spreading.in")
-//  val allFiles = List("kittens.in")
+//  val allFiles = List[String]("kittens.in", "me_at_the_zoo.in", "trending_today.in", "videos_worth_spreading.in")
+  val allFiles = List("kittens.in")
 //  val allFiles = List("me_at_the_zoo.in")
 //  val allFiles = List("trending_today.in")
 //  val allFiles = List("videos_worth_spreading.in")
