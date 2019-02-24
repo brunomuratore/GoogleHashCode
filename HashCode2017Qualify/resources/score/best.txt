@@ -1,5 +1,0 @@
-total: 1748000/0
-me_at_the_zoo.in: 404000/0
-videos_worth_spreading.in: 267000/0
-kittens.in: 578000/0
-trending_today.in: 499000/0
