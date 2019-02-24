@@ -9,6 +9,8 @@ import scala.collection.mutable._
 // max 10k
 case class Video(id: Int, size: Int)
 
+case class CachedVideo(video: Video, savedLatency: Int)
+
 // max 1k
 // caches: cache id / latency
 case class Endpoint(id: Int, latency: Int, caches: HashMap[Int, Int], requests: ArrayBuffer[Requests])
@@ -23,11 +25,11 @@ case class Link(id: Int, latency: Int)
 
 // max 1k, size: max 500k mb
 // endpoints: endpoint id / latency
-case class Cache(id: Int, size: Int, var videos: HashMap[Int, Video], endpoints: HashMap[Int, Int]) {
+case class Cache(id: Int, size: Int, var cachedVideos: HashMap[Int, CachedVideo], endpoints: HashMap[Int, Int]) {
   var currentSize = 0
-  def addIfHasSpace(video: Video): Boolean = {
+  def addIfHasSpace(video: Video, savedLatency: Int): Boolean = {
     if (currentSize + video.size <=size) {
-      videos += video.id -> video
+      cachedVideos += video.id -> CachedVideo(video, savedLatency)
       currentSize += video.size
       true
     } else {

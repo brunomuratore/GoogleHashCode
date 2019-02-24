@@ -13,12 +13,12 @@ object OutputWriter {
     val file = new File(s"resources/output/$fileName")
     file.getParentFile.mkdirs()
     val bw = new BufferedWriter(new FileWriter(file.getAbsolutePath))
-    val cachesWithVideo = caches.filter(_.videos.nonEmpty)
+    val cachesWithVideo = caches.filter(_.cachedVideos.nonEmpty)
 
     bw.write(cachesWithVideo.length + "\n")
 
     cachesWithVideo.foreach{ cache =>
-      bw.write(s"${cache.id} ${cache.videos.map(_._2.id).mkString(" ")}\n")
+      bw.write(s"${cache.id} ${cache.cachedVideos.keys.mkString(" ")}\n")
     }
 
     bw.close()
