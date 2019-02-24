@@ -37,4 +37,8 @@ case class Cache(id: Int, size: Int, var cachedVideos: HashMap[Int, CachedVideo]
     }
   }
   def freeSpace = size - currentSize
+
+  def getLatencyForEndpointId(endpointId: Int): Int = {
+    endpoints(endpointId)
+  }
 }
