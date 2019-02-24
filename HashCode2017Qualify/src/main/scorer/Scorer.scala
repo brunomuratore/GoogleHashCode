@@ -9,8 +9,6 @@ object Scorer {
   def compute(endpoints: ArrayBuffer[Endpoint], caches: ArrayBuffer[Cache]): Score = {
     val max = 0
 
-    var totalSaved = 0
-    var totalRequests = 0L
     /*val pb = new ProgressBar("Score", endpoints.size)
     endpoints.foreach{ end =>
       end.requests.foreach{ req =>
@@ -21,8 +19,9 @@ object Scorer {
       pb.update()
     }*/
 
-    totalSaved = caches.map(_.cachedVideos.values.map(_.savedLatency)).sum
+    val totalSaved = caches.map(_.cachedVideos.values.map(_.savedLatency).sum).sum
+    val totalRequests = endpoints.map(_.requests.length).sum
 
     Score(totalSaved / totalRequests * 1000, max)
-    }
-    }
+  }
+}
