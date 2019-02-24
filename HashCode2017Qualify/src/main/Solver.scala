@@ -12,11 +12,9 @@ import util.control.Breaks._
 
 class Solver(caches: ArrayBuffer[Cache], endpoints: ArrayBuffer[Endpoint], in: Int) {
 
+  def solve(): ArrayBuffer[Cache] = {
 
-
-  def solve(): List[Cache] = {
-
-    List[Cache]()
+    ArrayBuffer[Cache]()
   }
 
 }
