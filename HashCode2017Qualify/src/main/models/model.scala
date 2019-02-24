@@ -42,6 +42,7 @@ case class Cache(id: Int, size: Int, var cachedVideos: HashMap[Int, CachedVideo]
 
   def getLatencyForEndpointId(endpointId: Int): Int = {
     endpoints(endpointId)
+  }
 
   def addToInfinityCache(video: Video, savedLatency: Int) = {
     cachedVideos(video.id) = cachedVideos.getOrElseUpdate(video.id, CachedVideo(video, savedLatency))
