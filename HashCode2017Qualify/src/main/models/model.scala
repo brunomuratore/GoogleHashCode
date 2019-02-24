@@ -27,6 +27,7 @@ case class Link(id: Int, latency: Int)
 // endpoints: endpoint id / latency
 case class Cache(id: Int, size: Int, var cachedVideos: HashMap[Int, CachedVideo], endpoints: HashMap[Int, Int]) {
   var currentSize = 0
+
   def addIfHasSpace(video: Video, savedLatency: Int): Boolean = {
     if (currentSize + video.size <=size) {
       cachedVideos += video.id -> CachedVideo(video, savedLatency)
@@ -36,9 +37,17 @@ case class Cache(id: Int, size: Int, var cachedVideos: HashMap[Int, CachedVideo]
       false
     }
   }
+
   def freeSpace = size - currentSize
 
   def getLatencyForEndpointId(endpointId: Int): Int = {
     endpoints(endpointId)
+
+  def addToInfinityCache(video: Video, savedLatency: Int) = {
+    cachedVideos(video.id) = cachedVideos.getOrElseUpdate(video.id, CachedVideo(video, savedLatency))
+  }
+
+  def trimCache() = {
+
   }
 }
