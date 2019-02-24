@@ -13,11 +13,12 @@ import util.control.Breaks._
 class Solver(caches: ArrayBuffer[Cache], endpoints: ArrayBuffer[Endpoint], in: Int) {
 
   def solve(): ArrayBuffer[Cache] = {
-    distributeVideosToCaches()
+    distributeVideosToCaches
     caches
   }
 
   def distributeVideosToCaches() = {
+    var pb = new ProgressBar("Solver", endpoints.size)
     endpoints.foreach { endpoint =>
 
       val bestCaches = endpoint.caches.toList.sortBy(_._2).map(kv => caches(kv._1))
@@ -27,9 +28,15 @@ class Solver(caches: ArrayBuffer[Cache], endpoints: ArrayBuffer[Endpoint], in: I
             bestCaches.head.addToInfinityCache(req.video, savedLatency)
         }
       }
+      pb.update()
     }
 
-    caches.foreach(_.trimCache())
+    pb = new ProgressBar("Trim", endpoints.size)
+    caches.foreach { c =>
+      c.trimCache()
+      pb.update()
+    }
   }
 
 }
+

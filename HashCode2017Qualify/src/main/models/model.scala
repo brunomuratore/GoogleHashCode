@@ -4,6 +4,9 @@
 
 package main.models
 
+import main.knap
+import main.knap.Item
+
 import scala.collection.mutable._
 
 // max 10k
@@ -55,8 +58,8 @@ case class Cache(id: Int, size: Int, var cachedVideos: HashMap[Int, CachedVideo]
   }
 
   // Since we allow to insert even if cache full, trim de cache with best options remaining
-  // replace with knapsack
   def trimCache() = {
+  // Greedy
     val bestVideos = cachedVideos.values.toList.sortBy(-_.savedLatency)
     var usedSpace = 0
     var keepVideos = ListBuffer[CachedVideo]()
@@ -66,6 +69,16 @@ case class Cache(id: Int, size: Int, var cachedVideos: HashMap[Int, CachedVideo]
         usedSpace += v.video.size
       }
     }
+
+
+    cachedVideos = HashMap.empty
+    keepVideos.foreach(v => cachedVideos += v.video.id -> v)
+    currentSize = keepVideos.map(_.video.size).sum
+  }
+
+  def trimCacheKnap() = {
+    //Knapsack
+    val keepVideos = knap.run(cachedVideos.values.map(v => Item(v.video.id, v.video.size, v.savedLatency)).toList, size).map(cachedVideos(_))
 
     cachedVideos = HashMap.empty
     keepVideos.foreach(v => cachedVideos += v.video.id -> v)
