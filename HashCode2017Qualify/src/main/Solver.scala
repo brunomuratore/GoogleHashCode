@@ -22,23 +22,11 @@ class Solver(caches: ArrayBuffer[Cache], endpoints: ArrayBuffer[Endpoint], in: I
   def distributeVideosToCaches() = {
     endpoints.foreach { endpoint =>
 
-      var bestCache: Option[Cache] = None
-
-      endpoint.caches.keys.foreach { cacheId =>
-        val cache = caches(cacheId)
-
-        if (bestCache.isEmpty) {
-          bestCache = Some(cache)
-        }
-
-        if (cache.getLatencyForEndpointId(endpoint.id) < bestCache.get.getLatencyForEndpointId(endpoint.id)) {
-          bestCache = Some(cache)
-        }
-      }
-
-      if (bestCache.isDefined) {
+      val bestCaches = endpoint.caches.toList.sortBy(_._2).map(kv => caches(kv._1))
+      if (bestCaches.nonEmpty) {
         endpoint.requests.foreach { req =>
-          bestCache.get.addToInfinityCache(req.video, bestCache.get.getLatencyForEndpointId(endpoint.id))
+          val savedLatency = (endpoint.latency - bestCaches.head.getLatencyForEndpointId(endpoint.id)) * req.totalSize
+            bestCaches.head.addToInfinityCache(req.video, savedLatency)
         }
       }
     }
