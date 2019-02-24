@@ -69,5 +69,6 @@ case class Cache(id: Int, size: Int, var cachedVideos: HashMap[Int, CachedVideo]
 
     cachedVideos = HashMap.empty
     keepVideos.foreach(v => cachedVideos += v.video.id -> v)
+    currentSize = keepVideos.map(_.video.size).sum
   }
 }
