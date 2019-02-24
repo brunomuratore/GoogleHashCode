@@ -28,7 +28,7 @@ case class Link(id: Int, latency: Int)
 case class Cache(id: Int, size: Int, var cachedVideos: HashMap[Int, CachedVideo], endpoints: HashMap[Int, Int]) {
   var currentSize = 0
 
-  def addIfHasSpace(video: Video, savedLatency: Int): Boolean = {
+  def addIfHasSpace(video: Video, savedLatency: Int = 0): Boolean = {
     if (currentSize + video.size <=size) {
       cachedVideos += video.id -> CachedVideo(video, savedLatency)
       currentSize += video.size
