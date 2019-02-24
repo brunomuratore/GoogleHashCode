@@ -13,11 +13,7 @@ import util.control.Breaks._
 class Solver(caches: ArrayBuffer[Cache], endpoints: ArrayBuffer[Endpoint], in: Int) {
 
   def solve(): ArrayBuffer[Cache] = {
-
     distributeVideosToCaches()
-
-    caches.foreach(_.trimCache())
-
     caches
   }
 
@@ -32,10 +28,8 @@ class Solver(caches: ArrayBuffer[Cache], endpoints: ArrayBuffer[Endpoint], in: I
         }
       }
     }
-  }
 
-  def addVideoToCache() = {
-
+    caches.foreach(_.trimCache())
   }
 
 }
