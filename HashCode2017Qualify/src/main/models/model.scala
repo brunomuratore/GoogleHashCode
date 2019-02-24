@@ -44,11 +44,30 @@ case class Cache(id: Int, size: Int, var cachedVideos: HashMap[Int, CachedVideo]
     endpoints(endpointId)
   }
 
-  def addToInfinityCache(video: Video, savedLatency: Int) = {
-    cachedVideos(video.id) = cachedVideos.getOrElseUpdate(video.id, CachedVideo(video, savedLatency))
+  // Return true if cache has not exploded
+  // Return false if cache is more than full after video was added
+  def addToInfinityCache(video: Video, savedLatency: Int): Boolean = {
+    cachedVideos(video.id) = CachedVideo(video,
+      cachedVideos.getOrElse(video.id, CachedVideo(video, 0)).savedLatency + savedLatency
+    )
+    currentSize += video.size
+    freeSpace >= 0
   }
 
+  // Since we allow to insert even if cache full, trim de cache with best options remaining
+  // replace with knapsack
   def trimCache() = {
+    val bestVideos = cachedVideos.values.toList.sortBy(-_.savedLatency)
+    var usedSpace = 0
+    var keepVideos = ListBuffer[CachedVideo]()
+    for (v <- bestVideos) {
+      if(usedSpace + v.video.size <= size) {
+        keepVideos += v
+        usedSpace += v.video.size
+      }
+    }
 
+    cachedVideos = HashMap.empty
+    keepVideos.foreach(v => cachedVideos += v.video.id -> v)
   }
 }
