@@ -197,7 +197,7 @@ class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int)(implicit fi
           removeSlice(slice)
         }
         val insertedIds = bfsSolveFromFreePoint(edgePoint.get)
-        val (curFreeSpace, _) = calculateFreeSpaceAndFindNearestSlice(edgePoint.get)
+        val (curFreeSpace, _) = calculateFreeSpaceAndFindNearestSlice(oldSlices.head.p1)
 //        println(s"cur: $curFreeSpace prev: $prevFreeSpace")
         if (curFreeSpace > prevFreeSpace) {
           insertedIds.foreach(removeSlice)

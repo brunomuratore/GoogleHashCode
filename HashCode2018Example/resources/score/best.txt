@@ -1,5 +1,5 @@
-total: 939274/1050057
+total: 939316/1050057
 input.txt: 15/15
 big.in: 890565/1000000
 small.in: 42/42
-medium.in: 48709/50000
+medium.in: 48718/50000
