@@ -77,7 +77,7 @@ class Solver(caches: ArrayBuffer[Cache], endpoints: ArrayBuffer[Endpoint], in: I
 
   def distributeVideosToMultipleCaches() = {
     endpoints.foreach { endpoint =>
-      val bestCaches = endpoint.caches.toList.sortBy(_._2).map(kv => caches(kv._1)).toArray
+      val bestCaches = endpoint.caches.toList.sortBy(_._2).map(kv => caches(kv._1))
       var iCache = 0
       if (bestCaches.nonEmpty) {
         endpoint.requests.foreach { req =>

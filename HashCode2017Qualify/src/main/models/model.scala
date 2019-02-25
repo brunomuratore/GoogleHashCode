@@ -16,7 +16,7 @@ case class CachedVideo(video: Video, savedLatency: Int)
 
 // max 1k
 // caches: cache id / latency
-case class Endpoint(id: Int, latency: Int, caches: HashMap[Int, Int], requests: ArrayBuffer[Requests])
+case class Endpoint(id: Int, latency: Int, caches: HashMap[Int, Int], requests: ArrayBuffer[Requests], var bestCaches: List[Cache] = List.empty)
 
 // max 1M
 case class Requests(qty: Int, video: Video) {
@@ -60,7 +60,7 @@ case class Cache(id: Int, size: Int, var cachedVideos: HashMap[Int, CachedVideo]
   // Since we allow to insert even if cache full, trim de cache with best options remaining
   def trimCache() = {
   // Greedy
-    val bestVideos = cachedVideos.values.toList.sortBy(-_.savedLatency)
+    val bestVideos = cachedVideos.values.toList.sortBy(v => -(v.savedLatency / (v.video.size)))
     var usedSpace = 0
     var keepVideos = ListBuffer[CachedVideo]()
     for (v <- bestVideos) {
