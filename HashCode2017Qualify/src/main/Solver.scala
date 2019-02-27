@@ -12,29 +12,99 @@ import util.control.Breaks._
 
 class Solver(caches: ArrayBuffer[Cache], endpoints: ArrayBuffer[Endpoint], in: Int) {
 
+  def solve(): ArrayBuffer[Cache] = {
+    distributeVideosToCaches()
+    // distributeVideosToMultipleCaches()
 
-
-  def solve(): List[Cache] = {
-
-    val pb = new ProgressBar("Solver", endpoints.length)
-
-    val videoSet = Set[Int]()
-
-    endpoints.filter(_.links.nonEmpty).foreach { endpoint =>
-      val closestCaches = endpoint.links.sortBy(_.latency).map(_.cache)
-
-      endpoint.requests.sortBy(-_.totalSize).map(_.video).foreach{ video =>
-        if(List(1,3).contains(in) || !videoSet.contains(video.id)) {
-          val it = closestCaches.iterator
-          while (it.hasNext && !it.next().addIfHasSpace(video)) {}
-          videoSet += video.id
-        }
-      }
-
-      pb.update()
-    }
-
-    caches.toList
+    // distributeVideosToMultipleCachesWithoutRepeatingVideos()
+    caches
   }
 
+  def unCachedVideosForEndpoint(endpoint: Endpoint) = {
+    val allVideos = endpoint.requests.map(_.video).toSet
+    val cachedVideos = endpoint.caches.keys.flatMap(caches(_).cachedVideos.values).map(_.video).toSet
+
+    allVideos.diff(cachedVideos)
+  }
+
+  def distributeVideosToCaches() = {
+      val pb = new ProgressBar("Distributing", endpoints.size)
+
+      endpoints.foreach { endpoint =>
+        val unCachedVideos = unCachedVideosForEndpoint(endpoint)
+        val bestCaches = endpoint.caches.toList.sortBy(_._2).map(kv => caches(kv._1))
+        if (bestCaches.nonEmpty) {
+          endpoint.requests.filter(req => unCachedVideos.contains(req.video)).foreach { req =>
+            val savedLatency = (endpoint.latency - bestCaches.head.getLatencyForEndpointId(endpoint.id)) * req.totalSize
+            bestCaches.head.addToInfinityCache(req.video, savedLatency)
+          }
+        }
+        pb.update()
+      }
+
+    caches.foreach(_.trimCache())
+  }
+
+  def distributeVideosToMultipleCachesWithoutRepeatingVideos() = {
+    var cachedVideos = scala.collection.mutable.Set[Int]()
+
+    endpoints.foreach { endpoint =>
+      val bestCaches = endpoint.caches.toList.sortBy(_._2).map(kv => caches(kv._1)).toArray
+      var iCache = 0
+      if (bestCaches.nonEmpty) {
+        endpoint.requests.foreach { req =>
+          if (cachedVideos.contains(req.video.id) == false) {
+            if (iCache < bestCaches.length) {
+              val savedLatency = (endpoint.latency - bestCaches(iCache).getLatencyForEndpointId(endpoint.id)) * req.totalSize
+              var added = bestCaches(iCache).addIfHasSpace(req.video, savedLatency)
+              if (added == false) {
+                iCache = iCache + 1
+                if (iCache < bestCaches.length) {
+                  bestCaches(iCache).addIfHasSpace(req.video, savedLatency)
+                }
+              }
+              if (added == true) {
+                cachedVideos += req.video.id
+              }
+            }
+          }
+        }
+      }
+    }
+
+    caches.foreach(_.trimCache())
+  }
+
+  def distributeVideosToMultipleCaches() = {
+    endpoints.foreach { endpoint =>
+      val bestCaches = endpoint.caches.toList.sortBy(_._2).map(kv => caches(kv._1))
+      var iCache = 0
+      if (bestCaches.nonEmpty) {
+        endpoint.requests.foreach { req =>
+          if (iCache < bestCaches.length) {
+            val savedLatency = (endpoint.latency - bestCaches(iCache).getLatencyForEndpointId(endpoint.id)) * req.totalSize
+            val added = bestCaches(iCache).addIfHasSpace(req.video, savedLatency)
+            if (added == false) {
+              iCache = iCache + 1
+              if (iCache < bestCaches.length) {
+                bestCaches(iCache).addIfHasSpace(req.video, savedLatency)
+              }
+            }
+          }
+        }
+      }
+    }
+
+    caches.foreach(_.trimCache())
+  }
+
+
 }
+
+/*
+total: 1601000 ▲ 149000
+videos_worth_spreading.in: 422000 ▲ 253000
+me_at_the_zoo.in: 318000 ▼ -4000
+kittens.in: 524000 ▼ -80000
+trending_today.in: 337000 ▼ -134000
+*/
