@@ -91,7 +91,7 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
   }
 
   def addToSlideShow(slideShow: SlideShow, slide: Slide): Unit = {
-    0.until(slide.photos.size - 1).foreach(i => {
+    slide.photos.indices.foreach(i => {
       val photo = slide.photos(i)
       photo.tags.foreach(tag => {
         tagInPhotos(tag) -= photo
