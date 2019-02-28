@@ -41,7 +41,7 @@ object Scorer {
       return Score(0, 0)
     }
 
-    1.to(slideShow.slides.size).foreach { slideIndex: Int =>
+    1.to(slideShow.slides.size-1).foreach { slideIndex: Int =>
 
       val prevSlide = slideShow.slides(slideIndex-1)
       val curSlide = slideShow.slides(slideIndex)
