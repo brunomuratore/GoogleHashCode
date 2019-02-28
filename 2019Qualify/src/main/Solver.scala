@@ -5,17 +5,18 @@
 package main
 
 import main.framework.ProgressBar
-import main.models.Slice
+import main.models.{Photo, Slide, SlideShow}
 
+import scala.collection.mutable
 import scala.util.Random
 
-class Solver(pizza: Array[Array[Int]], minOfEach: Int, maxSize: Int)(implicit file: String) {
+class Solver(photos: mutable.Set[Photo], tagInPhotos: mutable.Map[String, mutable.Set[Photo]])(implicit file: String) {
   val r = new Random()
 
   def solve() = {
 
     run()
-    List[Slice]()
+    SlideShow(mutable.LinkedList.empty[Slide])
   }
 
   private def run() = {

@@ -8,26 +8,27 @@ import scala.collection.mutable._
 
 object Main extends App{
 
-  val allFiles = List[String]("input.txt", "small.in", "medium.in", "big.in")
-//  val allFiles = List("input.txt")
-//  val allFiles = List("small.in")
-//  val allFiles = List("medium.in")
-//  val allFiles = List("big.in")
+//  val allFiles = List[String]("a_example.txt", "b_lovely_landscapes.txt", "c_memorable_moments.txt", "d_pet_pictures.txt", "e_shiny_selfies.txt")
+  val allFiles = List("a_example.txt")
+//  val allFiles = List("b_lovely_landscapes.txt")
+//  val allFiles = List("c_memorable_moments.txt")
+//  val allFiles = List("d_pet_pictures.txt")
+//  val allFiles = List("e_shiny_selfies.txt")
 
   var scores = HashMap[String, Score]()
 
   allFiles.foreach { file =>
     println(s"Running $file")
 
-    val (array, min, max) = InputReader.read(file)
+    val (photos, tagInPhotos) = InputReader.read(file)
 
-    val solver = new Solver(array, min, max)(file)
+    val solver = new Solver(photos, tagInPhotos)(file)
 
-    val slices = solver.solve()
+    val slideShow = solver.solve()
 
-    OutputWriter.write(slices, file)
+    OutputWriter.write(slideShow, file)
 
-    scores += file -> Scorer.compute(slices, array)
+    scores += file -> Scorer.compute(slideShow)
 
     println("")
   }
