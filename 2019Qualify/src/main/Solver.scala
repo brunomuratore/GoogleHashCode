@@ -31,8 +31,8 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
     val bar = new ProgressBar("Greedy solve", photos.size)
 
     val slideShow = SlideShow(ListBuffer.empty[Slide])
-
-    addToSlideShow(slideShow, pickSlideBruno(sortedPhotos.keys.last).get)
+    val initialphoto: Photo = sortedPhotosHor(sortedPhotosHor.keys.last).head._1
+    addToSlideShow(slideShow, Slide(List(initialphoto)))
 
     breakable {
       while (!photos.isEmpty) {
@@ -41,7 +41,7 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
         var bestValue: Int = 0
 
         0.to(10).foreach { _ =>
-          val pick = pickSlideBruno(Scorer.tagsForSlide(slideShow.slides.last).size)
+          val pick = pickSlideBruno(Scorer.tagsForSlide(slideShow.slides.last))
 
           val transitionScore: Int = if (pick.isDefined) Scorer.scoreForTransition(slideShow.slides.last, pick.get) else 0
 
@@ -95,19 +95,19 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
     None
   }
 
-  def pickSlideBruno(tags: Int): Option[Slide] = {
-    tags.to(0).by(-1).foreach { t =>
-      val up = pickSlideBrunoInt(t)
+  def pickSlideBruno(tags: List[String]): Option[Slide] = {
+    tags.size.to(0).by(-1).foreach { t =>
+      val up = pickSlideBrunoInt(t, tags)
       if (up.isDefined) return up
 
-      val down = pickSlideBrunoInt(-t)
+      val down = pickSlideBrunoInt(-t, tags)
       if (down.isDefined) return down
     }
 
     None
   }
 
-  def pickSlideBrunoInt(t: Int): Option[Slide] = {
+  def pickSlideBrunoInt(t: Int, tags: List[String]): Option[Slide] = {
     if(sortedPhotosHor.contains(t) && sortedPhotosHor(t).nonEmpty)
       return Some(Slide(List(sortedPhotosHor(t).head._1)))
 
