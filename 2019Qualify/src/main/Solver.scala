@@ -51,13 +51,13 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
   }
 
   def run() = {
-    val bar = new ProgressBar("Greedy solve", 1)
+    val bar = new ProgressBar("Greedy solve", photos.size)
 
     val slideShow = SlideShow(ListBuffer.empty[Slide])
 
     addToSlideShow(slideShow, pickSlide(sortedPhotos.keys.last).get)
 
-    while (!photos.isEmpty) {
+    while (photos.nonEmpty) {
 
       var bestPick: Option[Slide] = None
       var bestValue: Int = 0
@@ -74,6 +74,7 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
 
         slideShow.slides.last
       }
+      bar.update()
     }
 
     bar.update()
