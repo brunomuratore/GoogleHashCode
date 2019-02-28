@@ -8,23 +8,23 @@ import main.framework.ProgressBar
 import main.models.{Photo, Slide, SlideShow}
 import main.scorer.Scorer
 
-import scala.collection.mutable.ArrayBuffer
-import scala.collection.{mutable, _}
+import scala.collection.mutable._
 import scala.util.Random
 
-class Solver(photos: Set[Photo], tagInPhotos: Map[String, ArrayBuffer[Photo]], sortedPhotos: mutable.TreeMap[Int, ArrayBuffer[Photo]])(implicit file: String) {
+class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Photo]], sortedPhotos: TreeMap[Int,
+  Map[Photo, Photo]])(implicit file: String) {
 
   val r = new Random()
 
   def solve() = {
 
-    run()git 
+    run()
   }
 
   def pickVerticalPhoto(tags: Int): Option[Photo] = {
     tags.to(0).by(-1).foreach { t =>
       val diff = tags - t
-      for (photo <- sortedPhotos(tags))
+      for (photo <- sortedPhotos(tags).keys)
         if (photo.vertical) return Some(photo)
     }
     return None
@@ -33,9 +33,10 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, ArrayBuffer[Photo]], s
   def pickSlide(tags: Int): Option[Slide] = {
     tags.to(0).by(-1).foreach { t =>
       val diff = tags - t
-      val photoIds = sortedPhotos(tags).indices
+      val photoIds = sortedPhotos(tags).keys.toVector
       while (photoIds.nonEmpty) {
-        val photo = sortedPhotos(tags)(photoIds(r.nextInt(photoIds.length)))
+        val idx = photoIds(r.nextInt(photoIds.size))
+        val photo:Photo = photos(idx)
         if (!photo.vertical) return Some(Slide(List(photo)))
         else if (diff > 0) {
           val p = pickVerticalPhoto(diff)
@@ -52,9 +53,9 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, ArrayBuffer[Photo]], s
   def run() = {
     val bar = new ProgressBar("Greedy solve", 1)
 
-    val slideShow = SlideShow(mutable.ListBuffer.empty[Slide])
+    val slideShow = SlideShow(ListBuffer.empty[Slide])
 
-    addToSlideShow(pickSlide(sortedPhotos.keys.last).get)
+    addToSlideShow(slideShow, pickSlide(sortedPhotos.keys.last).get)
 
     while (!photos.isEmpty) {
 
@@ -79,13 +80,14 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, ArrayBuffer[Photo]], s
     slideShow
   }
 
-  def addToSlideShow(slideShow: SlideShow, slide: Slide, indexTagsInPhotos: List[Int], indexSortedPhotos: List[Int]): Unit = {
+  def addToSlideShow(slideShow: SlideShow, slide: Slide): Unit = {
     0.until(slide.photos.size - 1).foreach(i => {
       val photo = slide.photos(i)
       photo.tags.foreach(tag => {
-        tagInPhotos(tag).remove(indexTagsInPhotos(i))
+        tagInPhotos(tag) -= photo
       })
-      sortedPhotos(photo.tags.size).remove(indexSortedPhotos(i))
+      sortedPhotos(photo.tags.size) -= photo
+      photos -= photo
     })
 
     slideShow.slides += slide

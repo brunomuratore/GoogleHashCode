@@ -4,20 +4,20 @@ import java.io.{BufferedReader, File, FileReader}
 
 import main.models.Photo
 
-import scala.collection.mutable
-import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable._
 
 object InputReader {
 
-  def read(file: String): (mutable.Set[Photo], mutable.Map[String, ArrayBuffer[Photo]], mutable.TreeMap[Int, ArrayBuffer[Photo]]) = {
+  def read(file: String): (Map[Photo, Photo], Map[String, Map[Photo, Photo]], TreeMap[Int,
+    Map[Photo, Photo]]) = {
     val path = new File(s"resources/input/$file").getAbsolutePath
     val reader = new BufferedReader(new FileReader(path))
 
     val rows = reader.readLine().toInt
 
-    val photos = mutable.Set.empty[Photo]
-    val tagToPhotos = mutable.Map.empty[String, ArrayBuffer[Photo]]
-    val sortedPhotos = mutable.TreeMap[Int, ArrayBuffer[Photo]]()
+    val photos = Map.empty[Photo, Photo]
+    val tagToPhotos = Map.empty[String, Map[Photo, Photo]]
+    val sortedPhotos = TreeMap[Int, Map[Photo, Photo]]()
 
     0.until(rows).foreach(_ => {
       val line = reader.readLine().split(" ")
@@ -25,21 +25,21 @@ object InputReader {
       val vertical = line(0) == "V"
       val tags = line.slice(2, line.length).toSet
       val photo = Photo(id, vertical, tags)
-      photos.add(photo)
+      photos += photo -> photo
 
       tags.foreach(tag => {
         if (tagToPhotos.contains(tag)) {
-          tagToPhotos(tag) = tagToPhotos(tag) :+ photo
+          tagToPhotos(tag) += photo -> photo
         } else {
-          tagToPhotos(tag) = ArrayBuffer(photo)
+          tagToPhotos(tag) += photo -> photo
         }
       })
 
       val num = photo.tags.size
       if (sortedPhotos.contains(num)) {
-        sortedPhotos(num) = sortedPhotos(num) :+ photo
+        sortedPhotos(num) += photo -> photo
       } else {
-        sortedPhotos(num) = ArrayBuffer(photo)
+        sortedPhotos(num) += photo -> photo
       }
     })
 
