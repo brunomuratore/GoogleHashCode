@@ -40,9 +40,9 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
   def pickSlide(tags: Int): Option[Slide] = {
     tags.to(0).by(-1).foreach { t =>
       val diff = tags - t
-      val photoIds = sortedPhotos(t).keys.toVector
+      val photoIds = sortedPhotos(t).keys.toSet
       while (photoIds.nonEmpty) {
-        val idx = photoIds(r.nextInt(photoIds.size))
+        val idx = photoIds.toVector(r.nextInt(photoIds.size))
         val photo:Photo = photos(idx)
         if (!photo.vertical) return Some(Slide(List(photo)))
         else if (diff > 0) {
@@ -50,6 +50,7 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
           if (p.isDefined)
             return Some(Slide(List(photo, p.get)))
           else
+            photoIds -= idx
             return None
         }
       }
