@@ -123,7 +123,7 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
   }
 
   def getVert(p1: Photo, tags: Int):Option[Photo] = {
-    0.until(tags).foreach { t =>
+    0.to(tags).foreach { t =>
       if(sortedPhotosVert.contains(t)) {
         sortedPhotosVert(t).keys.foreach{ p=>
           if(p != p1) return Some(p)
