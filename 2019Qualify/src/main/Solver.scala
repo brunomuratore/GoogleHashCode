@@ -16,7 +16,7 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, Set[Photo]], sortedPho
   def solve() = {
 
     run()
-    //SlideShow(mutable.LinkedList.empty[Slide])
+    SlideShow(mutable.ListBuffer.empty[Slide])
   }
 
   private def run() = {

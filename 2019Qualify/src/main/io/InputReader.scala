@@ -15,17 +15,21 @@ object InputReader {
     val rows = reader.readLine().toInt
 
     val photos = mutable.Set.empty[Photo]
-    val tagToPhotos = mutable.Map.empty[String, mutable.Set[Photo]].withDefault(_ => mutable.Set.empty[Photo])
+    val tagToPhotos = mutable.Map.empty[String, mutable.Set[Photo]]
 
     0.until(rows).foreach(_ => {
       val line = reader.readLine().split(" ")
-      val id = line(0).toInt
-      val vertical = line(1) == "V"
-      val tags = line.takeRight(2).toSet
+      val id = line(1).toInt
+      val vertical = line(0) == "V"
+      val tags = line.slice(2, line.length).toSet
       val photo = Photo(id, vertical, tags)
       photos.add(photo)
       tags.foreach(tag => {
-        tagToPhotos(tag).add(photo)
+        if (tagToPhotos.contains(tag)) {
+          tagToPhotos(tag).add(photo)
+        } else {
+          tagToPhotos(tag) = mutable.Set[Photo](photo)
+        }
       })
     })
 
