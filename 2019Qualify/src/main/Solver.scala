@@ -17,8 +17,7 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, Array[Photo]], sortedP
 
   def solve() = {
 
-    run()
-    SlideShow(mutable.ListBuffer.empty[Slide])
+    run()git 
   }
 
   def pickVerticalPhoto(tags: Int): Option[Photo] = {
