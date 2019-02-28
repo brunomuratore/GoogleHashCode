@@ -22,6 +22,17 @@ object Scorer {
     tags
   }
 
+  def scoreForTransition(slide1: Slide, slide2: Slide): Int = {
+    val tagsIn1 = tagsForSlide(slide1)
+    val tagsIn2 = tagsForSlide(slide2)
+
+    val tagsInCommon = tagsIn1.filter(tag => tagsIn2.contains(tag))
+    val tags1Only = tagsIn1.filter(tag => !tagsIn2.contains(tag))
+    val tags2Only = tagsIn2.filter(tag => !tagsIn1.contains(tag))
+
+    Math.min(tagsInCommon.size, Math.min(tags1Only.size, tags2Only.size))
+  }
+
   def compute(slideShow: SlideShow): Score = {
 
     var addedScore: Int = 0
@@ -35,14 +46,7 @@ object Scorer {
       val prevSlide = slideShow.slides(slideIndex-1)
       val curSlide = slideShow.slides(slideIndex)
 
-      val tagsInPrev = tagsForSlide(prevSlide)
-      val tagsInCur = tagsForSlide(curSlide)
-
-      val tagsInCommon = tagsInCur.filter(tag => tagsInPrev.contains(tag))
-      val tagsPrevOnly = tagsInPrev.filter(tag => !tagsInCur.contains(tag))
-      val tagsCurOnly = tagsInCur.filter(tag => !tagsInPrev.contains(tag))
-
-      addedScore += Math.min(tagsInCommon.size, Math.min(tagsPrevOnly.size, tagsCurOnly.size))
+      addedScore += scoreForTransition(prevSlide, curSlide)
     }
 
     val result = addedScore
