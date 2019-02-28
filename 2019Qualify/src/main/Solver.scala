@@ -37,7 +37,7 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, Array[Photo]], sortedP
         val photo = sortedPhotos(tags)(photoIds(r.nextInt(photoIds.length)))
         if (!photo.vertical) return Some(Slide(List(photo)))
         else if (diff > 0) {
-          val p = pickVerticalPhoto(tags(diff))
+          val p = pickVerticalPhoto(diff)
           if (p.isDefined)
             return Some(Slide(List(photo, p.get)))
           else
