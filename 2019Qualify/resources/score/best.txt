@@ -1,0 +1,2 @@
+a_example.txt: 1/0
+total: 1/0
