@@ -32,17 +32,19 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, Array[Photo]], sortedP
   def pickSlide(tags: Int): Option[Slide] = {
     tags.to(0).by(-1).foreach { t =>
       val diff = tags - t
-        for (photo <- sortedPhotos(tags))
-          if (!photo.vertical) return Some(Slide(List(photo)))
-          else if (diff > 0) {
-            val p = pickVerticalPhoto(tags(diff))
-            if(p.isDefined)
-              return Some(Slide(List(photo,p.get)))
-            else
-              return None
-          }
+      val photoIds = sortedPhotos(tags).indices
+      while(photoIds.nonEmpty) {
+        val photo = sortedPhotos(tags)(photoIds(r.nextInt(photoIds.length)))
+        if (!photo.vertical) return Some(Slide(List(photo)))
+        else if (diff > 0) {
+          val p = pickVerticalPhoto(tags(diff))
+          if (p.isDefined)
+            return Some(Slide(List(photo, p.get)))
+          else
+            return None
+        }
+      }
 
-    }
     None
   }
 
