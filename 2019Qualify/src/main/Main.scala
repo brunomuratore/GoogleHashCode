@@ -4,7 +4,7 @@ import main.framework.{Score, ScorePrinter}
 import main.io.{InputReader, OutputWriter}
 import main.scorer.Scorer
 
-import scala.collection.mutable
+import scala.collection.mutable._
 
 object Main extends App{
 
@@ -14,7 +14,7 @@ object Main extends App{
 //  val allFiles = List("medium.in")
 //  val allFiles = List("big.in")
 
-  var scores = mutable.HashMap[String, Score]()
+  var scores = HashMap[String, Score]()
 
   allFiles.foreach { file =>
     println(s"Running $file")
