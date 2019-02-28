@@ -70,7 +70,7 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
 
     val slideShow = SlideShow(ListBuffer.empty[Slide])
 
-    addToSlideShow(slideShow, pickSlide(sortedPhotos.keys.last).get)
+    addToSlideShow(slideShow, pickSlideBruno(sortedPhotos.keys.last).get)
 
     breakable {
       while (!photos.isEmpty) {
@@ -79,7 +79,7 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
         var bestValue: Int = 0
 
         0.to(10).foreach { _ =>
-          val pick = pickSlide(Scorer.tagsForSlide(slideShow.slides.last).size)
+          val pick = pickSlideBruno(Scorer.tagsForSlide(slideShow.slides.last).size)
 
           val transitionScore: Int = if (pick.isDefined) Scorer.scoreForTransition(slideShow.slides.last, pick.get) else 0
 
@@ -110,10 +110,38 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
         tagInPhotos(tag) -= photo
       })
       sortedPhotos(photo.tags.size) -= photo
+      if(sortedPhotosHor(photo.tags.size).contains(photo)) sortedPhotosHor(photo.tags.size) -= photo
+      if(sortedPhotosVert(photo.tags.size).contains(photo)) sortedPhotosVert(photo.tags.size) -= photo
       photos -= photo
     })
 
     slideShow.slides += slide
+  }
+
+  def getVert(p1: Photo, tags: Int):Option[Photo] = {
+    0.until(tags).foreach { t =>
+      if(sortedPhotosVert.contains(t)) {
+        sortedPhotosVert(t).keys.foreach{ p=>
+          if(p != p1) return Some(p)
+        }
+      }
+    }
+    None
+  }
+  def pickSlideBruno(tags: Int): Option[Slide] = {
+    tags.to(0).by(-1).foreach{ t=>
+      if(sortedPhotosHor.contains(t)) return Some(Slide(List(sortedPhotosHor(t).head._1)))
+
+      if(sortedPhotosVert.contains(t)) {
+        val p1 = sortedPhotosVert(t).head._1
+        val p2 = getVert(p1, tags)
+        if(p2.isDefined)
+          return Some(Slide(List(p1, p2.get)))
+        else
+          None
+      }
+    }
+    None
   }
 
 }
