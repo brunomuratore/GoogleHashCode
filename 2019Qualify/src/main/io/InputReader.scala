@@ -5,18 +5,19 @@ import java.io.{BufferedReader, File, FileReader}
 import main.models.Photo
 
 import scala.collection.mutable
+import scala.collection.mutable.ArrayBuffer
 
 object InputReader {
 
-  def read(file: String): (mutable.Set[Photo], mutable.Map[String, Array[Photo]], mutable.TreeMap[Int, Array[Photo]]) = {
+  def read(file: String): (mutable.Set[Photo], mutable.Map[String, ArrayBuffer[Photo]], mutable.TreeMap[Int, ArrayBuffer[Photo]]) = {
     val path = new File(s"resources/input/$file").getAbsolutePath
     val reader = new BufferedReader(new FileReader(path))
 
     val rows = reader.readLine().toInt
 
     val photos = mutable.Set.empty[Photo]
-    val tagToPhotos = mutable.Map.empty[String, Array[Photo]]
-    val sortedPhotos = mutable.TreeMap[Int, Array[Photo]]()
+    val tagToPhotos = mutable.Map.empty[String, ArrayBuffer[Photo]]
+    val sortedPhotos = mutable.TreeMap[Int, ArrayBuffer[Photo]]()
 
     0.until(rows).foreach(_ => {
       val line = reader.readLine().split(" ")
@@ -30,7 +31,7 @@ object InputReader {
         if (tagToPhotos.contains(tag)) {
           tagToPhotos(tag) = tagToPhotos(tag) :+ photo
         } else {
-          tagToPhotos(tag) = Array(photo)
+          tagToPhotos(tag) = ArrayBuffer(photo)
         }
       })
 
@@ -38,7 +39,7 @@ object InputReader {
       if (sortedPhotos.contains(num)) {
         sortedPhotos(num) = sortedPhotos(num) :+ photo
       } else {
-        sortedPhotos(num) = Array(photo)
+        sortedPhotos(num) = ArrayBuffer(photo)
       }
     })
 

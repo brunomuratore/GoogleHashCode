@@ -8,10 +8,11 @@ import main.framework.ProgressBar
 import main.models.{Photo, Slide, SlideShow}
 import main.scorer.Scorer
 
+import scala.collection.mutable.ArrayBuffer
 import scala.collection.{mutable, _}
 import scala.util.Random
 
-class Solver(photos: Set[Photo], tagInPhotos: Map[String, Array[Photo]], sortedPhotos: mutable.TreeMap[Int, Array[Photo]])(implicit file: String) {
+class Solver(photos: Set[Photo], tagInPhotos: Map[String, ArrayBuffer[Photo]], sortedPhotos: mutable.TreeMap[Int, ArrayBuffer[Photo]])(implicit file: String) {
 
   val r = new Random()
 
@@ -82,10 +83,16 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, Array[Photo]], sortedP
 
   }
 
+  def addSlide(slideShow: SlideShow, slide: Slide, indexTagsInPhotos: List[Int], indexSortedPhotos: List[Int]): Unit = {
+    0.until(slide.photos.size - 1).foreach(i => {
+      val photo = slide.photos(i)
+      photo.tags.foreach(tag => {
+        tagInPhotos(tag).remove(indexTagsInPhotos(i))
+      })
+      sortedPhotos(photo.tags.size).remove(indexSortedPhotos(i))
+    })
 
-  def addSlide(slideShow: SlideShow, slide: Slide): SlideShow = {
-    // todo: remove photos from all maps
-    SlideShow(slideShow.slides :+ slide)
+    slideShow.slides += slide
   }
 
 }
