@@ -110,8 +110,12 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
         tagInPhotos(tag) -= photo
       })
       sortedPhotos(photo.tags.size) -= photo
-      if(sortedPhotosHor(photo.tags.size).contains(photo)) sortedPhotosHor(photo.tags.size) -= photo
-      if(sortedPhotosVert(photo.tags.size).contains(photo)) sortedPhotosVert(photo.tags.size) -= photo
+      if(sortedPhotosHor.contains(photo.tags.size))
+        if(sortedPhotosHor(photo.tags.size).contains(photo))
+          sortedPhotosHor(photo.tags.size) -= photo
+      if(sortedPhotosVert.contains(photo.tags.size))
+      if(sortedPhotosVert(photo.tags.size).contains(photo))
+        sortedPhotosVert(photo.tags.size) -= photo
       photos -= photo
     })
 
