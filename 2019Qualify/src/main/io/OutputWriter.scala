@@ -11,9 +11,10 @@ object OutputWriter {
     file.getParentFile.mkdirs()
     val bw = new BufferedWriter(new FileWriter(file.getAbsolutePath))
 
-    // CHANGE HERE: Write output file
-//    bw.write(slices.size + "\n")
-//    slices.foreach(s => bw.write(s"${s.p1.row} ${s.p1.col} ${s.p2.row} ${s.p2.col}\n"))
+    bw.write(slideShow.slides.length + "\n")
+    slideShow.slides.foreach(slide => {
+      bw.write(slide.photos.map(p => p.id).mkString(" ") + "\n")
+    })
 
     bw.close()
   }
