@@ -36,18 +36,13 @@ object Scorer {
       return Score(0, 0)
     }
 
-    1.until(slideShow.slides.size).foreach { slideIndex: Int =>
-
-      val prevSlide = slideShow.slides(slideIndex-1)
-      val curSlide = slideShow.slides(slideIndex)
-
-      addedScore += scoreForTransition(prevSlide, curSlide)
+    var prev = slideShow.slides.head
+    slideShow.slides.foreach { slide =>
+      addedScore += scoreForTransition(prev, slide)
+      prev = slide
       pb.update()
     }
 
-    val result = addedScore
-    val max = 0
-
-    Score(result, max)
+    Score(addedScore, 0)
   }
 }
