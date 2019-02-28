@@ -21,9 +21,9 @@ object Main extends App{
   allFiles.foreach { file =>
     println(s"Running $file")
 
-    val (photos, tagInPhotos, sortedPhotos) = InputReader.read(file)
+    val (photos, tagInPhotos, sortedPhotos, sortedPhotosVer, sortedPhotosHor) = InputReader.read(file)
 
-    val solver = new Solver(photos, tagInPhotos, sortedPhotos)(file)
+    val solver = new Solver(photos, tagInPhotos, sortedPhotos, sortedPhotosVer, sortedPhotosHor)(file)
 
     val slideShow = solver.solve()
 

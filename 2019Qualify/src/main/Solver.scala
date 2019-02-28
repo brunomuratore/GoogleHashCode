@@ -13,7 +13,8 @@ import scala.util.Random
 import util.control.Breaks._
 
 class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Photo]], sortedPhotos: TreeMap[Int,
-  Map[Photo, Photo]])(implicit file: String) {
+  Map[Photo, Photo]], sortedPhotosVert: TreeMap[Int, Map[Photo, Photo]], sortedPhotosHor: TreeMap[Int, Map[Photo,
+  Photo]])(implicit file: String) {
 
   val r = new Random()
 

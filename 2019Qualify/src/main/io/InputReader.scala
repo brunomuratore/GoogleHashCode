@@ -9,7 +9,7 @@ import scala.collection.mutable._
 object InputReader {
 
   def read(file: String): (Map[Photo, Photo], Map[String, Map[Photo, Photo]], TreeMap[Int,
-    Map[Photo, Photo]]) = {
+    Map[Photo, Photo]], TreeMap[Int, Map[Photo, Photo]], TreeMap[Int, Map[Photo, Photo]]) = {
     val path = new File(s"resources/input/$file").getAbsolutePath
     val reader = new BufferedReader(new FileReader(path))
 
@@ -18,6 +18,8 @@ object InputReader {
     val photos = Map.empty[Photo, Photo]
     val tagToPhotos = Map.empty[String, Map[Photo, Photo]]
     val sortedPhotos = TreeMap[Int, Map[Photo, Photo]]()
+    val sortedPhotosVertical = TreeMap[Int, Map[Photo, Photo]]()
+    val sortedPhotosHorizontal = TreeMap[Int, Map[Photo, Photo]]()
 
     0.until(rows).foreach(_ => {
       val line = reader.readLine().split(" ")
@@ -41,10 +43,24 @@ object InputReader {
       } else {
         sortedPhotos(num) = Map(photo -> photo)
       }
+
+      if (photo.vertical) {
+        if (sortedPhotosVertical.contains(num)) {
+          sortedPhotosVertical(num) += photo -> photo
+        } else {
+          sortedPhotosVertical(num) = Map(photo -> photo)
+        }
+      } else {
+        if (sortedPhotosHorizontal.contains(num)) {
+          sortedPhotosHorizontal(num) += photo -> photo
+        } else {
+          sortedPhotosHorizontal(num) = Map(photo -> photo)
+        }
+      }
     })
 
     reader.close()
 
-    (photos, tagToPhotos, sortedPhotos)
+    (photos, tagToPhotos, sortedPhotos, sortedPhotosVertical, sortedPhotosHorizontal)
   }
 }
