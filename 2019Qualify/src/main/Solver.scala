@@ -132,20 +132,32 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
     }
     None
   }
-  def pickSlideBruno(tags: Int): Option[Slide] = {
-    tags.to(0).by(-1).foreach{ t=>
-      if(sortedPhotosHor.contains(t) && sortedPhotosHor(t).nonEmpty)
-        return Some(Slide(List(sortedPhotosHor(t).head._1)))
 
-      if(sortedPhotosVert.contains(t) && sortedPhotosVert(t).nonEmpty) {
-        val p1 = sortedPhotosVert(t).head._1
-        val p2 = getVert(p1, tags)
-        if(p2.isDefined)
-          return Some(Slide(List(p1, p2.get)))
-        else
-          None
-      }
+  def pickSlideBruno(tags: Int): Option[Slide] = {
+    tags.to(0).by(-1).foreach { t =>
+      val up = pickSlideBrunoInt(tags, t)
+      if (up.isDefined) return up
+
+      val down = pickSlideBrunoInt(tags, -t)
+      if (down.isDefined) return down
     }
+
+    None
+  }
+
+  def pickSlideBrunoInt(tags: Int, t: Int): Option[Slide] = {
+    if(sortedPhotosHor.contains(t) && sortedPhotosHor(t).nonEmpty)
+      return Some(Slide(List(sortedPhotosHor(t).head._1)))
+
+    if(sortedPhotosVert.contains(t) && sortedPhotosVert(t).nonEmpty) {
+      val p1 = sortedPhotosVert(t).head._1
+      val p2 = getVert(p1, tags)
+      if(p2.isDefined)
+        return Some(Slide(List(p1, p2.get)))
+      else
+        None
+    }
+
     None
   }
 
