@@ -8,14 +8,10 @@ import scala.collection.mutable._
 object Scorer {
 
   def tagsForSlide(slide: Slide): Set[String] = {
-    var tags:Set[String] = Set[String]()
+    val tags:Set[String] = Set[String]()
 
-    val it = slide.photos.iterator
-
-    while (it.hasNext) {
-      val photo = it.next()
-
-      photo.tags.foreach(tags.add(_))
+    slide.photos.foreach{p =>
+      tags ++= p.tags
     }
 
     tags
@@ -25,11 +21,11 @@ object Scorer {
     val tagsIn1 = tagsForSlide(slide1)
     val tagsIn2 = tagsForSlide(slide2)
 
-    val tagsInCommon = tagsIn1.filter(tag => tagsIn2.contains(tag))
-    val tags1Only = tagsIn1.filter(tag => !tagsIn2.contains(tag))
-    val tags2Only = tagsIn2.filter(tag => !tagsIn1.contains(tag))
+    val tagsInCommon = tagsIn1.intersect(tagsIn2)
+    val tags1Only = tagsIn1.size - tagsInCommon.size
+    val tags2Only = tagsIn2.size - tagsInCommon.size
 
-    Math.min(tagsInCommon.size, Math.min(tags1Only.size, tags2Only.size))
+    Math.min(tagsInCommon.size, Math.min(tags1Only, tags2Only))
   }
 
   def compute(slideShow: SlideShow): Score = {

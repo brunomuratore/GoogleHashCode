@@ -2,6 +2,7 @@ package main
 
 import main.framework.{Score, ScorePrinter}
 import main.io.{InputReader, OutputWriter}
+import main.scorer.Scorer
 
 import scala.collection.mutable._
 
@@ -32,7 +33,7 @@ object Main extends App{
 //    ))
     OutputWriter.write(slideShow, file)
 
-    //scores += file -> Scorer.compute(slideShow)
+    scores += file -> Scorer.compute(slideShow)
 
     println("")
   }
