@@ -8,7 +8,7 @@ import scala.collection.mutable
 
 object InputReader {
 
-  def read(file: String): (mutable.Set[Photo], mutable.Map[String, mutable.Set[Photo]]) = {
+  def read(file: String): (mutable.Set[Photo], mutable.Map[String, mutable.Set[Photo]], mutable.TreeMap[Int, Array[Photo]]) = {
     val path = new File(s"resources/input/$file").getAbsolutePath
     val reader = new BufferedReader(new FileReader(path))
 
@@ -16,6 +16,7 @@ object InputReader {
 
     val photos = mutable.Set.empty[Photo]
     val tagToPhotos = mutable.Map.empty[String, mutable.Set[Photo]]
+    val sortedPhotos = mutable.TreeMap[Int, Array[Photo]]()
 
     0.until(rows).foreach(_ => {
       val line = reader.readLine().split(" ")
@@ -24,6 +25,7 @@ object InputReader {
       val tags = line.slice(2, line.length).toSet
       val photo = Photo(id, vertical, tags)
       photos.add(photo)
+
       tags.foreach(tag => {
         if (tagToPhotos.contains(tag)) {
           tagToPhotos(tag).add(photo)
@@ -31,10 +33,17 @@ object InputReader {
           tagToPhotos(tag) = mutable.Set[Photo](photo)
         }
       })
+
+      val num = photo.tags.size
+      if (sortedPhotos.contains(num)) {
+        sortedPhotos(num) = sortedPhotos(num) :+ photo
+      } else {
+        sortedPhotos(num) = Array(photo)
+      }
     })
 
     reader.close()
 
-    (photos, tagToPhotos)
+    (photos, tagToPhotos, sortedPhotos)
   }
 }
