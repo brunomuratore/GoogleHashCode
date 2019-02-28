@@ -83,5 +83,9 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, Array[Photo]], sortedP
   }
 
 
+  def addSlide(slideShow: SlideShow, slide: Slide): SlideShow = {
+    // todo: remove photos from all maps
+    SlideShow(slideShow.slides :+ slide)
+  }
 
 }
