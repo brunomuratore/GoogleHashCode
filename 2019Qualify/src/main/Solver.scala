@@ -29,7 +29,7 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
   def pickVerticalPhoto(tags: Int): Option[Photo] = {
     tags.to(0).by(-1).foreach { t =>
       val diff = tags - t
-      for (photo <- sortedPhotos(tags).keys)
+      for (photo <- sortedPhotos(t).keys)
         if (photo.vertical) return Some(photo)
     }
     return None
