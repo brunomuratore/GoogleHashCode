@@ -10,6 +10,7 @@ import main.scorer.Scorer
 
 import scala.collection.mutable._
 import scala.util.Random
+import util.control.Breaks._
 
 class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Photo]], sortedPhotos: TreeMap[Int,
   Map[Photo, Photo]])(implicit file: String) {
