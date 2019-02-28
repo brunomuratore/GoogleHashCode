@@ -22,7 +22,7 @@ object Scorer {
     tags
   }
 
-  def compute(slideShow: SlideShow, array: Array[Array[Int]]): Score = {
+  def compute(slideShow: SlideShow): Score = {
 
     var addedScore: Int = 0
 
