@@ -31,7 +31,7 @@ object InputReader {
         if (tagToPhotos.contains(tag)) {
           tagToPhotos(tag) += photo -> photo
         } else {
-          tagToPhotos(tag) += photo -> photo
+          tagToPhotos(tag) = Map(photo -> photo)
         }
       })
 
@@ -39,7 +39,7 @@ object InputReader {
       if (sortedPhotos.contains(num)) {
         sortedPhotos(num) += photo -> photo
       } else {
-        sortedPhotos(num) += photo -> photo
+        sortedPhotos(num) = Map(photo -> photo)
       }
     })
 
