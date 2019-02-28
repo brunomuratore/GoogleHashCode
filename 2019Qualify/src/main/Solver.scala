@@ -25,19 +25,29 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, Set[Photo]], sortedPho
     bar.update()
   }
 
-//  def pickSlide(): Slide = {
-//    val max = sortedPhotos.keys.last
-//    val photo = sortedPhotos(max).head
+  def pickSlide(): Slide = {
+    val slide = new Slide(mutable.ListBuffer[Photo]())
 
-//    val slide = Slide()
-//    if (!photo.vertical) {
-//        slide.photos.
-//        return sli(photo: photo)
-//    }
-//
-//    val photo = sortedPhotos(max).head
+    // grab the max number of tags in a single photo
+    val max = sortedPhotos.keys.last
 
-//  }
+    // grab the first photo which has this number of tags
+    val photo1 = sortedPhotos(max).head
+
+    // if it's horizontal return it
+    if (!photo1.vertical) {
+        slide.photos += photo1
+        return slide
+    }
+
+    // It's vertical, try to add the next one
+    val photo2 = sortedPhotos(max).head
+    if (photo2.vertical) {
+      slide.photos += photo2
+    }
+
+    return slide
+  }
 
 
 
