@@ -6,6 +6,7 @@ package main
 
 import main.framework.ProgressBar
 import main.models.{Photo, Slide, SlideShow}
+import main.scorer.Scorer
 
 import scala.collection.{mutable, _}
 import scala.util.Random
@@ -51,7 +52,35 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, Array[Photo]], sortedP
   def run() = {
     val bar = new ProgressBar("Greedy solve", 1)
 
+    val slideShow = SlideShow(mutable.ListBuffer.empty[Slide])
+
+    addToSlideShow(pickSlide(sortedPhotos.keys.last).get)
+
+    while (!photos.isEmpty) {
+
+      var bestPick: Option[Slide] = None
+      var bestValue: Int = 0
+
+      0.to(10).foreach { _ =>
+        val pick = pickSlide(Scorer.tagsForSlide(slideShow.slides.last).size)
+
+        val transitionScore: Int = if (pick.isDefined) Scorer.scoreForTransition(slideShow.slides.last, pick.get) else 0
+
+        if (!bestPick.isDefined || (transitionScore > bestValue)) {
+          bestPick = pick
+          bestValue = transitionScore
+        }
+
+        slideShow.slides.last
+      }
+    }
+
     bar.update()
+    slideShow
+  }
+
+  def addToSlideShow(slide: Slide) = {
+
   }
 
 
