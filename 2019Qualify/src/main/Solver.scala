@@ -77,7 +77,6 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
       bar.update()
     }
 
-    bar.update()
     slideShow
   }
 
