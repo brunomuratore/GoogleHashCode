@@ -1,9 +1,8 @@
 package main.scorer
 
-import main.framework.Score
-import main.models.Photo
-import main.models.Slide
-import main.models.SlideShow
+import main.framework.{ProgressBar, Score}
+import main.models.{Slide, SlideShow}
+
 import scala.collection.mutable._
 
 object Scorer {
@@ -34,19 +33,20 @@ object Scorer {
   }
 
   def compute(slideShow: SlideShow): Score = {
-
+    var pb = new ProgressBar("Scorer", slideShow.slides.size)
     var addedScore: Int = 0
 
     if (slideShow.slides.size < 1) {
       return Score(0, 0)
     }
 
-    1.to(slideShow.slides.size-1).foreach { slideIndex: Int =>
+    1.until(slideShow.slides.size).foreach { slideIndex: Int =>
 
       val prevSlide = slideShow.slides(slideIndex-1)
       val curSlide = slideShow.slides(slideIndex)
 
       addedScore += scoreForTransition(prevSlide, curSlide)
+      pb.update()
     }
 
     val result = addedScore
