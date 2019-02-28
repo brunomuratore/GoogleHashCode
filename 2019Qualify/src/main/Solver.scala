@@ -137,7 +137,7 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
       if(sortedPhotosHor.contains(t) && sortedPhotosHor(t).nonEmpty)
         return Some(Slide(List(sortedPhotosHor(t).head._1)))
 
-      if(sortedPhotosVert.contains(t) && sortedPhotosVert.nonEmpty) {
+      if(sortedPhotosVert.contains(t) && sortedPhotosVert(t).nonEmpty) {
         val p1 = sortedPhotosVert(t).head._1
         val p2 = getVert(p1, tags)
         if(p2.isDefined)
