@@ -40,7 +40,7 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
   def pickSlide(tags: Int): Option[Slide] = {
     tags.to(0).by(-1).foreach { t =>
       val diff = tags - t
-      val photoIds = sortedPhotos(t).keys.toSet
+      val photoIds = Set(sortedPhotos(t).keys)
       while (photoIds.nonEmpty) {
         val idx = photoIds.toVector(r.nextInt(photoIds.size))
         val photo:Photo = photos(idx)
