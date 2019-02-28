@@ -19,7 +19,11 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
 
   def solve() = {
 
-    run()
+    val slideShow = run()
+
+    print("Photos in slideshow: " + slideShow.slides.size)
+
+    slideShow
   }
 
   def pickVerticalPhoto(tags: Int): Option[Photo] = {
@@ -34,7 +38,7 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
   def pickSlide(tags: Int): Option[Slide] = {
     tags.to(0).by(-1).foreach { t =>
       val diff = tags - t
-      val photoIds = sortedPhotos(tags).keys.toVector
+      val photoIds = sortedPhotos(t).keys.toVector
       while (photoIds.nonEmpty) {
         val idx = photoIds(r.nextInt(photoIds.size))
         val photo:Photo = photos(idx)
@@ -85,7 +89,6 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
         bar.update()
       }
     }
-
 
     slideShow
   }
