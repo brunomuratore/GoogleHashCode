@@ -7,10 +7,10 @@ package main
 import main.framework.ProgressBar
 import main.models.{Photo, Slide, SlideShow}
 
-import scala.collection.mutable
+import scala.collection.{mutable, _}
 import scala.util.Random
 
-class Solver(photos: mutable.Set[Photo], tagInPhotos: mutable.Map[String, mutable.Set[Photo]])(implicit file: String) {
+class Solver(photos: Set[Photo], tagInPhotos: Map[String, Set[Photo]])(implicit file: String) {
   val r = new Random()
 
   def solve() = {
