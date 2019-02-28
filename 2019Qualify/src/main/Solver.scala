@@ -134,7 +134,8 @@ class Solver(photos: Map[Photo, Photo], tagInPhotos: Map[String, Map[Photo, Phot
   }
   def pickSlideBruno(tags: Int): Option[Slide] = {
     tags.to(0).by(-1).foreach{ t=>
-      if(sortedPhotosHor.contains(t)) return Some(Slide(List(sortedPhotosHor(t).head._1)))
+      if(sortedPhotosHor.contains(t) && sortedPhotosHor(t).nonEmpty)
+        return Some(Slide(List(sortedPhotosHor(t).head._1)))
 
       if(sortedPhotosVert.contains(t)) {
         val p1 = sortedPhotosVert(t).head._1
