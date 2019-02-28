@@ -10,8 +10,7 @@ import main.models.{Photo, Slide, SlideShow}
 import scala.collection.{mutable, _}
 import scala.util.Random
 
-class Solver(photos: Set[Photo], tagInPhotos: Map[String, Array[Photo]], sortedPhotos: mutable.TreeMap[Int, Array[Photo]])
-            (implicit file: String) {
+class Solver(photos: Set[Photo], tagInPhotos: Map[String, Array[Photo]], sortedPhotos: mutable.TreeMap[Int, Array[Photo]])(implicit file: String) {
 
   val r = new Random()
 
@@ -44,6 +43,7 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, Array[Photo]], sortedP
           }
 
     }
+    None
   }
 
   private def run() = {
@@ -59,7 +59,7 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, Array[Photo]], sortedP
     val max = sortedPhotos.keys.last
 
     // grab the first photo which has this number of tags
-    val photo1 = sortedPhotos(max).head
+    val photo1 = sortedPhotos(max)(0)
 
     // if it's horizontal return it
     if (!photo1.vertical) {
@@ -68,11 +68,15 @@ class Solver(photos: Set[Photo], tagInPhotos: Map[String, Array[Photo]], sortedP
     }
 
     // It's vertical, try to add the next one
-    val photo2 = sortedPhotos(max).head
-    if (photo2.vertical) {
-      slide.photos += photo2
+    for (i <- 1 until sortedPhotos(max).length) {
+      var photo2 = sortedPhotos(max)(i)
+      if (photo2.vertical) {
+        slide.photos += photo2
+        return slide
+      }
     }
 
+    // it was not possible to find another vertical photo, just return a slide containing single photo
     return slide
   }
 
