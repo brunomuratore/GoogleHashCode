@@ -2,6 +2,7 @@ package main
 
 import main.framework.{Score, ScorePrinter}
 import main.io.{InputReader, OutputWriter}
+import main.models.{Photo, Slide, SlideShow}
 import main.scorer.Scorer
 
 import scala.collection.mutable._
@@ -26,6 +27,11 @@ object Main extends App{
 
     val slideShow = solver.solve()
 
+    // example of slide show, not needed
+//    val slideShow = SlideShow(ListBuffer(
+//      Slide(ListBuffer(Photo(1, true, null))),
+//      Slide(ListBuffer(Photo(2, true, null), Photo(3, true, null)))
+//    ))
     OutputWriter.write(slideShow, file)
 
     scores += file -> Scorer.compute(slideShow)
