@@ -21,9 +21,9 @@ object InputReader {
     val sortedPhotosVertical = TreeMap[Int, Map[Photo, Photo]]()
     val sortedPhotosHorizontal = TreeMap[Int, Map[Photo, Photo]]()
 
-    0.until(rows).foreach(_ => {
+    0.until(rows).foreach(i => {
       val line = reader.readLine().split(" ")
-      val id = line(1).toInt
+      val id = i
       val vertical = line(0) == "V"
       val tags = line.slice(2, line.length).toSet
       val photo = Photo(id, vertical, tags)
