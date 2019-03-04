@@ -1,6 +1,6 @@
+a_example.txt: 3/0
 b_lovely_landscapes.txt: 30/0
-a_example.txt: 2/0
-total: 321052/0
-d_pet_pictures.txt: 207564/0
-e_shiny_selfies.txt: 113289/0
-c_memorable_moments.txt: 167/0
+total: 412347/0
+d_pet_pictures.txt: 412347/0
+e_shiny_selfies.txt: 142606/0
+c_memorable_moments.txt: 201/0

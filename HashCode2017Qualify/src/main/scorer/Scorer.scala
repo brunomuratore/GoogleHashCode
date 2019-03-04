@@ -20,12 +20,17 @@ object Scorer {
     val max = 0
 
     var totalSaved = 0L
+    caches.foreach {c =>
+      c.cachedVideos.foreach{v =>
+        totalSaved += v._2.savedLatency
+      }
+    }
     var totalRequests = 0L
 
     val pb = new ProgressBar("Score", endpoints.size)
     endpoints.foreach{ end =>
-      end.requests.foreach { req =>
-        totalSaved += req.qty * (end.latency - getBestLatency(end, req))
+      end.requests.values.foreach { req =>
+        //totalSaved += req.qty * (end.latency - getBestLatency(end, req))
         totalRequests += req.qty
       }
       pb.update()

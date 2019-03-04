@@ -3,18 +3,40 @@ package main.scorer
 import main.framework.{ProgressBar, Score}
 import main.models.{Slide, SlideShow}
 
-import scala.collection.mutable._
-
 object Scorer {
 
-  def tagsForSlide(slide: Slide): Set[String] = {
-    val tags:Set[String] = Set[String]()
+  def tagsForSlide(slide: Slide): Array[String] = {
+    if(slide.photos.size == 1)
+      slide.photos.head.tags
+    else
+      slide.photos.head.tags ++ slide.photos.last.tags
+  }
 
-    slide.photos.foreach{p =>
-      tags ++= p.tags
+  def score(tagsIn1: Array[String], tagsIn2: Array[String]): Int = {
+    val tagsInCommon = tagsIn1.intersect(tagsIn2)
+    val tags1Only = Math.abs(tagsIn1.length - tagsInCommon.length)
+    val tags2Only = Math.abs(tagsIn2.length - tagsInCommon.length)
+
+    Math.min(tagsInCommon.length, Math.min(tags1Only, tags2Only))
+  }
+
+  def scoreSet(tagsIn1: Set[String], tagsIn2: Set[String]): Int = {
+    val tagsInCommon = tagsIn1.intersect(tagsIn2).size
+    val tags1Only = Math.abs(tagsIn1.size - tagsInCommon)
+    val tags2Only = Math.abs(tagsIn2.size - tagsInCommon)
+
+    Math.min(tagsInCommon, Math.min(tags1Only, tags2Only))
+  }
+
+  def scoreSet2(tagsIn1: Set[String], tagsIn2: Set[String]): Int = {
+    var tagsInCommon = 0
+    for(t <- tagsIn1) {
+      if(tagsIn2.contains(t)) tagsInCommon += 1
     }
+    val tags1Only = Math.abs(tagsIn1.size - tagsInCommon)
+    val tags2Only = Math.abs(tagsIn2.size - tagsInCommon)
 
-    tags
+    Math.min(tagsInCommon, Math.min(tags1Only, tags2Only))
   }
 
   def scoreForTransition(slide1: Slide, slide2: Slide): Int = {
@@ -22,10 +44,10 @@ object Scorer {
     val tagsIn2 = tagsForSlide(slide2)
 
     val tagsInCommon = tagsIn1.intersect(tagsIn2)
-    val tags1Only = tagsIn1.size - tagsInCommon.size
-    val tags2Only = tagsIn2.size - tagsInCommon.size
+    val tags1Only = Math.abs(tagsIn1.length - tagsInCommon.length)
+    val tags2Only = Math.abs(tagsIn2.length - tagsInCommon.length)
 
-    Math.min(tagsInCommon.size, Math.min(tags1Only, tags2Only))
+    Math.min(tagsInCommon.length, Math.min(tags1Only, tags2Only))
   }
 
   def compute(slideShow: SlideShow): Score = {

@@ -12,11 +12,11 @@ import scala.collection.mutable._
 // max 10k
 case class Video(id: Int, size: Int)
 
-case class CachedVideo(video: Video, savedLatency: Int)
+case class CachedVideo(video: Video, var savedLatency: Int)
 
 // max 1k
 // caches: cache id / latency
-case class Endpoint(id: Int, latency: Int, caches: HashMap[Int, Int], requests: ArrayBuffer[Requests], var bestCaches: List[Cache] = List.empty)
+case class Endpoint(id: Int, latency: Int, caches: HashMap[Int, Int], requests: HashMap[Int, Requests],var bestVideos: List[Video] = List.empty, var bestCaches: List[Cache] = List.empty)
 
 // max 1M
 case class Requests(qty: Int, video: Video) {
