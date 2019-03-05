@@ -1,18 +1,12 @@
-/*
- * Copyright (c) 2017 Schibsted Media Group. All rights reserved.
- */
-
 package main
 
-import main.framework.ProgressBar
+import main.framework.Utils.time
 import main.models.{Photo, Slide, SlideShow}
 import main.scorer.Scorer
 
-import scala.collection.mutable.ListBuffer
-import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable
+import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 import scala.util.Random
-import util.control.Breaks._
 
 class Solver(photos: Array[Photo])(implicit file: String) {
   val slideShow = new SlideShow(ListBuffer.empty)
@@ -63,7 +57,7 @@ class Solver(photos: Array[Photo])(implicit file: String) {
     val slidesArr = createSlides() //add on global val
     //groupByTags(slidesArr) //add on global val
     slidesA = slidesArr
-    val slideShow = run()
+    time { run() }
 
     slideShow
   }

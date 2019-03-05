@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2019 Schibsted Media Group. All rights reserved.
- */
-
 package main.framework
 
 class ProgressBar(name: String, total: Float) {
