@@ -1,5 +1,6 @@
 package main
 
+import main.framework.ProgressBar
 import main.framework.Utils.time
 import main.models.{Photo, Slide, SlideShow}
 import main.scorer.Scorer
@@ -123,11 +124,14 @@ class Solver(photos: Array[Photo])(implicit file: String) {
   }
 
   def run() = {
+
+
     var prev = slidesA(0)
     slideShow.slides += prev
 
     val used = mutable.Set(0)
 
+    val pb = new ProgressBar("Greedy", slidesA.length - 1)
     1.until(slidesA.length).foreach{x =>
       var best = (prev, -1, -1)
 
@@ -137,6 +141,7 @@ class Solver(photos: Array[Photo])(implicit file: String) {
         used += bestIndex
         prev = bestSlide
       }
+      pb.update()
     }
 
     slideShow
