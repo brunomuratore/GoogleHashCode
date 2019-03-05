@@ -91,14 +91,6 @@ class Solver(photos: Array[Photo])(implicit file: String) {
     }
   }
 
-  def tree(n: Int) = {
-    0.until(n).foreach { i =>
-      val points = "." * (n-i-1)
-      val stars = "*" * (i*2+1)
-      println(List(points, stars, points).mkString(""))
-    }
-  }
-
   def run() = {
 
     if(isTestCaseE) {
