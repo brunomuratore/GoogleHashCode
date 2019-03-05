@@ -15,7 +15,7 @@ class Solver(photos: Array[Photo])(implicit file: String) {
   private def run(): SlideShow = {
     Params.getSolver match {
       case SolverType.GreedyPhoto => new GreedyPhotoSolver(photos).run()
-      case SolverType.GreedyPhoto => new GreedySlideSolver(photos).run()
+      case SolverType.GreedySlide => new GreedySlideSolver(photos).run()
       case SolverType.HamiltonianPath => new HamiltonianPathSolver(photos).run()
     }
   }
