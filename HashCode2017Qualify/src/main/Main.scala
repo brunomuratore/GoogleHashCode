@@ -8,7 +8,7 @@ import scala.collection.mutable
 
 object Main extends App{
 
-  val allFiles = List[String]("kittens.in", "me_at_the_zoo.in", "trending_today.in", "videos_worth_spreading.in")
+  val allFiles = List[String]("me_at_the_zoo.in", "trending_today.in", "videos_worth_spreading.in", "kittens.in")
 //  val allFiles = List("kittens.in")
 //  val allFiles = List("me_at_the_zoo.in")
 //  val allFiles = List("trending_today.in")
@@ -16,18 +16,18 @@ object Main extends App{
 
   var scores = mutable.HashMap[String, Score]()
 
-  allFiles.zipWithIndex.foreach { case (file,i) =>
+  allFiles.foreach { case (file) =>
     println(s"Running $file")
 
     val (caches, endpoints) = InputReader.read(file)
 
-    val solver = new Solver(caches, endpoints, i)
+    val solver = new SolverBruno(caches, endpoints)(file)
 
     val cachesResult = solver.solve()
 
     OutputWriter.write(file, cachesResult)
 
-    scores += file -> Scorer.compute(endpoints)
+    scores += file -> Scorer.compute(endpoints, cachesResult)
 
     println(s"free total cache space = ${caches.map(_.freeSpace).sum}")
 

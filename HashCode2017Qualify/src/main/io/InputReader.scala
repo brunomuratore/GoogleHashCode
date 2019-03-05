@@ -21,7 +21,7 @@ object InputReader {
 
     //caches
     val caches = new ArrayBuffer[Cache](aCaches)
-    0.until(aCaches).foreach(caches += Cache(_, cacheSize, HashMap.empty))
+    0.until(aCaches).foreach(caches += Cache(_, cacheSize, HashMap.empty, HashMap.empty))
 
     //videos
     val videos = new ArrayBuffer[Video](aVideos)
@@ -34,14 +34,16 @@ object InputReader {
       line = reader.readLine().split(" ")
       val latency = line(0).toInt
       val linksA = line(1).toInt
-      val links = new ArrayBuffer[Link](linksA)
+      val links = HashMap[Int, Int]()
       0.until(linksA).foreach { _ =>
         line = reader.readLine().split(" ")
-        val cacheObj = caches(line(0).toInt)
+        val cacheId = line(0).toInt
         val cacheLatency = line(1).toInt
-        links += Link(cacheObj, cacheLatency)
+        links += cacheId -> cacheLatency
+
+        caches(cacheId).endpoints += e -> cacheLatency
       }
-      endpoints += Endpoint(e, latency, links, new ArrayBuffer[Requests])
+      endpoints += Endpoint(e, latency, links, HashMap.empty)
     }
 
     //requests
@@ -51,7 +53,7 @@ object InputReader {
       val videoId = line(0).toInt
       val endpointId = line(1).toInt
       val totalRequests = line(2).toInt
-      endpoints(endpointId).requests += Requests(totalRequests, videos(videoId))
+      endpoints(endpointId).requests(videoId) = Requests(endpoints(endpointId).requests.getOrElseUpdate(videoId, Requests(0,videos(videoId))).qty + totalRequests, videos(videoId))
     }
 
     (caches, endpoints)

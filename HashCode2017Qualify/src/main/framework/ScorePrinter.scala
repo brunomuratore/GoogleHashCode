@@ -34,10 +34,11 @@ object ScorePrinter {
 
   def loadBestScores() = {
     val scores = HashMap[String, Score]()
-    val path = new File(s"resources/score/best.txt").getAbsolutePath
-    val reader = new BufferedReader(new FileReader(path))
+    val file = new File(s"resources/score/best.txt")
+    file.getParentFile.mkdirs()
+    val reader = new BufferedReader(new FileReader(file.getAbsolutePath))
 
-    Files.readAllLines(Paths.get(path), Charset.defaultCharset()).asScala.foreach{ line =>
+    Files.readAllLines(Paths.get(file.getAbsolutePath), Charset.defaultCharset()).asScala.foreach{ line =>
       val split = line.split(": ")
       val file = split(0)
       val scoreSplit = split(1).split("/")

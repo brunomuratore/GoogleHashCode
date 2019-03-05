@@ -1,0 +1,1 @@
+python3 $(DIRNAME $0)/shoot.py $PWD
