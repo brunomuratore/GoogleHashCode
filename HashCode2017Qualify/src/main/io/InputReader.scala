@@ -43,7 +43,7 @@ object InputReader {
 
         caches(cacheId).endpoints += e -> cacheLatency
       }
-      endpoints += Endpoint(e, latency, links, new ArrayBuffer[Requests])
+      endpoints += Endpoint(e, latency, links, HashMap.empty)
     }
 
     //requests
@@ -53,7 +53,7 @@ object InputReader {
       val videoId = line(0).toInt
       val endpointId = line(1).toInt
       val totalRequests = line(2).toInt
-      endpoints(endpointId).requests += Requests(totalRequests, videos(videoId))
+      endpoints(endpointId).requests(videoId) = Requests(endpoints(endpointId).requests.getOrElseUpdate(videoId, Requests(0,videos(videoId))).qty + totalRequests, videos(videoId))
     }
 
     (caches, endpoints)
