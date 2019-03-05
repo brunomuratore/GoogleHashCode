@@ -1,9 +1,8 @@
 package main.params
 
 object Params {
-  def numOfSlicesToRemove(implicit file: String) = file match {
-    case "small.in" => 3
-    case "medium.in" => 1
-    case _ => 1
+  def isTestCaseE(implicit file: String) = file match {
+    case "e_shiny_selfies.txt" => true
+    case _ => false
   }
 }

@@ -5,8 +5,6 @@ import java.io.{BufferedReader, File, FileReader}
 import main.framework.ProgressBar
 import main.models.Photo
 
-import scala.collection.mutable._
-
 object InputReader {
 
   def read(file: String): Array[Photo] = {
@@ -23,7 +21,7 @@ object InputReader {
       val line = reader.readLine().split(" ")
       val id = i
       val vertical = line(0) == "V"
-      val tags = line.slice(2, line.length)
+      val tags = line.slice(2, line.length).toSet
       val photo = Photo(id, vertical, tags)
       photos(i) = photo
       pb.update()

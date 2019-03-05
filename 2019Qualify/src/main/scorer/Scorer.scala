@@ -5,7 +5,7 @@ import main.models.{Slide, SlideShow}
 
 object Scorer {
 
-  def tagsForSlide(slide: Slide): Array[String] = {
+  def tagsForSlide(slide: Slide): Set[String] = {
     if(slide.photos.size == 1)
       slide.photos.head.tags
     else
@@ -44,10 +44,10 @@ object Scorer {
     val tagsIn2 = tagsForSlide(slide2)
 
     val tagsInCommon = tagsIn1.intersect(tagsIn2)
-    val tags1Only = Math.abs(tagsIn1.length - tagsInCommon.length)
-    val tags2Only = Math.abs(tagsIn2.length - tagsInCommon.length)
+    val tags1Only = Math.abs(tagsIn1.size - tagsInCommon.size)
+    val tags2Only = Math.abs(tagsIn2.size - tagsInCommon.size)
 
-    Math.min(tagsInCommon.length, Math.min(tags1Only, tags2Only))
+    Math.min(tagsInCommon.size, Math.min(tags1Only, tags2Only))
   }
 
   def compute(slideShow: SlideShow): Score = {
