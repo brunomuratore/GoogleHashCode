@@ -39,13 +39,11 @@ class GreedySlideSolver(photos: Array[Photo])(implicit file: String) {
 
   private def getBestSlide(prev: Slide, x: Int, used: mutable.Set[Int]): (Slide, Int, Int) = {
     var best = (prev, -1, -1)
-    val ideal = prev.tags.size / 2
     2.until(slides.length).par.foreach { y =>
       val s = slides(y)
       if(x != y && !used(y)) {
-        val score = Scorer.scoreSet(prev.tags, s.tags)
+        val score = Scorer.scoreSet(prev.tags, s.tags) + ((40 - s.tags.size) / 40)
         if(score > best._2) best = (s, score, y)
-        if(score == ideal) return best
       }
     }
     best
@@ -61,8 +59,9 @@ class GreedySlideSolver(photos: Array[Photo])(implicit file: String) {
       slidesBuff += Slide.of(p)
     }
 
-    verticals.indices.by(2).foreach { i =>
-      slidesBuff += Slide.of(verticals(i), verticals(i+1))
+    val vertSorted = verticals.sortBy(_.tags.size)
+    0.until(vertSorted.length/2).foreach { i =>
+      slidesBuff += Slide.of(vertSorted(i), vertSorted(vertSorted.length - 1 -i))
     }
 
     slidesBuff.toArray

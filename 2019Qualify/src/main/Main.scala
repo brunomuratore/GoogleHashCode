@@ -11,9 +11,9 @@ object Main extends App{
 //  val allFiles = List[String]("a_example.txt", "b_lovely_landscapes.txt", "c_memorable_moments.txt", "d_pet_pictures.txt", "e_shiny_selfies.txt")
 //  val allFiles = List("a_example.txt")
 //  val allFiles = List("b_lovely_landscapes.txt")
-  val allFiles = List("c_memorable_moments.txt")
+//  val allFiles = List("c_memorable_moments.txt")
 //  val allFiles = List("d_pet_pictures.txt")
-//  val allFiles = List("e_shiny_selfies.txt")
+  val allFiles = List("e_shiny_selfies.txt")
 
   var scores = HashMap[String, Score]()
 

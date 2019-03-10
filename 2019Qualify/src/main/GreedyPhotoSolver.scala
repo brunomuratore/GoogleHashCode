@@ -39,13 +39,11 @@ class GreedyPhotoSolver(photos: Array[Photo])(implicit file: String) {
 
   private def getBestPhoto(prev: Slide, x: Int, used: mutable.Set[Int]): (Photo, Int, Int) = {
     var best = (prev.photos.last, -1, -1)
-    val ideal = prev.tags.size / 2
     photos.indices.par.foreach { y =>
       val s = photos(y)
       if(x != y && !used(y)) {
-        val score = Scorer.scoreSet(prev.tags, s.tags)
+        val score = Scorer.scoreSet(prev.tags, s.tags) + (s.tags.size / 40)
         if(score > best._2) best = (s, score, y)
-        if(score == ideal) return best
       }
     }
     best
@@ -54,15 +52,12 @@ class GreedyPhotoSolver(photos: Array[Photo])(implicit file: String) {
   private def fillSlideIfVertical(prev: Slide, cur: Photo, x: Int, used: mutable.Set[Int]): Slide = {
     if(cur.vertical) {
       var best = (prev.photos.last, -1, -1)
-      val ideal = prev.tags.size / 2
-      breakable {
-        photos.indices.par.foreach { y =>
-          val s = photos(y)
-          if (s.vertical && x != y && !used(y)) {
-            val score = Scorer.scoreSet(prev.tags, cur.tags ++ s.tags)
-            if (score > best._2) best = (s, score, y)
-            if (score == ideal) break
-          }
+      photos.indices.par.foreach { y =>
+        val s = photos(y)
+        if (s.vertical && x != y && !used(y)) {
+          val sumTags = cur.tags ++ s.tags
+          val score = Scorer.scoreSet(prev.tags, sumTags) + ((40 - sumTags.size) / 40)
+          if (score > best._2) best = (s, score, y)
         }
       }
       used += best._3
