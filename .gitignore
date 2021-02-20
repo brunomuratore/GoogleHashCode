@@ -4,3 +4,5 @@
 *.zip
 **/resources/output/
 *.DS_Store
+**/.vs/
+**/obj/

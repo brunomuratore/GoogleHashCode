@@ -1,0 +1,6 @@
+a.txt 10829
+b.txt 10681
+c.txt 30147
+d.txt 71916
+e.txt 13839
+f.txt 9942
