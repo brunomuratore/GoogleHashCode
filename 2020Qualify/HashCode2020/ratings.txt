@@ -1,6 +1,6 @@
-a.txt 10829
-b.txt 10681
-c.txt 30147
-d.txt 71916
-e.txt 13839
-f.txt 9942
+a.txt 7052
+b.txt 10381
+c.txt 29578
+d.txt 70883
+e.txt 10069
+f.txt 13463

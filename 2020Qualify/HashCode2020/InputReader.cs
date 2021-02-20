@@ -10,7 +10,7 @@ namespace HashCode2021
     {
         public static string Read(string file)
         {
-            var lines = File.ReadAllLines($"../../../in/{file}");
+            var lines = File.ReadAllLines($"../../../input/{file}");
 
             foreach (var line in lines)
             {

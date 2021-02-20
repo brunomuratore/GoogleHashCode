@@ -17,7 +17,7 @@ namespace HashCode2021
 
         private static string Save(string file, string[] lines, Rating rating)
         {
-            var path = $"../../../out/";
+            var path = $"../../../output/";
             var fileName = $"{path}{file}";
 
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
