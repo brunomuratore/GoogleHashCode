@@ -28,12 +28,17 @@ namespace HashCode2021
             }
         }
 
-        private Random r = new Random();
-        internal int Calculate(string file, Result result)
+        internal int Calculate(string file, Result r)
         {
-
-            var score = result.libraries.Count;
-
+            var remainingDays = r.days;
+            var score = 0;
+            foreach (var l in r.libraries)
+            {
+                remainingDays -= l.signup;
+                if (remainingDays < 0) break;
+                score += l.scan.Take(Math.Min(remainingDays * l.capacity, l.scan.Count)).Select(b => b.score).Sum();
+            }
+            
             Print(file, score);
             Save(file, score);
             return score;
@@ -48,6 +53,7 @@ namespace HashCode2021
 
             var msg = $"{file}: {score} ([{symbol}{Math.Abs(score - ratings[file].score)}])";
             Utils.AddSummary(msg, color);
+            Utils.AddTotal(score);
         }
                 
         private void Save(string file, int score) 

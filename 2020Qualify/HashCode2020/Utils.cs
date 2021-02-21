@@ -42,6 +42,7 @@ namespace HashCode2021
         {
             Console.WriteLine();
             summaryEntries.ForEach(e => WriteColor(e.Item1, e.Item2));
+            Console.WriteLine($"Total: {TotalScore}");
         }
 
         #region Splits
@@ -55,6 +56,14 @@ namespace HashCode2021
             var sp = s.Split(separator);
             return (int.Parse(sp[0]), int.Parse(sp[1]));
         }
+
+
+        public static int TotalScore = 0;
+        public static void AddTotal(int score)
+        {
+            TotalScore += score;
+        }
+
         public static (A, B, C) Split3<A, B, C>(this string s, string separator = " ")
         {
             var sp = s.Split(separator);

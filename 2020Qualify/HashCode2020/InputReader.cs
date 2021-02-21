@@ -26,7 +26,7 @@ namespace HashCode2021
 
             var libraries = new Dictionary<int, Library>();
 
-            for (int i = 2; i < L * 2; i += 2)
+            for (int i = 2; i < (L * 2) + 2; i += 2)
             {
                 var (nBooks, signup, capacity) = lines[i].Split3();
 
