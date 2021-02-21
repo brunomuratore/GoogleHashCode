@@ -45,55 +45,55 @@ namespace HashCode2021
         }
 
         #region Splits
-        public static (A, B) Split2<A, B>(this string s, string separator)
+        public static (A, B) Split2<A, B>(this string s, string separator = " ")
         {
             var sp = s.Split(separator);
             return ((A)Convert.ChangeType(sp[0], typeof(A)), (B)Convert.ChangeType(sp[1], typeof(B)));
         }
-        public static (long, long) Split2(this string s, string separator)
+        public static (int, int) Split2(this string s, string separator = " ")
         {
             var sp = s.Split(separator);
-            return (long.Parse(sp[0]), long.Parse(sp[1]));
+            return (int.Parse(sp[0]), int.Parse(sp[1]));
         }
-        public static (A, B, C) Split3<A, B, C>(this string s, string separator)
+        public static (A, B, C) Split3<A, B, C>(this string s, string separator = " ")
         {
             var sp = s.Split(separator);
             return ((A)Convert.ChangeType(sp[0], typeof(A)), (B)Convert.ChangeType(sp[1], typeof(B)), (C)Convert.ChangeType(sp[2], typeof(C)));
         }
-        public static (long, long, long) Split3(this string s, string separator)
+        public static (int, int, int) Split3(this string s, string separator = " ")
         {
             var sp = s.Split(separator);
-            return (long.Parse(sp[0]), long.Parse(sp[1]), long.Parse(sp[2]));
+            return (int.Parse(sp[0]), int.Parse(sp[1]), int.Parse(sp[2]));
         }
-        public static (A, B, C, D) Split4<A, B, C, D>(this string s, string separator)
+        public static (A, B, C, D) Split4<A, B, C, D>(this string s, string separator = " ")
         {
             var sp = s.Split(separator);
             return ((A)Convert.ChangeType(sp[0], typeof(A)), (B)Convert.ChangeType(sp[1], typeof(B)), (C)Convert.ChangeType(sp[2], typeof(C)), (D)Convert.ChangeType(sp[3], typeof(D)));
         }
-        public static (long, long, long, long) Split4(this string s, string separator)
+        public static (int, int, int, int) Split4(this string s, string separator = " ")
         {
             var sp = s.Split(separator);
-            return (long.Parse(sp[0]), long.Parse(sp[1]), long.Parse(sp[2]), long.Parse(sp[3]));
+            return (int.Parse(sp[0]), int.Parse(sp[1]), int.Parse(sp[2]), int.Parse(sp[3]));
         }
-        public static (A, B, C, D, E) Split5<A, B, C, D, E>(this string s, string separator)
+        public static (A, B, C, D, E) Split5<A, B, C, D, E>(this string s, string separator = " ")
         {
             var sp = s.Split(separator);
             return ((A)Convert.ChangeType(sp[0], typeof(A)), (B)Convert.ChangeType(sp[1], typeof(B)), (C)Convert.ChangeType(sp[2], typeof(C)), (D)Convert.ChangeType(sp[3], typeof(D)), (E)Convert.ChangeType(sp[4], typeof(E)));
         }
-        public static (long, long, long, long, long) Split5(this string s, string separator)
+        public static (int, int, int, int, int) Split5(this string s, string separator = " ")
         {
             var sp = s.Split(separator);
-            return (long.Parse(sp[0]), long.Parse(sp[1]), long.Parse(sp[2]), long.Parse(sp[3]), long.Parse(sp[4]));
+            return (int.Parse(sp[0]), int.Parse(sp[1]), int.Parse(sp[2]), int.Parse(sp[3]), int.Parse(sp[4]));
         }
-        public static (A, B, C, D, E, F) Split6<A, B, C, D, E, F>(this string s, string separator)
+        public static (A, B, C, D, E, F) Split6<A, B, C, D, E, F>(this string s, string separator = " ")
         {
             var sp = s.Split(separator);
             return ((A)Convert.ChangeType(sp[0], typeof(A)), (B)Convert.ChangeType(sp[1], typeof(B)), (C)Convert.ChangeType(sp[2], typeof(C)), (D)Convert.ChangeType(sp[3], typeof(D)), (E)Convert.ChangeType(sp[4], typeof(E)), (F)Convert.ChangeType(sp[5], typeof(F)));
         }
-        public static (long, long, long, long, long, long) Split6(this string s, string separator)
+        public static (int, int, int, int, int, int) Split6(this string s, string separator = " ")
         {
             var sp = s.Split(separator);
-            return (long.Parse(sp[0]), long.Parse(sp[1]), long.Parse(sp[2]), long.Parse(sp[3]), long.Parse(sp[4]), long.Parse(sp[5]));
+            return (int.Parse(sp[0]), int.Parse(sp[1]), int.Parse(sp[2]), int.Parse(sp[3]), int.Parse(sp[4]), int.Parse(sp[5]));
         }
         #endregion
     }

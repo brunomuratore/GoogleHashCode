@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HashCode2020.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,9 +11,24 @@ namespace HashCode2021
         {
         }
 
-        internal string Solve(string model)
+        public Result Solve(Model m)
         {
-            return model;
+
+            Console.WriteLine($"days: {m.days}, books: {m.books.Count}, libraries: {m.libraries.Count}");
+            
+
+
+            return new Result(m.libraries.First().Value);
+        }
+
+        public class Result
+        {
+            public List<Library> libraries;
+
+            public Result(Library l)
+            {
+                this.libraries = new List<Library>() { l };
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using static HashCode2021.Solver;
 
 namespace HashCode2021
 {
@@ -28,10 +29,10 @@ namespace HashCode2021
         }
 
         private Random r = new Random();
-        internal int Calculate(string file, string result)
+        internal int Calculate(string file, Result result)
         {
 
-            var score = int.Parse(result) + r.Next(-2000,+12000);
+            var score = result.libraries.Count;
 
             Print(file, score);
             Save(file, score);

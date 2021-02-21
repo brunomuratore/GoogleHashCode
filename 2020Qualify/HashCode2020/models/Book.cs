@@ -8,5 +8,11 @@ namespace HashCode2020.models
     {
         public int id;
         public int score;
+
+        public Book(int id, int score)
+        {
+            this.score = score;
+            this.id = id;
+        }
     }
 }

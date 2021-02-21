@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using static HashCode2021.Solver;
 
 namespace HashCode2021
 {
     internal static class OutputWriter
     {
-        internal static string Write(string file, string result, Rating rating)
+        internal static string Write(string file, Result result, Rating rating)
         {
             var lines = new[] { "1", "2" };
 
