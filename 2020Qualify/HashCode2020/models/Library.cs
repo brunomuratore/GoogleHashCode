@@ -19,7 +19,7 @@ namespace HashCode2020.models
             maxPotentialScore = books.Take(Math.Min((Global.Days - signup) * capacity, books.Count)).Select(b => b.score).Sum();            
         }
 
-        internal void Dedup()
+        internal void Dedup(bool chosen)
         {
             scan = new List<Book>();
 
@@ -27,7 +27,7 @@ namespace HashCode2020.models
             {
                 if (!Global.UsedBooks.Contains(book))
                 {
-                    Global.UsedBooks.Add(book);
+                    if (chosen) Global.UsedBooks.Add(book);
                     scan.Add(book);
                 }
             }

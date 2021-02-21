@@ -17,20 +17,22 @@ namespace HashCode2021
         {
             Console.WriteLine($"days: {m.days}, books: {m.books.Count}, libraries: {m.libraries.Count}");
 
-            var bestLibraries = m.libraries.Values.OrderByDescending(l => l.maxPotentialScore).ToList();
-            
+            var bestLibraries = m.libraries.Values.OrderByDescending(l => l.maxPotentialScore).ToList();            
+            var resultLibraries = new List<Library>();
+
             while(Global.RemainingDays > 0 && m.libraries.Count > 0)
             {
+                bestLibraries[0].Dedup(true);
                 m.libraries.Remove(bestLibraries[0].id);
                 Global.RemainingDays -= bestLibraries[0].signup;
+                resultLibraries.Add(bestLibraries[0]);
 
-                foreach (var l in m.libraries.Values) l.Dedup();
+                foreach (var l in m.libraries.Values) l.Dedup(false);
 
-
-                bestLibraries = bestLibraries.OrderByDescending(l => l.maxPotentialScore).ToList();
+                bestLibraries = m.libraries.Values.OrderByDescending(l => l.maxPotentialScore).ToList();
             }
 
-            return new Result(bestLibraries, m.days);
+            return new Result(resultLibraries, m.days);
         }
 
         public class Result

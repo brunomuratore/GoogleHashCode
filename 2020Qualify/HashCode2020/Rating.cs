@@ -31,7 +31,7 @@ namespace HashCode2021
 
         internal int Calculate(string file, Result r)
         {
-            var remainingDays = r.days;
+            long remainingDays = r.days;
             var score = 0;
             var books = 0;
             var booksTaken = new HashSet<int>();
@@ -40,11 +40,12 @@ namespace HashCode2021
                 remainingDays -= l.signup;
                 if (remainingDays < 0) break;
                 var booksToTake = Math.Min(remainingDays * l.capacity, l.scan.Count);
-                var mid = l.scan.Take(booksToTake);
+                var b = (int)Math.Min(int.MaxValue, booksToTake);
+                var mid = l.scan.Take(b);
                 score += mid.Select(b => b.score).Sum();
 
-                booksTaken.UnionWith(l.scan.Take(booksToTake).Select(b => b.id));
-                books += booksToTake;
+                booksTaken.UnionWith(l.scan.Take(b).Select(b => b.id));
+                books += b;
             }
 
             Console.WriteLine($"books: {booksTaken.Count}/{books}, {(float)booksTaken.Count/ (float)books *100F}%");

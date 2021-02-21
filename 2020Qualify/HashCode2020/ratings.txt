@@ -1,6 +1,6 @@
 a.txt 21
 b.txt 5822900
-c.txt 997810
+c.txt 1414691
 d.txt 4901845
 e.txt 1673108
 f.txt 4058354
