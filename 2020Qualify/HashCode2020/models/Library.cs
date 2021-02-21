@@ -21,7 +21,9 @@ namespace HashCode2020.models
 
         internal void Dedup()
         {
-            foreach(var book in books.OrderByDescending(b => b.score))
+            scan = new List<Book>();
+
+            foreach (var book in books.OrderByDescending(b => b.score))
             {
                 if (!Global.UsedBooks.Contains(book))
                 {

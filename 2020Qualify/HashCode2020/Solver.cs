@@ -1,4 +1,5 @@
-﻿using HashCode2020.models;
+﻿using HashCode2020;
+using HashCode2020.models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +19,16 @@ namespace HashCode2021
 
             var bestLibraries = m.libraries.Values.OrderByDescending(l => l.maxPotentialScore).ToList();
             
-            foreach(var l in bestLibraries)
+            while(Global.RemainingDays > 0 && m.libraries.Count > 0)
             {
-                l.Dedup();
-            }
+                m.libraries.Remove(bestLibraries[0].id);
+                Global.RemainingDays -= bestLibraries[0].signup;
 
-            bestLibraries = bestLibraries.OrderByDescending(l => l.maxPotentialScore).ToList();
+                foreach (var l in m.libraries.Values) l.Dedup();
+
+
+                bestLibraries = bestLibraries.OrderByDescending(l => l.maxPotentialScore).ToList();
+            }
 
             return new Result(bestLibraries, m.days);
         }
