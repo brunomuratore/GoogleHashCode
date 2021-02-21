@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HashCode2020;
+using HashCode2020.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,6 +22,10 @@ namespace HashCode2021
 
                 var model = InputReader.Read(file);
                 Console.WriteLine($"Read input");
+
+                // Reset globals
+                Global.UsedBooks = new HashSet<Book>();
+                Global.RemainingDays = Global.Days;
 
                 var solver = new Solver();
 

@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Linq;
 using HashCode2020.models;
+using HashCode2020;
 
 namespace HashCode2021
 {
@@ -36,6 +37,7 @@ namespace HashCode2021
                 libraries.Add(i, new Library(i, capacity, signup, booksL));
             }
 
+            Global.Days = days;
             return new Model(books, libraries, days);
         }
     }

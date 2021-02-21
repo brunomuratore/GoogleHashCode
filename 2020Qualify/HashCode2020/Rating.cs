@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HashCode2020.models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,13 +33,22 @@ namespace HashCode2021
         {
             var remainingDays = r.days;
             var score = 0;
+            var books = 0;
+            var booksTaken = new HashSet<int>();
             foreach (var l in r.libraries)
             {
                 remainingDays -= l.signup;
                 if (remainingDays < 0) break;
-                score += l.scan.Take(Math.Min(remainingDays * l.capacity, l.scan.Count)).Select(b => b.score).Sum();
+                var booksToTake = Math.Min(remainingDays * l.capacity, l.scan.Count);
+                var mid = l.scan.Take(booksToTake);
+                score += mid.Select(b => b.score).Sum();
+
+                booksTaken.UnionWith(l.scan.Take(booksToTake).Select(b => b.id));
+                books += booksToTake;
             }
-            
+
+            Console.WriteLine($"books: {booksTaken.Count}/{books}, {(float)booksTaken.Count/ (float)books *100F}%");
+
             Print(file, score);
             Save(file, score);
             return score;
