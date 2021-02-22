@@ -2,6 +2,7 @@
 using HashCode2020.models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace HashCode2021
@@ -20,7 +21,10 @@ namespace HashCode2021
             var bestLibraries = m.libraries.Values.OrderByDescending(l => l.maxPotentialScore).ToList();            
             var resultLibraries = new List<Library>();
 
-            while(Global.RemainingDays > 0 && m.libraries.Count > 0)
+            var timer = new Stopwatch();
+            timer.Start();
+
+            while(Global.RemainingDays > 0 && m.libraries.Count > 0 && timer.ElapsedMilliseconds < 1000 * 30)
             {
                 bestLibraries[0].Dedup(true);
                 m.libraries.Remove(bestLibraries[0].id);
@@ -31,6 +35,8 @@ namespace HashCode2021
 
                 bestLibraries = m.libraries.Values.OrderByDescending(l => l.maxPotentialScore).ToList();
             }
+
+            resultLibraries.AddRange(bestLibraries);
 
             return new Result(resultLibraries, m.days);
         }

@@ -16,7 +16,8 @@ namespace HashCode2020.models
             this.signup = signup;
             this.books = booksL;
 
-            maxPotentialScore = books.Take(Math.Min((Global.Days - signup) * capacity, books.Count)).Select(b => b.score).Sum();            
+            maxPotentialScore = books.Take(Math.Min((Global.Days - signup) * capacity, books.Count)).Select(b => b.score).Sum();
+            maxPotentialScore /= signup;
         }
 
         internal void Dedup(bool chosen)
@@ -33,6 +34,23 @@ namespace HashCode2020.models
             }
 
             maxPotentialScore = scan.Take(Math.Min((Global.Days - signup) * capacity, scan.Count)).Select(b => b.score).Sum();
+        }
+
+        internal void Dedup2(bool chosen)
+        {
+            scan = new List<Book>();
+
+            foreach (var book in books.OrderByDescending(b => b.score))
+            {
+                if (!Global.UsedBooks.Contains(book))
+                {
+                    if (chosen) Global.UsedBooks.Add(book);
+                    scan.Add(book);
+                }
+            }
+
+            maxPotentialScore = scan.Take(Math.Min((Global.Days - signup) * capacity, scan.Count)).Select(b => b.score).Sum();
+            maxPotentialScore /= signup;
         }
 
         public HashSet<Book> books;
