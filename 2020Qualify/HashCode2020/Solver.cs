@@ -24,14 +24,14 @@ namespace HashCode2021
             var timer = new Stopwatch();
             timer.Start();
 
-            while(Global.RemainingDays > 0 && m.libraries.Count > 0 && timer.ElapsedMilliseconds < 1000 * 30)
+            while(Global.RemainingDays > 0 && m.libraries.Count > 0 && timer.ElapsedMilliseconds < 1000 * 5)
             {
-                bestLibraries[0].Dedup(true);
+                bestLibraries[0].Dedup2(true);
                 m.libraries.Remove(bestLibraries[0].id);
                 Global.RemainingDays -= bestLibraries[0].signup;
                 resultLibraries.Add(bestLibraries[0]);
 
-                foreach (var l in m.libraries.Values) l.Dedup(false);
+                foreach (var l in m.libraries.Values) l.Dedup2(false);
 
                 bestLibraries = m.libraries.Values.OrderByDescending(l => l.maxPotentialScore).ToList();
             }
