@@ -31,24 +31,15 @@ namespace HashCode2021
 
         internal int Calculate(string file, Result r)
         {
-            long remainingDays = r.days;
+            // ================ CUSTOM SCORE CALCULATION START =========================
+            // Just fill score variable
+            
             var score = 0;
-            var books = 0;
-            var booksTaken = new HashSet<int>();
-            foreach (var l in r.libraries)
-            {
-                remainingDays -= l.signup;
-                if (remainingDays < 0) break;
-                var booksToTake = Math.Min(remainingDays * l.capacity, l.scan.Count);
-                var b = (int)Math.Min(int.MaxValue, booksToTake);
-                var mid = l.scan.Where(b => !booksTaken.Contains(b.id)).Take(b);
-                score += mid.Select(b => b.score).Sum();
 
-                booksTaken.UnionWith(l.scan.Take(b).Select(b => b.id));
-                books += b;
-            }
 
-            Console.WriteLine($"books: {booksTaken.Count}/{books}, {(float)booksTaken.Count/ (float)books *100F}%");
+            // Log info about the result
+            L.Log($"any insight about the score...(duplicates, unused)");
+            // ================ CUSTOM SCORE CALCULATION END =========================
 
             Print(file, score);
             Save(file, score);
