@@ -45,7 +45,7 @@ namespace HashCode2021
             //      decrement 1 second of every light, turning to red if necessary, and next one to green
 
             var placesWithSchedules = r.places.Where(place => place.schedules != null && place.schedules.Count > 0);
-            var lights = new List<Light>();
+            var lights = new Dictionary<string, Light>();
 
             foreach (var place in placesWithSchedules)
             {
@@ -57,19 +57,48 @@ namespace HashCode2021
                     // if this schedule is the first of the place
                     bool isFirst = place.schedules[0] == schedule;
 
-                    lights.Add(new Light(schedule.street, cars, isFirst, schedule.time));
+                    lights[schedule.street.id] = new Light(schedule.street, place, cars, isFirst, schedule.time);
                 }
             }
 
             for (int i = 0; i < r.seconds; i++)
             {
-                foreach (var light in lights.Where(l => l.isGreen && l.cars.Count > 0))
+                foreach (var light in lights.Values.Where(l => l.isGreen && l.cars.Count > 0))
                 {
                     var car = light.cars[0];
                     light.cars.RemoveAt(0);
 
-                    //var next
-                    // turn into 
+                    car.curstreetindex += 1;
+                    if (car.curstreetindex >= car.route.Count -1) //car is at destination
+                    {
+                        score += r.bonus;
+                    }
+                    else
+                    {
+                        var nextStreet = car.route[car.curstreetindex];
+                        lights[nextStreet.id].cars.Add(car);
+                    }
+                }
+            }
+
+            foreach(var light in lights.Values.Where(l => l.isGreen))
+            {
+                light.seconds -= 1;
+
+                if (light.seconds == 0)
+                {
+                    light.isGreen = false;
+                    light.place.curScheduleIndex += 1;
+
+                    if (light.place.curScheduleIndex == light.place.schedules.Count)
+                    {
+                        light.place.curScheduleIndex = 0;
+                    }
+
+                    var nextSched = light.place.schedules[light.place.curScheduleIndex];
+
+                    lights[nextSched.street.id].isGreen = true;
+                    lights[nextSched.street.id].seconds = nextSched.time;
                 }
             }
 

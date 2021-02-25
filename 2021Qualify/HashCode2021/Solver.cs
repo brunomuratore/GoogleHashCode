@@ -51,7 +51,7 @@ namespace HashCode2021
                 }
             }
             
-            return new Result(m.places.Values.ToList(), m.duration, m.cars.Values.ToList());
+            return new Result(m.places.Values.ToList(), m.duration, m.bonus, m.cars.Values.ToList());
             // ================ CUSTOM SOLVER END =========================
         }
 
