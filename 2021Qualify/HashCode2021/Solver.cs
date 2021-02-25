@@ -35,7 +35,7 @@ namespace HashCode2021
             {
                 foreach(var street in car.Value.route)
                 {
-                    street.countCarsPassingBy += car.Score;
+                    street.countCarsPassingBy += car.score;
                 }
             }
 
@@ -63,6 +63,7 @@ namespace HashCode2021
                     }
                     place.schedules.Add(new Schedule(street, time));
                 }
+
             }
             
             return new Result(m.places.Values.ToList(), m.duration, m.bonus, m.cars.Values.ToList());
