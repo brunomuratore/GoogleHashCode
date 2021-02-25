@@ -11,7 +11,7 @@ namespace HashCode2020.models
         public int cost;
         public int origin;
         public int dest;
-        public int countCarsPassingBy = 0;
+        public double countCarsPassingBy = 0;
 
         public Street(string id, int cost, int origin, int dest)
         {

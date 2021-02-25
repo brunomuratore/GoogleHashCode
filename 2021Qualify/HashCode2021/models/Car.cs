@@ -8,7 +8,7 @@ namespace HashCode2020.models
     {
         public int id;
         public List<Street> route = new List<Street>();
-        public int score = 0;
+        public double score = 0;
 
         // used by score
         public int curstreetindex = 0; // index of current street where the car is in its route
