@@ -22,7 +22,7 @@ namespace HashCode2021
 
 
             var places = new Dictionary<int, Place>();
-            var streets = new Dictionary<int, Street>();
+            var streets = new Dictionary<string, Street>();
 
             for(int i = 0; i < S; i++)
             {
@@ -41,7 +41,7 @@ namespace HashCode2021
                 var destPlace = places[dest];
 
                 var street = new Street(name, cost, orig, dest);
-                streets.Add(i, street);
+                streets.Add(name, street);
 
                 destPlace.inDestinations.Add(orig, originPlace);
                 destPlace.inStreets.Add(name, street);
@@ -50,35 +50,24 @@ namespace HashCode2021
                 originPlace.outStreets.Add(name, street);
             }
 
-            for(int i = 0; i < C; i++)
+            var cars = new Dictionary<int, Car>();
+            for (int i = 0; i < C; i++)
             {
                 var split = lines[i + 1 + S].Split(" ");
-                var car = new Car()
+                var car = new Car(i);
                 foreach (var street in split.Skip(1))
                 {
-                    
+                    car.route.Add(streets[street]);
                 }
+                cars.Add(i, car);
             }
-
-            var scores = lines[1].Split(" ");
-
-            var books = new Dictionary<int, Car>();
-
-            for (int i = 0; i < b; i++)
-            {
-                books.Add(i, new Car(i, int.Parse(scores[i])));
-            }
-
-
-            
-
 
             // Log info about the model
-            L.Log($"days: {days}, books: {books.Count}, libraries: {libraries.Count}");
+            L.Log($"duration: {duration}, intersections: {P}, streets: {S}, cars: {C}, bonus: {bonus}");
 
 
 
-            return new Model(books, new Dictionary<int, Street>(libraries), days);
+            return new Model(cars, places, duration, bonus);
             // ================ CUSTOM INPUT READ END =========================
         }
     }
