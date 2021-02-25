@@ -28,13 +28,30 @@ namespace HashCode2021
         public Result SolveGeneric(Model m)
         {
             // ================ CUSTOM SOLVER START =========================            
-            var bestLibraries = m.libraries.Values.OrderByDescending(l => l.maxPotentialScore).ToList();
-            var resultLibraries = new List<Street>();
+            //var bestLibraries = m.libraries.Values.OrderByDescending(l => l.maxPotentialScore).ToList();
+            //var resultLibraries = new List<Street>();
 
+            foreach (var car in m.cars)
+            {
+                foreach(var street in car.Value.route)
+                {
+                    street.countCarsPassingBy += 1;
+                }
+            }
 
-
-
-            return new Result(resultLibraries, m.days);
+            foreach (var place in m.places.Values)
+            {
+                var streets = place.inStreets.Values;
+                var totalCarsPassingByIntersec = streets.Select(s => s.countCarsPassingBy).Sum();
+                foreach(var street in streets)
+                {
+                    var time = (float)street.countCarsPassingBy / totalCarsPassingByIntersec;
+                    if (time < 1) { time *= 10; }
+                    place.schedules.Add(new Schedule(street, (int)time));
+                }
+            }
+            
+            return new Result(m.places.Values.ToList(), m.duration, m.cars.Values.ToList());
             // ================ CUSTOM SOLVER END =========================
         }
 

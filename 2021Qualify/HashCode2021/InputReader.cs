@@ -35,7 +35,7 @@ namespace HashCode2021
 
                 if (!places.ContainsKey(dest))
                 {
-                    places.Add(orig, new Place(orig));
+                    places.Add(dest, new Place(dest));
                 }
                 var originPlace = places[orig];
                 var destPlace = places[dest];

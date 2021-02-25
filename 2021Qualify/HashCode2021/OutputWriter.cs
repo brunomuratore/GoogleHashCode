@@ -15,14 +15,14 @@ namespace HashCode2021
             // ================ CUSTOM OUTPUT WRITE START =========================
             // Just fill "lines" variable with each line to be outputed on file
 
-            lines.Add(r.libraries.Count.ToString());
+            //lines.Add(r.libraries.Count.ToString());
 
-            foreach(var library in r.libraries)
-            {
-                lines.Add($"{library.id} {library.scan.Count}");
+            //foreach(var library in r.libraries)
+            //{
+            //    lines.Add($"{library.id} {library.scan.Count}");
 
-                lines.Add(string.Join(" ", library.scan.Select(book => book.id)));
-            }
+            //    lines.Add(string.Join(" ", library.scan.Select(book => book.id)));
+            //}
 
             // ================ CUSTOM OUTPUT WRITE END =========================
 
