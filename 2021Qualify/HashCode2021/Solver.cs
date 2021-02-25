@@ -55,7 +55,13 @@ namespace HashCode2021
                 foreach (var street in streets)
                 {                    
                     var time = (int)((float)street.countCarsPassingBy / totalCarsPassingByIntersec * 10F);
-                    place.schedules.Add(new Schedule(street, time * LCM(times)));
+                    if (time == 10) time = 1;
+                    else
+                    {
+                        var lcm = LCM(times);
+                        if (lcm == time) time = 1;
+                    }
+                    place.schedules.Add(new Schedule(street, time));
                 }
             }
             

@@ -1,6 +1,6 @@
-a.txt 5
-b.txt 5
-c.txt 5
-d.txt 5
-e.txt 5
-f.txt 5
+a.txt 1000
+b.txt 42000
+c.txt 900
+d.txt 0
+e.txt 94000
+f.txt 0
