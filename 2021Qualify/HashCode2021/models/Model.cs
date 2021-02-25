@@ -5,15 +5,18 @@ namespace HashCode2021
 {
     public class Model
     {
-        public Dictionary<int, Book> books;
-        public Dictionary<int, Library> libraries;
-        public int days;
+        public Dictionary<int, Car> cars;
+        public Dictionary<int, Street> streets;
+        public int duration;
+        public int bonus;
+                
 
-        public Model(Dictionary<int, Book> books, Dictionary<int, Library> libraries, int days)
+        public Model(Dictionary<int, Car> cars, Dictionary<int, Street> streets, int duration, int bonus)
         {
-            this.books = books;
-            this.libraries = libraries;
-            this.days = days;
+            this.cars = cars;
+            this.streets = streets;
+            this.duration = duration;
+            this.bonus = bonus;
         }
     }
 }

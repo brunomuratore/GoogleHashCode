@@ -17,7 +17,7 @@ namespace HashCode2021
             Console.WriteLine("HashCode 2021 - Br = Hu3^2\n");
             var ratingService = new Rating(files);
 
-            var iteration = 3;
+            var iteration = 1;
             while (iteration-- > 0 )
             {
                 L.LogA($"#{iteration}");

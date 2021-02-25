@@ -1,0 +1,6 @@
+a.txt 0
+b.txt 0
+c.txt 0
+d.txt 0
+e.txt 0
+f.txt 0
