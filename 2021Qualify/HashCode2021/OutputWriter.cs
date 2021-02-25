@@ -42,7 +42,8 @@ namespace HashCode2021
 
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
-            if (rating.GetNewBest().Contains(file)) File.WriteAllLines(fileName, lines);
+            //if (rating.GetNewBest().Contains(file)) 
+            File.WriteAllLines(fileName, lines);
 
             return fileName;
         }

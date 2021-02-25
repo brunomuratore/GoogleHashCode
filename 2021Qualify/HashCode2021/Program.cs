@@ -34,14 +34,14 @@ namespace HashCode2021
                     var result = solver.Solve(model);
                     L.Log($"Calculated result");
 
-                    var score = ratingService.Calculate(file, result);
-                    L.Log($"Calculated score: {score}");
+                    //var score = ratingService.Calculate(file, result);
+                    //L.Log($"Calculated score: {score}");
 
                     var outputFile = OutputWriter.Write(file, result, ratingService);
                     L.Log($"Generated output: {outputFile}\n");
                 }
 
-                Utils.WriteSummary();
+                //Utils.WriteSummary();
             }
 
             Console.ReadLine();
