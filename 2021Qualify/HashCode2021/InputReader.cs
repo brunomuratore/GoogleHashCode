@@ -55,10 +55,13 @@ namespace HashCode2021
             {
                 var split = lines[i + 1 + S].Split(" ");
                 var car = new Car(i);
+                var score = 0;
                 foreach (var street in split.Skip(1))
                 {
                     car.route.Add(streets[street]);
+                    score += streets[street].cost;
                 }
+                car.score = score;
                 cars.Add(i, car);
             }
 
