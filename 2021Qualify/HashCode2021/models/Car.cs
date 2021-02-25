@@ -9,10 +9,13 @@ namespace HashCode2020.models
         public int id;
         public int score;
 
-        public Car(int id, int score)
+        public List<Street> route;
+
+        public Car(int id, int score, List<Street> route)
         {
             this.score = score;
             this.id = id;
+            this.route = route;
         }
     }
 }
