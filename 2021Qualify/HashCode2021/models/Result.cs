@@ -7,13 +7,13 @@ namespace HashCode2021
     {
         public class Result
         {
-            public List<Street> libraries;
-            public int days;
+            public List<Place> places;
 
-            public Result(List<Street> l, int days)
+
+            public Result(List<Street> l, List<Place> places)
             {
                 this.libraries = l;
-                this.days = days;
+                this.places = days;
             }
         }
     }

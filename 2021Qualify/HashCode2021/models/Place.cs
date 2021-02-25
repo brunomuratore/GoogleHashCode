@@ -13,7 +13,7 @@ namespace HashCode2020.models
         public Dictionary<int, Place> outDestinations = new Dictionary<int, Place>();
 
 
-        public Place(int id)
+        public Place(int id, Dictionary<int, Street> inStreets, Dictionary<int, Street> outStreets, Dictionary<int, Place> inDestinations, Dictionary<int, Place> outDestinations)
         {
             this.id = id;
         }
