@@ -35,7 +35,7 @@ namespace HashCode2021
             {
                 foreach(var street in car.Value.route)
                 {
-                    street.countCarsPassingBy += car.score;
+                    street.countCarsPassingBy += car.Value.score;
                 }
             }
 
