@@ -11,7 +11,7 @@ namespace HashCode2021
         public int bonus;
                 
 
-        public Model(Dictionary<int, Car> cars, Dictionary<int, Street> places, int duration, int bonus)
+        public Model(Dictionary<int, Car> cars, Dictionary<int, Place> places, int duration, int bonus)
         {
             this.cars = cars;
             this.places = places;
