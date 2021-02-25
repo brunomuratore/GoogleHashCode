@@ -11,9 +11,9 @@ namespace HashCode2020.models
         public Dictionary<int, Street> outStreets = new Dictionary<int, Street>();
         public Dictionary<int, Place> inDestinations = new Dictionary<int, Place>();
         public Dictionary<int, Place> outDestinations = new Dictionary<int, Place>();
+        public List<Schedule> schedules = new List<Schedule>();
 
-
-        public Place(int id, Dictionary<int, Street> inStreets, Dictionary<int, Street> outStreets, Dictionary<int, Place> inDestinations, Dictionary<int, Place> outDestinations)
+        public Place(int id)
         {
             this.id = id;
         }
