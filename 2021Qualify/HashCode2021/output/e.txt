@@ -4,35 +4,30 @@
 eji-a 1
 1
 2
-a-b 2
-ejj-b 1
+a-b 7
+ejj-b 2
 499
-250
+225
 a-ejj 1
-c-ejj 1
 e-ejj 1
 g-ejj 1
 i-ejj 1
 ba-ejj 1
 bc-ejj 1
 be-ejj 1
-bg-ejj 1
 bi-ejj 1
 ca-ejj 1
 cc-ejj 1
 ce-ejj 1
 cg-ejj 1
 ci-ejj 1
-da-ejj 1
 dc-ejj 1
 de-ejj 1
 dg-ejj 1
 di-ejj 1
-ea-ejj 1
 ec-ejj 1
 ee-ejj 1
 eg-ejj 1
-ei-ejj 1
 fa-ejj 1
 fc-ejj 1
 fe-ejj 1
@@ -52,7 +47,6 @@ ia-ejj 1
 ic-ejj 1
 ie-ejj 1
 ig-ejj 1
-ii-ejj 1
 ja-ejj 1
 jc-ejj 1
 je-ejj 1
@@ -67,10 +61,7 @@ bba-ejj 1
 bbc-ejj 1
 bbe-ejj 1
 bbg-ejj 1
-bbi-ejj 1
-bca-ejj 1
 bcc-ejj 1
-bce-ejj 1
 bcg-ejj 1
 bci-ejj 1
 bda-ejj 1
@@ -107,17 +98,12 @@ bja-ejj 1
 bjc-ejj 1
 bje-ejj 1
 bjg-ejj 1
-bji-ejj 1
 caa-ejj 1
 cac-ejj 1
 cae-ejj 1
-cag-ejj 1
-cai-ejj 1
-cba-ejj 1
 cbc-ejj 1
 cbe-ejj 1
 cbg-ejj 1
-cbi-ejj 1
 cca-ejj 1
 ccc-ejj 1
 cce-ejj 1
@@ -135,10 +121,8 @@ ceg-ejj 1
 cei-ejj 1
 cfa-ejj 1
 cfc-ejj 1
-cfe-ejj 1
 cfg-ejj 1
 cfi-ejj 1
-cga-ejj 1
 cgc-ejj 1
 cge-ejj 1
 cgg-ejj 1
@@ -164,10 +148,7 @@ dae-ejj 1
 dag-ejj 1
 dai-ejj 1
 dba-ejj 1
-dbc-ejj 1
-dbe-ejj 1
 dbg-ejj 1
-dbi-ejj 1
 dca-ejj 1
 dcc-ejj 1
 dce-ejj 1
@@ -183,15 +164,11 @@ dec-ejj 1
 dee-ejj 1
 deg-ejj 1
 dei-ejj 1
-dfa-ejj 1
 dfc-ejj 1
-dfe-ejj 1
 dfg-ejj 1
 dfi-ejj 1
 dga-ejj 1
-dgc-ejj 1
 dge-ejj 1
-dgg-ejj 1
 dgi-ejj 1
 dha-ejj 1
 dhc-ejj 1
@@ -236,9 +213,7 @@ eei-ejj 1
 efa-ejj 1
 efc-ejj 1
 efe-ejj 1
-efg-ejj 1
 efi-ejj 1
-ega-ejj 1
 egc-ejj 1
 ege-ejj 1
 egg-ejj 1
@@ -263,155 +238,155 @@ eji-ejj 1
 b-c 1
 3
 2
-c-d 2
-ejj-d 1
+c-d 7
+ejj-d 2
 4
 1
-d-e 3
+d-e 1
 5
 2
+ejj-f 3
 e-f 1
-ejj-f 1
 6
 1
 f-g 1
 7
 2
-g-h 1
-ejj-h 2
+ejj-h 5
+g-h 4
 8
 1
-h-i 3
+h-i 1
 9
 2
-i-j 3
+i-j 9
 ejj-j 1
 10
 1
 j-ba 1
 11
 2
+ejj-bb 3
 ba-bb 1
-ejj-bb 1
 12
 1
 bb-bc 1
 13
 2
-bc-bd 2
-ejj-bd 1
+bc-bd 5
+ejj-bd 4
 14
 1
 bd-be 1
 15
 2
-be-bf 2
-ejj-bf 1
+be-bf 7
+ejj-bf 2
 16
 1
 bf-bg 1
 17
 2
+ejj-bh 3
 bg-bh 1
-ejj-bh 1
 18
 1
-bh-bi 3
+bh-bi 1
 19
 2
+ejj-bj 3
 bi-bj 1
-ejj-bj 1
 20
 1
-bj-ca 3
+bj-ca 1
 21
 2
-ca-cb 1
-ejj-cb 2
+ejj-cb 5
+ca-cb 4
 22
 1
 cb-cc 1
 23
 2
-cc-cd 1
-ejj-cd 2
+ejj-cd 5
+cc-cd 4
 24
 1
-cd-ce 3
+cd-ce 1
 25
 2
-ce-cf 1
+ce-cf 3
 ejj-cf 1
 26
 1
 cf-cg 1
 27
 2
-cg-ch 2
-ejj-ch 1
+cg-ch 7
+ejj-ch 2
 28
 1
 ch-ci 1
 29
 2
-ci-cj 2
-ejj-cj 1
+ci-cj 5
+ejj-cj 4
 30
 1
 cj-da 1
 31
 2
+ejj-db 3
 da-db 1
-ejj-db 1
 32
 1
-db-dc 3
+db-dc 1
 33
 2
-dc-dd 2
-ejj-dd 1
+dc-dd 7
+ejj-dd 2
 34
 1
-dd-de 3
+dd-de 1
 35
 2
+ejj-df 3
 de-df 1
-ejj-df 1
 36
 1
-df-dg 3
+df-dg 1
 37
 2
-dg-dh 2
-ejj-dh 1
+dg-dh 5
+ejj-dh 4
 38
 1
-dh-di 3
+dh-di 1
 39
 2
-di-dj 2
-ejj-dj 1
+di-dj 5
+ejj-dj 4
 40
 1
-dj-ea 3
+dj-ea 1
 41
 2
-ea-eb 2
-ejj-eb 1
+ea-eb 7
+ejj-eb 2
 42
 1
-eb-ec 3
+eb-ec 1
 43
 2
-ec-ed 3
+ec-ed 9
 ejj-ed 1
 44
 1
-ed-ee 3
+ed-ee 1
 45
 2
+ejj-ef 3
 ee-ef 1
-ejj-ef 1
 46
 1
 ef-eg 1
@@ -424,63 +399,62 @@ ejj-eh 1
 eh-ei 1
 49
 2
-ei-ej 2
-ejj-ej 1
+ei-ej 5
+ejj-ej 4
 50
 1
-ej-fa 3
+ej-fa 1
 51
 2
-fa-fb 2
-ejj-fb 1
+fa-fb 7
+ejj-fb 2
 52
 1
-fb-fc 3
+fb-fc 1
 53
-2
-fc-fd 3
-ejj-fd 1
+1
+fc-fd 1
 54
 1
-fd-fe 3
+fd-fe 1
 55
 2
+ejj-ff 3
 fe-ff 1
-ejj-ff 1
 56
 1
-ff-fg 3
+ff-fg 1
 57
 2
-fg-fh 1
+fg-fh 3
 ejj-fh 1
 58
 1
-fh-fi 3
+fh-fi 1
 59
 2
+ejj-fj 3
 fi-fj 1
-ejj-fj 1
 60
 1
-fj-ga 3
+fj-ga 1
 61
 2
-ga-gb 2
-ejj-gb 1
+ga-gb 5
+ejj-gb 4
 62
 1
 gb-gc 1
 63
 2
-gc-gd 2
-ejj-gd 1
+gc-gd 7
+ejj-gd 2
 64
 1
 gd-ge 1
 65
 2
-ge-gf 3
+ge-gf 9
 ejj-gf 1
 66
 1
@@ -494,281 +468,281 @@ ejj-gh 1
 gh-gi 1
 69
 2
-gi-gj 2
-ejj-gj 1
+gi-gj 7
+ejj-gj 2
 70
 1
 gj-ha 1
 71
 2
-ha-hb 2
-ejj-hb 1
+ha-hb 7
+ejj-hb 2
 72
 1
 hb-hc 1
 73
 2
-hc-hd 2
-ejj-hd 1
+hc-hd 7
+ejj-hd 2
 74
 1
-hd-he 3
+hd-he 1
 75
 2
-he-hf 2
-ejj-hf 1
+he-hf 7
+ejj-hf 2
 76
 1
 hf-hg 1
 77
 2
-hg-hh 1
-ejj-hh 2
+ejj-hh 5
+hg-hh 4
 78
 1
-hh-hi 3
+hh-hi 1
 79
 2
-hi-hj 2
-ejj-hj 1
+hi-hj 7
+ejj-hj 2
 80
 1
-hj-ia 3
+hj-ia 1
 81
 2
-ia-ib 2
-ejj-ib 1
+ia-ib 5
+ejj-ib 4
 82
 1
 ib-ic 1
 83
 2
+ejj-id 3
 ic-id 1
-ejj-id 1
 84
 1
-id-ie 3
+id-ie 1
 85
 2
-ie-if 2
-ejj-if 1
+ie-if 5
+ejj-if 4
 86
 1
-if-ig 3
+if-ig 1
 87
 2
-ig-ih 2
-ejj-ih 1
+ig-ih 7
+ejj-ih 2
 88
 1
-ih-ii 3
+ih-ii 1
 89
 2
-ii-ij 1
-ejj-ij 2
+ejj-ij 5
+ii-ij 4
 90
 1
 ij-ja 1
 91
 2
+ejj-jb 3
 ja-jb 1
-ejj-jb 1
 92
 1
-jb-jc 3
+jb-jc 1
 93
 2
 jc-jd 1
 ejj-jd 1
 94
 1
-jd-je 3
+jd-je 1
 95
 2
 je-jf 1
 ejj-jf 1
 96
 1
-jf-jg 3
+jf-jg 1
 97
 2
-jg-jh 2
-ejj-jh 1
+jg-jh 5
+ejj-jh 4
 98
 1
-jh-ji 3
+jh-ji 1
 99
 2
-ji-jj 3
+ji-jj 9
 ejj-jj 1
 100
 1
-jj-baa 3
+jj-baa 1
 101
 2
-baa-bab 3
+baa-bab 9
 ejj-bab 1
 102
 1
 bab-bac 1
 103
 2
+ejj-bad 3
 bac-bad 1
-ejj-bad 1
 104
 1
-bad-bae 3
+bad-bae 1
 105
 2
+ejj-baf 3
 bae-baf 1
-ejj-baf 1
 106
 1
-baf-bag 3
+baf-bag 1
 107
 2
-bag-bah 2
-ejj-bah 1
+bag-bah 5
+ejj-bah 4
 108
 1
-bah-bai 3
+bah-bai 1
 109
 2
-bai-baj 2
-ejj-baj 1
+bai-baj 7
+ejj-baj 2
 110
 1
 baj-bba 1
 111
 2
-bba-bbb 2
-ejj-bbb 1
+bba-bbb 7
+ejj-bbb 2
 112
 1
 bbb-bbc 1
 113
 2
-bbc-bbd 2
-ejj-bbd 1
+bbc-bbd 7
+ejj-bbd 2
 114
 1
-bbd-bbe 3
+bbd-bbe 1
 115
 2
-bbe-bbf 3
+bbe-bbf 9
 ejj-bbf 1
 116
 1
-bbf-bbg 3
+bbf-bbg 1
 117
 2
-bbg-bbh 2
-ejj-bbh 1
+bbg-bbh 5
+ejj-bbh 4
 118
 1
-bbh-bbi 3
+bbh-bbi 1
 119
 2
-bbi-bbj 1
+bbi-bbj 3
 ejj-bbj 1
 120
 1
-bbj-bca 3
+bbj-bca 1
 121
 2
-bca-bcb 1
-ejj-bcb 2
+ejj-bcb 7
+bca-bcb 2
 122
 1
-bcb-bcc 3
+bcb-bcc 1
 123
 2
-bcc-bcd 1
-ejj-bcd 2
+ejj-bcd 7
+bcc-bcd 2
 124
 1
-bcd-bce 3
+bcd-bce 1
 125
 2
-bce-bcf 2
-ejj-bcf 1
+bce-bcf 5
+ejj-bcf 4
 126
 1
-bcf-bcg 3
+bcf-bcg 1
 127
 2
-bcg-bch 2
-ejj-bch 1
+bcg-bch 5
+ejj-bch 4
 128
 1
-bch-bci 3
+bch-bci 1
 129
 2
-bci-bcj 2
-ejj-bcj 1
+bci-bcj 5
+ejj-bcj 4
 130
 1
 bcj-bda 1
 131
 2
-bda-bdb 2
-ejj-bdb 1
+bda-bdb 7
+ejj-bdb 2
 132
 1
 bdb-bdc 1
 133
 2
-bdc-bdd 1
-ejj-bdd 2
+ejj-bdd 5
+bdc-bdd 4
 134
 1
-bdd-bde 3
+bdd-bde 1
 135
 2
-bde-bdf 2
-ejj-bdf 1
+bde-bdf 5
+ejj-bdf 4
 136
 1
-bdf-bdg 3
+bdf-bdg 1
 137
 2
-bdg-bdh 2
-ejj-bdh 1
+bdg-bdh 5
+ejj-bdh 4
 138
 1
 bdh-bdi 1
 139
 2
+ejj-bdj 3
 bdi-bdj 1
-ejj-bdj 1
 140
 1
 bdj-bea 1
 141
 2
-bea-beb 2
-ejj-beb 1
+bea-beb 5
+ejj-beb 4
 142
 1
-beb-bec 3
+beb-bec 1
 143
 2
+ejj-bed 3
 bec-bed 1
-ejj-bed 1
 144
 1
-bed-bee 3
+bed-bee 1
 145
 2
-bee-bef 1
-ejj-bef 2
+ejj-bef 5
+bee-bef 4
 146
 1
 bef-beg 1
 147
 2
-beg-beh 2
-ejj-beh 1
+beg-beh 7
+ejj-beh 2
 148
 1
 beh-bei 1
@@ -781,74 +755,73 @@ ejj-bej 1
 bej-bfa 1
 151
 2
+ejj-bfb 3
 bfa-bfb 1
-ejj-bfb 1
 152
 1
 bfb-bfc 1
 153
 2
-bfc-bfd 2
-ejj-bfd 1
+bfc-bfd 5
+ejj-bfd 4
 154
 1
 bfd-bfe 1
 155
 2
-bfe-bff 2
-ejj-bff 1
+bfe-bff 5
+ejj-bff 4
 156
 1
 bff-bfg 1
 157
 2
+ejj-bfh 3
 bfg-bfh 1
-ejj-bfh 1
 158
 1
-bfh-bfi 3
+bfh-bfi 1
 159
 2
-bfi-bfj 2
-ejj-bfj 1
+bfi-bfj 7
+ejj-bfj 2
 160
 1
-bfj-bga 3
+bfj-bga 1
 161
-2
-bga-bgb 3
-ejj-bgb 1
+1
+bga-bgb 1
 162
 1
-bgb-bgc 3
+bgb-bgc 1
 163
 2
+ejj-bgd 3
 bgc-bgd 1
-ejj-bgd 1
 164
 1
-bgd-bge 3
+bgd-bge 1
 165
 2
-bge-bgf 2
-ejj-bgf 1
+bge-bgf 5
+ejj-bgf 4
 166
 1
 bgf-bgg 1
 167
 2
-bgg-bgh 1
-ejj-bgh 2
+ejj-bgh 5
+bgg-bgh 4
 168
 1
 bgh-bgi 1
 169
 2
-bgi-bgj 3
+bgi-bgj 9
 ejj-bgj 1
 170
 1
-bgj-bha 3
+bgj-bha 1
 171
 2
 bha-bhb 1
@@ -858,25 +831,25 @@ ejj-bhb 1
 bhb-bhc 1
 173
 2
-bhc-bhd 3
+bhc-bhd 9
 ejj-bhd 1
 174
 1
 bhd-bhe 1
 175
 2
+ejj-bhf 3
 bhe-bhf 1
-ejj-bhf 1
 176
 1
 bhf-bhg 1
 177
 2
+ejj-bhh 3
 bhg-bhh 1
-ejj-bhh 1
 178
 1
-bhh-bhi 3
+bhh-bhi 1
 179
 2
 bhi-bhj 1
@@ -886,50 +859,50 @@ ejj-bhj 1
 bhj-bia 1
 181
 2
-bia-bib 2
-ejj-bib 1
+bia-bib 5
+ejj-bib 4
 182
 1
 bib-bic 1
 183
 2
-bic-bid 2
-ejj-bid 1
+bic-bid 7
+ejj-bid 2
 184
 1
-bid-bie 3
+bid-bie 1
 185
 2
-bie-bif 1
-ejj-bif 2
+ejj-bif 5
+bie-bif 4
 186
 1
-bif-big 3
+bif-big 1
 187
 2
 big-bih 1
 ejj-bih 1
 188
 1
-bih-bii 3
+bih-bii 1
 189
 2
-bii-bij 1
-ejj-bij 2
+ejj-bij 5
+bii-bij 4
 190
 1
 bij-bja 1
 191
 2
-bja-bjb 2
-ejj-bjb 1
+bja-bjb 7
+ejj-bjb 2
 192
 1
-bjb-bjc 3
+bjb-bjc 1
 193
 2
+ejj-bjd 3
 bjc-bjd 1
-ejj-bjd 1
 194
 1
 bjd-bje 1
@@ -939,7 +912,7 @@ bje-bjf 1
 ejj-bjf 1
 196
 1
-bjf-bjg 3
+bjf-bjg 1
 197
 2
 bjg-bjh 1
@@ -949,71 +922,71 @@ ejj-bjh 1
 bjh-bji 1
 199
 2
-bji-bjj 2
-ejj-bjj 1
+bji-bjj 7
+ejj-bjj 2
 200
 1
 bjj-caa 1
 201
 2
-caa-cab 3
+caa-cab 9
 ejj-cab 1
 202
 1
-cab-cac 3
+cab-cac 1
 203
 2
+ejj-cad 3
 cac-cad 1
-ejj-cad 1
 204
 1
-cad-cae 3
+cad-cae 1
 205
 2
+ejj-caf 3
 cae-caf 1
-ejj-caf 1
 206
 1
-caf-cag 3
+caf-cag 1
 207
 2
+ejj-cah 3
 cag-cah 1
-ejj-cah 1
 208
 1
 cah-cai 1
 209
 2
-cai-caj 1
-ejj-caj 2
+ejj-caj 5
+cai-caj 4
 210
 1
 caj-cba 1
 211
 2
-cba-cbb 2
-ejj-cbb 1
+cba-cbb 7
+ejj-cbb 2
 212
 1
 cbb-cbc 1
 213
 2
-cbc-cbd 2
-ejj-cbd 1
+cbc-cbd 7
+ejj-cbd 2
 214
 1
-cbd-cbe 3
+cbd-cbe 1
 215
 2
+ejj-cbf 3
 cbe-cbf 1
-ejj-cbf 1
 216
 1
 cbf-cbg 1
 217
 2
-cbg-cbh 2
-ejj-cbh 1
+cbg-cbh 5
+ejj-cbh 4
 218
 1
 cbh-cbi 1
@@ -1040,78 +1013,78 @@ ejj-ccd 1
 ccd-cce 1
 225
 2
+ejj-ccf 3
 cce-ccf 1
-ejj-ccf 1
 226
 1
 ccf-ccg 1
 227
 2
-ccg-cch 2
-ejj-cch 1
+ccg-cch 7
+ejj-cch 2
 228
 1
-cch-cci 3
+cch-cci 1
 229
 2
-cci-ccj 1
+cci-ccj 3
 ejj-ccj 1
 230
 1
 ccj-cda 1
 231
 2
-cda-cdb 2
-ejj-cdb 1
+cda-cdb 5
+ejj-cdb 4
 232
 1
 cdb-cdc 1
 233
 2
+ejj-cdd 3
 cdc-cdd 1
-ejj-cdd 1
 234
 1
-cdd-cde 3
+cdd-cde 1
 235
 2
 cde-cdf 1
 ejj-cdf 1
 236
 1
-cdf-cdg 3
+cdf-cdg 1
 237
 2
+ejj-cdh 3
 cdg-cdh 1
-ejj-cdh 1
 238
 1
 cdh-cdi 1
 239
 2
-cdi-cdj 1
+cdi-cdj 3
 ejj-cdj 1
 240
 1
 cdj-cea 1
 241
 2
-cea-ceb 2
-ejj-ceb 1
+cea-ceb 7
+ejj-ceb 2
 242
 1
-ceb-cec 3
+ceb-cec 1
 243
 2
-cec-ced 2
-ejj-ced 1
+cec-ced 7
+ejj-ced 2
 244
 1
 ced-cee 1
 245
 2
-cee-cef 2
-ejj-cef 1
+cee-cef 7
+ejj-cef 2
 246
 1
 cef-ceg 1
@@ -1121,67 +1094,66 @@ ceg-ceh 1
 ejj-ceh 1
 248
 1
-ceh-cei 3
+ceh-cei 1
 249
-2
+1
 cei-cej 1
-ejj-cej 1
 250
 1
-cej-cfa 3
+cej-cfa 1
 251
 2
-cfa-cfb 3
+cfa-cfb 9
 ejj-cfb 1
 252
 1
 cfb-cfc 1
 253
 2
-cfc-cfd 1
+cfc-cfd 3
 ejj-cfd 1
 254
 1
 cfd-cfe 1
 255
 2
+ejj-cff 3
 cfe-cff 1
-ejj-cff 1
 256
 1
-cff-cfg 3
+cff-cfg 1
 257
 2
+ejj-cfh 3
 cfg-cfh 1
-ejj-cfh 1
 258
 1
-cfh-cfi 3
+cfh-cfi 1
 259
 2
+ejj-cfj 3
 cfi-cfj 1
-ejj-cfj 1
 260
 1
-cfj-cga 3
+cfj-cga 1
 261
 2
 cga-cgb 1
 ejj-cgb 1
 262
 1
-cgb-cgc 3
+cgb-cgc 1
 263
 2
-cgc-cgd 1
-ejj-cgd 2
+ejj-cgd 5
+cgc-cgd 4
 264
 1
-cgd-cge 3
+cgd-cge 1
 265
 2
+ejj-cgf 3
 cge-cgf 1
-ejj-cgf 1
 266
 1
 cgf-cgg 1
@@ -1191,53 +1163,52 @@ cgg-cgh 1
 ejj-cgh 1
 268
 1
-cgh-cgi 3
+cgh-cgi 1
 269
-2
+1
 cgi-cgj 1
-ejj-cgj 1
 270
 1
-cgj-cha 3
+cgj-cha 1
 271
 2
-cha-chb 2
-ejj-chb 1
+cha-chb 5
+ejj-chb 4
 272
 1
 chb-chc 1
 273
 2
-chc-chd 2
-ejj-chd 1
+chc-chd 7
+ejj-chd 2
 274
 1
-chd-che 3
+chd-che 1
 275
 2
+ejj-chf 3
 che-chf 1
-ejj-chf 1
 276
 1
-chf-chg 3
+chf-chg 1
 277
 2
-chg-chh 3
+chg-chh 9
 ejj-chh 1
 278
 1
-chh-chi 3
+chh-chi 1
 279
 2
-chi-chj 2
-ejj-chj 1
+chi-chj 5
+ejj-chj 4
 280
 1
-chj-cia 3
+chj-cia 1
 281
 2
-cia-cib 2
-ejj-cib 1
+cia-cib 7
+ejj-cib 2
 282
 1
 cib-cic 1
@@ -1247,14 +1218,14 @@ cic-cid 1
 ejj-cid 1
 284
 1
-cid-cie 3
+cid-cie 1
 285
 2
-cie-cif 2
-ejj-cif 1
+cie-cif 7
+ejj-cif 2
 286
 1
-cif-cig 3
+cif-cig 1
 287
 2
 cig-cih 1
@@ -1263,58 +1234,57 @@ ejj-cih 1
 1
 cih-cii 1
 289
-2
+1
 cii-cij 1
-ejj-cij 1
 290
 1
-cij-cja 3
+cij-cja 1
 291
 2
+ejj-cjb 3
 cja-cjb 1
-ejj-cjb 1
 292
 1
 cjb-cjc 1
 293
 2
+ejj-cjd 3
 cjc-cjd 1
-ejj-cjd 1
 294
 1
 cjd-cje 1
 295
 2
+ejj-cjf 3
 cje-cjf 1
-ejj-cjf 1
 296
 1
 cjf-cjg 1
 297
 2
+ejj-cjh 3
 cjg-cjh 1
-ejj-cjh 1
 298
 1
-cjh-cji 3
+cjh-cji 1
 299
 2
-cji-cjj 2
-ejj-cjj 1
+cji-cjj 5
+ejj-cjj 4
 300
 1
-cjj-daa 3
+cjj-daa 1
 301
 2
-daa-dab 3
+daa-dab 9
 ejj-dab 1
 302
 1
 dab-dac 1
 303
 2
-dac-dad 2
-ejj-dad 1
+dac-dad 5
+ejj-dad 4
 304
 1
 dad-dae 1
@@ -1324,66 +1294,66 @@ dae-daf 1
 ejj-daf 1
 306
 1
-daf-dag 3
+daf-dag 1
 307
 2
-dag-dah 2
-ejj-dah 1
+dag-dah 5
+ejj-dah 4
 308
 1
-dah-dai 3
+dah-dai 1
 309
 2
-dai-daj 2
-ejj-daj 1
+dai-daj 7
+ejj-daj 2
 310
 1
-daj-dba 3
+daj-dba 1
 311
 2
-dba-dbb 2
-ejj-dbb 1
+dba-dbb 5
+ejj-dbb 4
 312
 1
-dbb-dbc 3
+dbb-dbc 1
 313
 2
-dbc-dbd 2
-ejj-dbd 1
+dbc-dbd 7
+ejj-dbd 2
 314
 1
 dbd-dbe 1
 315
 2
-dbe-dbf 2
-ejj-dbf 1
+dbe-dbf 7
+ejj-dbf 2
 316
 1
-dbf-dbg 3
+dbf-dbg 1
 317
 2
 dbg-dbh 1
 ejj-dbh 1
 318
 1
-dbh-dbi 3
+dbh-dbi 1
 319
 2
 dbi-dbj 1
 ejj-dbj 1
 320
 1
-dbj-dca 3
+dbj-dca 1
 321
 2
+ejj-dcb 3
 dca-dcb 1
-ejj-dcb 1
 322
 1
-dcb-dcc 3
+dcb-dcc 1
 323
 2
-dcc-dcd 3
+dcc-dcd 9
 ejj-dcd 1
 324
 1
@@ -1397,71 +1367,71 @@ ejj-dcf 1
 dcf-dcg 1
 327
 2
-dcg-dch 2
-ejj-dch 1
+dcg-dch 5
+ejj-dch 4
 328
 1
 dch-dci 1
 329
 2
+ejj-dcj 3
 dci-dcj 1
-ejj-dcj 1
 330
 1
-dcj-dda 3
+dcj-dda 1
 331
 2
-dda-ddb 2
-ejj-ddb 1
+dda-ddb 5
+ejj-ddb 4
 332
 1
-ddb-ddc 3
+ddb-ddc 1
 333
 2
-ddc-ddd 3
+ddc-ddd 9
 ejj-ddd 1
 334
 1
 ddd-dde 1
 335
 2
-dde-ddf 1
-ejj-ddf 2
+ejj-ddf 5
+dde-ddf 4
 336
 1
-ddf-ddg 3
+ddf-ddg 1
 337
 2
-ddg-ddh 3
+ddg-ddh 9
 ejj-ddh 1
 338
 1
 ddh-ddi 1
 339
 2
+ejj-ddj 3
 ddi-ddj 1
-ejj-ddj 1
 340
 1
-ddj-dea 3
+ddj-dea 1
 341
 2
-dea-deb 1
+dea-deb 3
 ejj-deb 1
 342
 1
 deb-dec 1
 343
 2
+ejj-ded 3
 dec-ded 1
-ejj-ded 1
 344
 1
-ded-dee 3
+ded-dee 1
 345
 2
+ejj-def 3
 dee-def 1
-ejj-def 1
 346
 1
 def-deg 1
@@ -1474,22 +1444,21 @@ ejj-deh 1
 deh-dei 1
 349
 2
+ejj-dej 3
 dei-dej 1
-ejj-dej 1
 350
 1
-dej-dfa 3
+dej-dfa 1
 351
-2
+1
 dfa-dfb 1
-ejj-dfb 1
 352
 1
 dfb-dfc 1
 353
 2
+ejj-dfd 3
 dfc-dfd 1
-ejj-dfd 1
 354
 1
 dfd-dfe 1
@@ -1499,56 +1468,56 @@ dfe-dff 1
 ejj-dff 1
 356
 1
-dff-dfg 3
+dff-dfg 1
 357
 2
+ejj-dfh 3
 dfg-dfh 1
-ejj-dfh 1
 358
 1
-dfh-dfi 3
+dfh-dfi 1
 359
 2
+ejj-dfj 3
 dfi-dfj 1
-ejj-dfj 1
 360
 1
-dfj-dga 3
+dfj-dga 1
 361
 2
+ejj-dgb 3
 dga-dgb 1
-ejj-dgb 1
 362
 1
-dgb-dgc 3
+dgb-dgc 1
 363
 2
-dgc-dgd 2
-ejj-dgd 1
+dgc-dgd 7
+ejj-dgd 2
 364
 1
-dgd-dge 3
+dgd-dge 1
 365
 2
+ejj-dgf 3
 dge-dgf 1
-ejj-dgf 1
 366
 1
 dgf-dgg 1
 367
 2
-dgg-dgh 2
-ejj-dgh 1
+dgg-dgh 7
+ejj-dgh 2
 368
 1
 dgh-dgi 1
 369
 2
+ejj-dgj 3
 dgi-dgj 1
-ejj-dgj 1
 370
 1
-dgj-dha 3
+dgj-dha 1
 371
 2
 dha-dhb 1
@@ -1558,22 +1527,22 @@ ejj-dhb 1
 dhb-dhc 1
 373
 2
+ejj-dhd 3
 dhc-dhd 1
-ejj-dhd 1
 374
 1
 dhd-dhe 1
 375
 2
+ejj-dhf 3
 dhe-dhf 1
-ejj-dhf 1
 376
 1
-dhf-dhg 3
+dhf-dhg 1
 377
 2
-dhg-dhh 2
-ejj-dhh 1
+dhg-dhh 7
+ejj-dhh 2
 378
 1
 dhh-dhi 1
@@ -1583,32 +1552,32 @@ dhi-dhj 1
 ejj-dhj 1
 380
 1
-dhj-dia 3
+dhj-dia 1
 381
 2
-dia-dib 3
+dia-dib 9
 ejj-dib 1
 382
 1
 dib-dic 1
 383
 2
-dic-did 2
-ejj-did 1
+dic-did 5
+ejj-did 4
 384
 1
 did-die 1
 385
 2
-die-dif 3
+die-dif 9
 ejj-dif 1
 386
 1
 dif-dig 1
 387
 2
-dig-dih 2
-ejj-dih 1
+dig-dih 7
+ejj-dih 2
 388
 1
 dih-dii 1
@@ -1618,11 +1587,11 @@ dii-dij 1
 ejj-dij 1
 390
 1
-dij-dja 3
+dij-dja 1
 391
 2
+ejj-djb 3
 dja-djb 1
-ejj-djb 1
 392
 1
 djb-djc 1
@@ -1632,63 +1601,62 @@ djc-djd 1
 ejj-djd 1
 394
 1
-djd-dje 3
+djd-dje 1
 395
-2
+1
 dje-djf 1
-ejj-djf 1
 396
 1
-djf-djg 3
+djf-djg 1
 397
 2
+ejj-djh 3
 djg-djh 1
-ejj-djh 1
 398
 1
-djh-dji 3
+djh-dji 1
 399
 2
-dji-djj 2
-ejj-djj 1
+dji-djj 7
+ejj-djj 2
 400
 1
 djj-eaa 1
 401
 2
-eaa-eab 2
-ejj-eab 1
+eaa-eab 7
+ejj-eab 2
 402
 1
 eab-eac 1
 403
 2
-eac-ead 2
-ejj-ead 1
+eac-ead 7
+ejj-ead 2
 404
 1
 ead-eae 1
 405
 2
-eae-eaf 1
+eae-eaf 3
 ejj-eaf 1
 406
 1
-eaf-eag 3
+eaf-eag 1
 407
 2
 eag-eah 1
 ejj-eah 1
 408
 1
-eah-eai 3
+eah-eai 1
 409
 2
-eai-eaj 1
-ejj-eaj 2
+ejj-eaj 5
+eai-eaj 4
 410
 1
-eaj-eba 3
+eaj-eba 1
 411
 2
 eba-ebb 1
@@ -1698,50 +1666,50 @@ ejj-ebb 1
 ebb-ebc 1
 413
 2
-ebc-ebd 2
-ejj-ebd 1
+ebc-ebd 7
+ejj-ebd 2
 414
 1
 ebd-ebe 1
 415
 2
-ebe-ebf 2
-ejj-ebf 1
+ebe-ebf 7
+ejj-ebf 2
 416
 1
-ebf-ebg 3
+ebf-ebg 1
 417
 2
-ebg-ebh 2
-ejj-ebh 1
+ebg-ebh 5
+ejj-ebh 4
 418
 1
 ebh-ebi 1
 419
 2
-ebi-ebj 2
-ejj-ebj 1
+ebi-ebj 7
+ejj-ebj 2
 420
 1
 ebj-eca 1
 421
 2
-eca-ecb 2
-ejj-ecb 1
+eca-ecb 7
+ejj-ecb 2
 422
 1
-ecb-ecc 3
+ecb-ecc 1
 423
 2
+ejj-ecd 3
 ecc-ecd 1
-ejj-ecd 1
 424
 1
 ecd-ece 1
 425
 2
-ece-ecf 2
-ejj-ecf 1
+ece-ecf 7
+ejj-ecf 2
 426
 1
 ecf-ecg 1
@@ -1754,22 +1722,22 @@ ejj-ech 1
 ech-eci 1
 429
 2
+ejj-ecj 3
 eci-ecj 1
-ejj-ecj 1
 430
 1
-ecj-eda 3
+ecj-eda 1
 431
 2
-eda-edb 2
-ejj-edb 1
+eda-edb 5
+ejj-edb 4
 432
 1
 edb-edc 1
 433
 2
+ejj-edd 3
 edc-edd 1
-ejj-edd 1
 434
 1
 edd-ede 1
@@ -1779,81 +1747,80 @@ ede-edf 1
 ejj-edf 1
 436
 1
-edf-edg 3
+edf-edg 1
 437
 2
+ejj-edh 3
 edg-edh 1
-ejj-edh 1
 438
 1
-edh-edi 3
+edh-edi 1
 439
 2
-edi-edj 2
-ejj-edj 1
+edi-edj 7
+ejj-edj 2
 440
 1
-edj-eea 3
+edj-eea 1
 441
 2
-eea-eeb 2
-ejj-eeb 1
+eea-eeb 5
+ejj-eeb 4
 442
 1
 eeb-eec 1
 443
 2
+ejj-eed 3
 eec-eed 1
-ejj-eed 1
 444
 1
 eed-eee 1
 445
 2
+ejj-eef 3
 eee-eef 1
-ejj-eef 1
 446
 1
 eef-eeg 1
 447
 2
-eeg-eeh 2
-ejj-eeh 1
+eeg-eeh 7
+ejj-eeh 2
 448
 1
 eeh-eei 1
 449
-2
+1
 eei-eej 1
-ejj-eej 1
 450
 1
-eej-efa 3
+eej-efa 1
 451
 2
+ejj-efb 3
 efa-efb 1
-ejj-efb 1
 452
 1
 efb-efc 1
 453
 2
-efc-efd 1
-ejj-efd 2
+ejj-efd 5
+efc-efd 4
 454
 1
-efd-efe 3
+efd-efe 1
 455
 2
+ejj-eff 3
 efe-eff 1
-ejj-eff 1
 456
 1
-eff-efg 3
+eff-efg 1
 457
 2
+ejj-efh 3
 efg-efh 1
-ejj-efh 1
 458
 1
 efh-efi 1
@@ -1863,137 +1830,136 @@ efi-efj 1
 ejj-efj 1
 460
 1
-efj-ega 3
+efj-ega 1
 461
 2
+ejj-egb 3
 ega-egb 1
-ejj-egb 1
 462
 1
 egb-egc 1
 463
 2
+ejj-egd 3
 egc-egd 1
-ejj-egd 1
 464
 1
 egd-ege 1
 465
 2
+ejj-egf 3
 ege-egf 1
-ejj-egf 1
 466
 1
 egf-egg 1
 467
 2
-egg-egh 1
-ejj-egh 2
+ejj-egh 7
+egg-egh 2
 468
 1
-egh-egi 3
+egh-egi 1
 469
 2
+ejj-egj 3
 egi-egj 1
-ejj-egj 1
 470
 1
 egj-eha 1
 471
 2
-eha-ehb 2
-ejj-ehb 1
+eha-ehb 5
+ejj-ehb 4
 472
 1
 ehb-ehc 1
 473
 2
+ejj-ehd 3
 ehc-ehd 1
-ejj-ehd 1
 474
 1
-ehd-ehe 3
+ehd-ehe 1
 475
 2
+ejj-ehf 3
 ehe-ehf 1
-ejj-ehf 1
 476
 1
 ehf-ehg 1
 477
 2
-ehg-ehh 2
-ejj-ehh 1
+ehg-ehh 7
+ejj-ehh 2
 478
 1
-ehh-ehi 3
+ehh-ehi 1
 479
 2
+ejj-ehj 3
 ehi-ehj 1
-ejj-ehj 1
 480
 1
 ehj-eia 1
 481
 2
-eia-eib 2
-ejj-eib 1
+eia-eib 7
+ejj-eib 2
 482
 1
 eib-eic 1
 483
 2
-eic-eid 3
+eic-eid 9
 ejj-eid 1
 484
 1
-eid-eie 3
+eid-eie 1
 485
 2
-eie-eif 2
-ejj-eif 1
+eie-eif 7
+ejj-eif 2
 486
 1
-eif-eig 3
+eif-eig 1
 487
-2
+1
 eig-eih 1
-ejj-eih 1
 488
 1
 eih-eii 1
 489
 2
-eii-eij 1
-ejj-eij 2
+ejj-eij 7
+eii-eij 2
 490
 1
 eij-eja 1
 491
 2
-eja-ejb 2
-ejj-ejb 1
+eja-ejb 5
+ejj-ejb 4
 492
 1
 ejb-ejc 1
 493
 2
-ejc-ejd 2
-ejj-ejd 1
+ejc-ejd 5
+ejj-ejd 4
 494
 1
 ejd-eje 1
 495
 2
+ejj-ejf 3
 eje-ejf 1
-ejj-ejf 1
 496
 1
-ejf-ejg 3
+ejf-ejg 1
 497
 2
+ejj-ejh 3
 ejg-ejh 1
-ejj-ejh 1
 498
 1
 ejh-eji 1

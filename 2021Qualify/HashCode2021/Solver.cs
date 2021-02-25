@@ -62,16 +62,12 @@ namespace HashCode2021
                     else
                     {
                         var lcm = LCM(times);
-                        if (lcm == time) time = 1;
-                        else
-                        {
-                            time = (int)Math.Round(time / 3f);
-                            if (time < 1) time = 1;
-                        }                            
+                        if (lcm == time) time = 1;                     
                     }
                     place.schedules.Add(new Schedule(street, time));
                 }
 
+                place.schedules = place.schedules.OrderByDescending(s => s.time).ToList();
             }
             
             return new Result(m.places.Values.ToList(), m.duration, m.bonus, m.cars.Values.ToList());
