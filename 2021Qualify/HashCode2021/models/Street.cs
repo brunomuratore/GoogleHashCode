@@ -7,25 +7,17 @@ namespace HashCode2020.models
 {
     public class Street
     {
-        public int id;
-        public HashSet<Car> books;
-        public int capacity;
-        public int signup;
-        public List<Car> scan = new List<Car>();
+        public string id;
+        public int cost;
+        public Place origin;
+        public Place dest;
 
-        public int maxPotentialScore = 0;
-
-        public Street(int id, int capacity, int signup, HashSet<Car> booksL)
+        public Street(string id, int cost, Place origin, Place dest)
         {
             this.id = id;
-            this.capacity = capacity;
-            this.signup = signup;
-            this.books = booksL;
-        }
-
-        internal void Calculate()
-        {
-            // if need to recalculate score
+            this.cost = cost;
+            this.origin = origin;
+            this.dest = dest;
         }
                 
     }
