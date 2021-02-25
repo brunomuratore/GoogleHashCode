@@ -13,6 +13,9 @@ namespace HashCode2020.models
         public Dictionary<int, Place> outDestinations = new Dictionary<int, Place>();
         public List<Schedule> schedules = new List<Schedule>();
 
+        //used by score
+        public int curScheduleIndex = 0; //current green light
+
         public Place(int id)
         {
             this.id = id;
