@@ -24,9 +24,9 @@ namespace HashCode2021
             var places = new Dictionary<int, Place>();
             var streets = new Dictionary<int, Street>();
 
-            for(int i = 1; i < 1 + S; i++)
+            for(int i = 0; i < S; i++)
             {
-                var (orig, dest, name, cost) = lines[i+1].Split4<int,int,string,int>();
+                var (orig, dest, name, cost) = lines[i + 1].Split4<int,int,string,int>();
 
                 if (!places.ContainsKey(orig))
                 {
@@ -40,10 +40,25 @@ namespace HashCode2021
                 var originPlace = places[orig];
                 var destPlace = places[dest];
 
-                streets.Add(i, new Street(name, cost, orig, dest));
+                var street = new Street(name, cost, orig, dest);
+                streets.Add(i, street);
 
                 destPlace.inDestinations.Add(orig, originPlace);
-            });
+                destPlace.inStreets.Add(name, street);
+
+                originPlace.outDestinations.Add(dest, destPlace);
+                originPlace.outStreets.Add(name, street);
+            }
+
+            for(int i = 0; i < C; i++)
+            {
+                var split = lines[i + 1 + S].Split(" ");
+                var car = new Car()
+                foreach (var street in split.Skip(1))
+                {
+                    
+                }
+            }
 
             var scores = lines[1].Split(" ");
 
