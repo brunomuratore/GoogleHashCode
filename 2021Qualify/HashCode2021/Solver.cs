@@ -31,9 +31,13 @@ namespace HashCode2021
             //var bestLibraries = m.libraries.Values.OrderByDescending(l => l.maxPotentialScore).ToList();
             //var resultLibraries = new List<Street>();
 
+            HashSet<string> streetsWhereCarsStart = new HashSet<string>();
+
             foreach (var car in m.cars)
             {
-                foreach(var street in car.Value.route)
+                streetsWhereCarsStart.Add(car.Value.route[0].id);
+
+                foreach (var street in car.Value.route)
                 {
                     street.countCarsPassingBy += car.Value.score;
                     street.countScore += car.Value.score;
@@ -68,6 +72,8 @@ namespace HashCode2021
                 }
 
                 place.schedules = place.schedules.OrderByDescending(s => s.time).ToList();
+
+                place.schedules = place.schedules.OrderBy(s => streetsWhereCarsStart.Contains(s.street.id) ? 1 : 0).ToList();
             }
             
             return new Result(m.places.Values.ToList(), m.duration, m.bonus, m.cars.Values.ToList());
