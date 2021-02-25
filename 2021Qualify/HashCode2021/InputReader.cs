@@ -21,17 +21,28 @@ namespace HashCode2021
             var (duration, P, S, C, bonus) = lines[0].Split5();
 
 
-            var places = new ConcurrentDictionary<int, Place>();
-            var streets = new ConcurrentDictionary<int, Street>();
+            var places = new Dictionary<int, Place>();
+            var streets = new Dictionary<int, Street>();
 
-            Parallel.For(0, S, i =>
+            for(int i = 1; i < 1 + S; i++)
             {
                 var (orig, dest, name, cost) = lines[i+1].Split4<int,int,string,int>();
 
-                var originPlace = new Place(orig);
-                var destPlace = new Place(dest);
+                if (!places.ContainsKey(orig))
+                {
+                    places.Add(orig, new Place(orig));
+                }
 
-                streets.TryAdd(i, new Street(name, cost, orig, dest));
+                if (!places.ContainsKey(dest))
+                {
+                    places.Add(orig, new Place(orig));
+                }
+                var originPlace = places[orig];
+                var destPlace = places[dest];
+
+                streets.Add(i, new Street(name, cost, orig, dest));
+
+                destPlace.inDestinations.Add(orig, originPlace);
             });
 
             var scores = lines[1].Split(" ");
