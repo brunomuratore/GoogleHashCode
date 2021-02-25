@@ -7,13 +7,15 @@ namespace HashCode2021
     {
         public class Result
         {
-            public List<Place> places;
+            public List<Place> places; // places where schedules have been set
+            public int seconds; //total seconds available in simulation
+            public List<Car> cars; //cars with their routes
 
-
-            public Result(List<Street> l, List<Place> places)
+            public Result(List<Place> places, int seconds, List<Car> cars)
             {
-                this.libraries = l;
-                this.places = days;
+                this.places = places;
+                this.seconds = seconds;
+                this.cars = cars;
             }
         }
     }
