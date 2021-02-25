@@ -33,8 +33,7 @@ namespace HashCode2021
         {
             // ================ CUSTOM SCORE CALCULATION START =========================
             // Just fill score variable
-            
-            var score = 0;
+            var score = 5;
 
             // steps:
             // create list of lights
@@ -44,34 +43,34 @@ namespace HashCode2021
             //      if car reaches destination, increment total score
             //      decrement 1 second of every light, turning to red if necessary, and next one to green
 
-            var placesWithSchedules = r.places.Where(place => place.schedules != null && place.schedules.Count > 0);
-            var lights = new List<Light>();
+            //var placesWithSchedules = r.places.Where(place => place.schedules != null && place.schedules.Count > 0);
+            //var lights = new List<Light>();
 
-            foreach (var place in placesWithSchedules)
-            {
-                foreach (var schedule in place.schedules)
-                {
-                    //get all cars that start in that street
-                    var cars = r.cars.Where(car => car.route[0] == schedule.street).ToList();
+            //foreach (var place in placesWithSchedules)
+            //{
+            //    foreach (var schedule in place.schedules)
+            //    {
+            //        //get all cars that start in that street
+            //        var cars = r.cars.Where(car => car.route[0] == schedule.street).ToList();
 
-                    // if this schedule is the first of the place
-                    bool isFirst = place.schedules[0] == schedule;
+            //        // if this schedule is the first of the place
+            //        bool isFirst = place.schedules[0] == schedule;
 
-                    lights.Add(new Light(schedule.street, cars, isFirst, schedule.time));
-                }
-            }
+            //        lights.Add(new Light(schedule.street, cars, isFirst, schedule.time));
+            //    }
+            //}
 
-            for (int i = 0; i < r.seconds; i++)
-            {
-                foreach (var light in lights.Where(l => l.isGreen && l.cars.Count > 0))
-                {
-                    var car = light.cars[0];
-                    light.cars.RemoveAt(0);
+            //for (int i = 0; i < r.seconds; i++)
+            //{
+            //    foreach (var light in lights.Where(l => l.isGreen && l.cars.Count > 0))
+            //    {
+            //        var car = light.cars[0];
+            //        light.cars.RemoveAt(0);
 
-                    //var next
-                    // turn into 
-                }
-            }
+            //        //var next
+            //        // turn into 
+            //    }
+            //}
 
             // Log info about the result
             L.Log($"any insight about the score...(duplicates, unused)");

@@ -1,6 +1,6 @@
-a.txt 0
-b.txt 0
-c.txt 0
-d.txt 0
-e.txt 0
-f.txt 0
+a.txt 5
+b.txt 5
+c.txt 5
+d.txt 5
+e.txt 5
+f.txt 5

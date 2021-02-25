@@ -43,18 +43,63 @@ namespace HashCode2021
             {
                 var streets = place.inStreets.Values;
                 var totalCarsPassingByIntersec = streets.Select(s => s.countCarsPassingBy).Sum();
-                foreach(var street in streets)
+                if (totalCarsPassingByIntersec == 0) continue;
+
+                var times = new List<int>(); 
+
+                foreach (var street in streets)
                 {
-                    var time = (float)street.countCarsPassingBy / totalCarsPassingByIntersec;
-                    if (time < 1) { time *= 10; }
-                    place.schedules.Add(new Schedule(street, (int)time));
+                    times.Add( (int) ((float)street.countCarsPassingBy / totalCarsPassingByIntersec * 10F));
+                }
+
+                foreach (var street in streets)
+                {                    
+                    var time = (int)((float)street.countCarsPassingBy / totalCarsPassingByIntersec * 10F);
+                    place.schedules.Add(new Schedule(street, time * LCM(times)));
                 }
             }
             
-            return new Result(m.places.Values.ToList(), m.duration, m.cars.Values.ToList());
+            return new Result(m.places.Values.ToList(), m.duration, m.bonus, m.cars.Values.ToList());
             // ================ CUSTOM SOLVER END =========================
         }
 
+
+        public static int LCM (List<int> list)
+        {
+            if (list.Count == 0) return 0;
+            if (list.Count == 1) return 1;
+            if (list.Count == 2) return LCM(list[0], list[1]);
+
+            return LCM(list[0], LCM(list.Skip(1).ToList()));
+        }
+        public static int LCM(int a, List<int> list)
+        {
+            if (list.Count == 1) return LCM(list[0], list[1]);
+
+            return LCM(a, LCM(list.Skip(1).ToList()));
+        }
+
+        public static int LCM(int a, int b) //method for finding LCM with parameters a and b
+        {
+            int num1, num2;                         //taking input from user by using num1 and num2 variables
+            if (a > b)
+            {
+                num1 = a; num2 = b;
+            }
+            else
+            {
+                num1 = b; num2 = a;
+            }
+
+            for (int i = 1; i <= num2; i++)
+            {
+                if ((num1 * i) % num2 == 0)
+                {
+                    return i * num1;
+                }
+            }
+            return num2;
+        }
         // Use in case of expensive loops
         //var timer = new Stopwatch();
         //timer.Start();
