@@ -36,30 +36,38 @@ namespace HashCode2021
                 foreach(var street in car.Value.route)
                 {
                     street.countCarsPassingBy += car.Value.score;
+                    street.countScore += car.Value.score;
                 }
             }
 
             foreach (var place in m.places.Values)
             {
                 var streets = place.inStreets.Values;
-                var totalCarsPassingByIntersec = streets.Select(s => s.countCarsPassingBy).Sum();
+                var totalCarsPassingByIntersec = streets.Select(s => s.countScore).Sum();
                 if (totalCarsPassingByIntersec == 0) continue;
 
                 var times = new List<int>(); 
 
                 foreach (var street in streets)
                 {
-                    times.Add( (int) ((float)street.countCarsPassingBy / totalCarsPassingByIntersec * 10F));
+                    times.Add( (int) ((float)street.countScore / totalCarsPassingByIntersec * 10F));
                 }
 
                 foreach (var street in streets)
-                {                    
-                    var time = (int)((float)street.countCarsPassingBy / totalCarsPassingByIntersec * 10F);
+                {
+                    if (street.countScore == 0) continue;
+
+                    var time = (int)((float)street.countScore / totalCarsPassingByIntersec * 10F);
                     if (time == 10) time = 1;
                     else
                     {
                         var lcm = LCM(times);
                         if (lcm == time) time = 1;
+                        else
+                        {
+                            time = (int)Math.Round(time / 3f);
+                            if (time < 1) time = 1;
+                        }                            
                     }
                     place.schedules.Add(new Schedule(street, time));
                 }
