@@ -69,7 +69,7 @@ namespace HashCode2021
                         if (lcm == time) time = 1;
                         else
                         {
-                            time = (int)(time * 1.5f);
+                            time = (int)Math.Round((time * 0.1f));
                             if (time < 1) time = 1;
                         }
                     }
