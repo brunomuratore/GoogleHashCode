@@ -29,7 +29,7 @@ namespace HashCode2021
         {
             // ================ CUSTOM SOLVER START =========================            
             var bestLibraries = m.libraries.Values.OrderByDescending(l => l.maxPotentialScore).ToList();
-            var resultLibraries = new List<Library>();
+            var resultLibraries = new List<Street>();
 
 
 

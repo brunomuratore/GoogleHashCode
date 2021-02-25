@@ -22,14 +22,14 @@ namespace HashCode2021
 
             var scores = lines[1].Split(" ");
 
-            var books = new Dictionary<int, Book>();
+            var books = new Dictionary<int, Car>();
 
             for (int i = 0; i < b; i++)
             {
-                books.Add(i, new Book(i, int.Parse(scores[i])));
+                books.Add(i, new Car(i, int.Parse(scores[i])));
             }
 
-            var libraries = new ConcurrentDictionary<int, Library>();
+            var libraries = new ConcurrentDictionary<int, Street>();
 
             Parallel.For(0, l, i =>
             {
@@ -37,7 +37,7 @@ namespace HashCode2021
 
                 var booksL = lines[2 + i * 2 + 1].Split(" ").Select(id => books[int.Parse(id)]).ToHashSet();
 
-                libraries.TryAdd(i, new Library(i, capacity, signup, booksL));
+                libraries.TryAdd(i, new Street(i, capacity, signup, booksL));
             });
 
 
@@ -46,7 +46,7 @@ namespace HashCode2021
 
 
 
-            return new Model(books, new Dictionary<int, Library>(libraries), days);
+            return new Model(books, new Dictionary<int, Street>(libraries), days);
             // ================ CUSTOM INPUT READ END =========================
         }
     }

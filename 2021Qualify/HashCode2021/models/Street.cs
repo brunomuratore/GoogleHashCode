@@ -5,17 +5,17 @@ using System.Text;
 
 namespace HashCode2020.models
 {
-    public class Library
+    public class Street
     {
         public int id;
-        public HashSet<Book> books;
+        public HashSet<Car> books;
         public int capacity;
         public int signup;
-        public List<Book> scan = new List<Book>();
+        public List<Car> scan = new List<Car>();
 
         public int maxPotentialScore = 0;
 
-        public Library(int id, int capacity, int signup, HashSet<Book> booksL)
+        public Street(int id, int capacity, int signup, HashSet<Car> booksL)
         {
             this.id = id;
             this.capacity = capacity;

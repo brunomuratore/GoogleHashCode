@@ -7,10 +7,10 @@ namespace HashCode2021
     {
         public class Result
         {
-            public List<Library> libraries;
+            public List<Street> libraries;
             public int days;
 
-            public Result(List<Library> l, int days)
+            public Result(List<Street> l, int days)
             {
                 this.libraries = l;
                 this.days = days;
