@@ -61,7 +61,7 @@ namespace HashCode2021
                     car.route.Add(streets[street]);
                     score += streets[street].cost;
                 }
-                car.score = ((double)(duration - score) / (double)duration) * 1.2f;
+                car.score = ((double)(duration - score) / (double)duration);
                 if (car.score < 0) car.score = 0;
                 cars.Add(i, car);
             }
