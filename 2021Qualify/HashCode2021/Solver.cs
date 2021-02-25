@@ -69,7 +69,7 @@ namespace HashCode2021
                         if (lcm == time) time = 1;
                         else
                         {
-                            time = time * 1.5f;
+                            time = (int)(time * 1.5f);
                             if (time < 1) time = 1;
                         }
                     }
