@@ -15,14 +15,20 @@ namespace HashCode2021
             // ================ CUSTOM OUTPUT WRITE START =========================
             // Just fill "lines" variable with each line to be outputed on file
 
-            //lines.Add(r.libraries.Count.ToString());
+            var placesWithSchedules = r.places.Where(p => p.schedules != null && p.schedules.Count > 0).ToList();
 
-            //foreach(var library in r.libraries)
-            //{
-            //    lines.Add($"{library.id} {library.scan.Count}");
+            lines.Add(placesWithSchedules.Count.ToString());
 
-            //    lines.Add(string.Join(" ", library.scan.Select(book => book.id)));
-            //}
+            foreach(var place in placesWithSchedules)
+            {
+                lines.Add($"{place.id}");
+                lines.Add($"{place.schedules.Count}");
+
+                foreach (var schedule in place.schedules)
+                {
+                    lines.Add($"{schedule.street.id} {schedule.time}");
+                }
+            }
 
             // ================ CUSTOM OUTPUT WRITE END =========================
 
