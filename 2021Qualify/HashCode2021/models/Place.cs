@@ -20,5 +20,10 @@ namespace HashCode2020.models
             this.outDestinations = outDestinations;
             this.id = id;
         }
+
+        public Place(int id)
+        {
+            this.id = id;
+        }
     }
 }

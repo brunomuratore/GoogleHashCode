@@ -18,7 +18,21 @@ namespace HashCode2021
             var lines = File.ReadAllLines($"../../../input/{file}");
 
             // ================ CUSTOM INPUT READ START =========================
-            var (b, l, days) = lines[0].Split3();
+            var (duration, P, S, C, bonus) = lines[0].Split5();
+
+
+            var places = new ConcurrentDictionary<int, Place>();
+            var streets = new ConcurrentDictionary<int, Street>();
+
+            Parallel.For(0, S, i =>
+            {
+                var (orig, dest, name, cost) = lines[i+1].Split4<int,int,string,int>();
+
+                var originPlace = new Place(orig);
+                var destPlace = new Place(dest);
+
+                streets.TryAdd(i, new Street(name, cost, orig, dest));
+            });
 
             var scores = lines[1].Split(" ");
 
@@ -29,16 +43,8 @@ namespace HashCode2021
                 books.Add(i, new Car(i, int.Parse(scores[i])));
             }
 
-            var libraries = new ConcurrentDictionary<int, Street>();
 
-            Parallel.For(0, l, i =>
-            {
-                var (nBooks, signup, capacity) = lines[2+i*2].Split3();
-
-                var booksL = lines[2 + i * 2 + 1].Split(" ").Select(id => books[int.Parse(id)]).ToHashSet();
-
-                libraries.TryAdd(i, new Street(i, capacity, signup, booksL));
-            });
+            
 
 
             // Log info about the model

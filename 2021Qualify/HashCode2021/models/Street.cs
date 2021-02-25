@@ -9,10 +9,10 @@ namespace HashCode2020.models
     {
         public string id;
         public int cost;
-        public Place origin;
-        public Place dest;
+        public int origin;
+        public int dest;
 
-        public Street(string id, int cost, Place origin, Place dest)
+        public Street(string id, int cost, int origin, int dest)
         {
             this.id = id;
             this.cost = cost;
