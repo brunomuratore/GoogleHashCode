@@ -12,6 +12,9 @@ namespace HashCode2020.models
         public Dictionary<int, Place> inDestinations;
         public Dictionary<int, Place> outDestinations;
 
+        // set by solver
+        public List<Schedule> schedules;
+
         public Place(int id, Dictionary<int, Street> inStreets, Dictionary<int, Street> outStreets, Dictionary<int, Place> inDestinations, Dictionary<int, Place> outDestinations)
         {
             this.inStreets = inStreets;
