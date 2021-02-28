@@ -35,75 +35,43 @@ namespace HashCode2021
             // Just fill score variable
             
             var score = 0;
-
-            // steps:
-            // create list of lights
-
-            // every second:
-            //      iterate over lights that are green, and advance each car
-            //      if car reaches destination, increment total score
-            //      decrement 1 second of every light, turning to red if necessary, and next one to green
-
-            var placesWithSchedules = r.places.Where(place => place.schedules != null && place.schedules.Count > 0);
-            var lights = new Dictionary<string, Light>();
-
-            foreach (var place in placesWithSchedules)
+                                    
+            for(int t = 0; t < r.seconds; t++)
             {
-                foreach (var schedule in place.schedules)
+                foreach(var place in r.places.Where(p => p.schedules.Count > 0))
                 {
-                    //get all cars that start in that street
-                    var cars = r.cars.Where(car => car.route[0] == schedule.street).ToList();
+                    // find if there is a car at this place on the street with open semaphore at this time
+                    var openStreet = place.OpenStreet(t);
+                    var carsAtPlace = openStreet.carsAtPlace.Where(c => t >= c.timeAtPlace).ToList();
+                    if (carsAtPlace.Count == 0) continue;
 
-                    // if this schedule is the first of the place
-                    bool isFirst = place.schedules[0] == schedule;
+                    // move car
+                    var carToMove = carsAtPlace.First();
+                    carToMove.route.RemoveFirst();
+                    openStreet.carsAtPlace.Remove(carToMove);
 
-                    lights[schedule.street.id] = new Light(schedule.street, place, cars, isFirst, schedule.time);
-                }
-            }
-
-            for (int i = 0; i < r.seconds; i++)
-            {
-                foreach (var light in lights.Values.Where(l => l.isGreen && l.cars.Count > 0))
-                {
-                    var car = light.cars[0];
-                    light.cars.RemoveAt(0);
-
-                    car.curstreetindex += 1;
-                    if (car.curstreetindex >= car.route.Count -1) //car is at destination
+                    if (carToMove.route.Count > 1)
                     {
-                        score += r.bonus;
-                    }
+                        // move to next place
+                        var nextStreet = carToMove.route.First.Value;
+                        carToMove.timeAtPlace += nextStreet.cost;
+                        nextStreet.carsAtPlace.Add(carToMove);
+                    } 
                     else
                     {
-                        var nextStreet = car.route[car.curstreetindex];
-                        lights[nextStreet.id].cars.Add(car);
+                        // car at last route, see if can finish and add score
+                        var lastRoute = carToMove.route.First.Value;
+
+                        if (lastRoute.cost + t < r.seconds)
+                        {
+                            score += r.bonus;
+                            score += r.seconds - t - lastRoute.cost;
+                        }
                     }
+                    
                 }
             }
-
-            foreach(var light in lights.Values.Where(l => l.isGreen))
-            {
-                light.seconds -= 1;
-
-                if (light.seconds == 0)
-                {
-                    light.isGreen = false;
-                    light.place.curScheduleIndex += 1;
-
-                    if (light.place.curScheduleIndex == light.place.schedules.Count)
-                    {
-                        light.place.curScheduleIndex = 0;
-                    }
-
-                    var nextSched = light.place.schedules[light.place.curScheduleIndex];
-
-                    lights[nextSched.street.id].isGreen = true;
-                    lights[nextSched.street.id].seconds = nextSched.time;
-                }
-            }
-
-            // Log info about the result
-            L.Log($"any insight about the score...(duplicates, unused)");
+            
             // ================ CUSTOM SCORE CALCULATION END =========================
 
             Print(file, score);

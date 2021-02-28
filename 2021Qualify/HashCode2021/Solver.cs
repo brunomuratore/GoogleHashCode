@@ -20,48 +20,110 @@ namespace HashCode2021
         {
             return file switch
             {
-                "a.txt" => SolveGeneric(m),
-                _ => SolveGeneric(m),
+                "a.txt" => SolveD(m),
+                _ => SolveD(m),
             };
+        }
+
+        private Result SolveD(Model m)
+        {
+            foreach (var place in m.places.Values)
+            {
+                var streets = place.inStreets.Values;
+                place.totalCarsPassingByIntersec = streets.Select(s => s.countCarsPassingBy).Sum();
+                if (place.totalCarsPassingByIntersec == 0) continue;
+
+                foreach (var street in streets)
+                {
+                    if (street.countCarsPassingBy == 0) continue;
+
+                    var time = 1;
+                    place.schedules.Add(new Schedule(street, time));
+                }
+                place.CalculateSchedule();
+            }
+
+            for(int t = 0; t < m.duration; t++)
+            {
+                //if (placesWithDefaultSchedule.Count == 0) break;
+
+                foreach(var place in m.places.Values.Where(p => p.totalCarsPassingByIntersec > 0))
+                {
+                    var idx = 0;
+                    foreach(var street in place.inStreets.Values.Where(s => s.carsAtPlace.Where(c => t >= c.timeAtPlace).Count() > 0).OrderBy(s => s.carsAtPlace.Where(c => t >= c.timeAtPlace).Count()))
+                    {
+                        // Verify if any car is waiting at this light
+                        var carsAtPlace = street.carsAtPlace.Where(c => t >= c.timeAtPlace).ToList();
+                        if (carsAtPlace.Count == 0) continue;
+
+                        // Set new schedule for street if not previously set
+                        var totalLights = place.schedules.Count;
+                        var streetLight = place.schedules.Single(s => s.street.id == street.id);
+                        if (streetLight.order == -1)
+                        {
+                            var bestOrder = t % totalLights;
+                            if(place.isSet(bestOrder))
+                            {
+                                bestOrder += 1;
+                                if (bestOrder >= totalLights) bestOrder = 0;
+                            }
+                            streetLight.order = bestOrder;
+                            place.CalculateSchedule();
+                        }
+
+                        // Run simulation by moving all cars at this second
+                        var openStreet = place.OpenStreet(t);
+                        if (openStreet.id != street.id) continue;
+
+                        var carToMove = carsAtPlace.First();
+                        carToMove.route.RemoveFirst();
+                        openStreet.carsAtPlace.Remove(carToMove);
+
+                        if (carToMove.route.Count > 1)
+                        {
+                            // move to next place
+                            var nextStreet = carToMove.route.First.Value;
+                            carToMove.timeAtPlace = t + nextStreet.cost;
+                            nextStreet.carsAtPlace.Add(carToMove);
+                        }
+                    }
+                }
+            }
+
+
+            return new Result(m.places.Values.ToList(), m.duration, m.bonus, m.cars.Values.ToList(), m.streets);
         }
 
         public Result SolveGeneric(Model m)
         {
             // ================ CUSTOM SOLVER START =========================            
-            //var bestLibraries = m.libraries.Values.OrderByDescending(l => l.maxPotentialScore).ToList();
-            //var resultLibraries = new List<Street>();
-
+            
             HashSet<string> streetsWhereCarsStart = new HashSet<string>();
 
             foreach (var car in m.cars)
             {
-                streetsWhereCarsStart.Add(car.Value.route[0].id);
-
-                foreach (var street in car.Value.route)
-                {
-                    street.countCarsPassingBy += car.Value.score;
-                    street.countScore += car.Value.score;
-                }
+                streetsWhereCarsStart.Add(car.Value.route.First.Value.id);
             }
 
+            var rnd = new Random();
             foreach (var place in m.places.Values)
             {
                 var streets = place.inStreets.Values;
-                var totalCarsPassingByIntersec = streets.Select(s => s.countScore).Sum();
-                if (totalCarsPassingByIntersec == 0) continue;
+                var totalScore = streets.Select(s => s.countScore).Sum();
+                if (totalScore == 0) continue;
 
                 var times = new List<int>(); 
 
                 foreach (var street in streets)
                 {
-                    times.Add( (int) ((float)street.countScore / totalCarsPassingByIntersec * 10F));
+                    times.Add( (int) ((float)street.countScore / totalScore * 10F));
                 }
-
+                                
                 foreach (var street in streets)
                 {
                     if (street.countScore == 0) continue;
 
-                    var time = (int)((float)street.countScore / totalCarsPassingByIntersec * 10F);
+                    var time = (int)((float)street.countScore / totalScore * 10F);
                     if (time == 10) time = 1;
                     else
                     {
@@ -69,20 +131,23 @@ namespace HashCode2021
                         if (lcm == time) time = 1;
                         else
                         {
-                            time = (int)Math.Round((time * 0.1f));
+                            time = (int)Math.Round((time * 1f));
                             if (time < 1) time = 1;
                         }
                     }
+
                     place.schedules.Add(new Schedule(street, time));
                 }
 
                 place.schedules = place.schedules.OrderByDescending(s => streetsWhereCarsStart.Contains(s.street.id) ? 1 : 0).ToList();
+                place.CalculateSchedule();
+                //if (place.schedules.Count > 5) place.schedules.RemoveAt(place.schedules.Count - 1);
                 //var rest = place.schedules.Where(s => s.street.id != top.street.id).OrderByDescending(s => s.time).ToList();
 
                 //place.schedules = new List<Schedule> { top }.Concat(rest).ToList();
             }
             
-            return new Result(m.places.Values.ToList(), m.duration, m.bonus, m.cars.Values.ToList());
+            return new Result(m.places.Values.ToList(), m.duration, m.bonus, m.cars.Values.ToList(), m.streets);
             // ================ CUSTOM SOLVER END =========================
         }
 

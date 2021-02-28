@@ -9,6 +9,7 @@ namespace HashCode2020.models
     {
         public Street street;
         public int time; // seconds
+        public int order = -1;
 
         public Schedule(Street street, int time)
         {

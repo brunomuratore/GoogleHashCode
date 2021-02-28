@@ -7,15 +7,23 @@ namespace HashCode2020.models
     public class Car
     {
         public int id;
-        public List<Street> route = new List<Street>();
-        public double score = 0;
+        public LinkedList<Street> route = new LinkedList<Street>();
+        public double score = 0; // calculated at input
 
-        // used by score
-        public int curstreetindex = 0; // index of current street where the car is in its route
+        public int timeAtPlace = 0;
 
         public Car(int id)
         {            
             this.id = id;
+        }
+
+        internal void AddToRoute(Street street)
+        {
+            if (route.Count == 0) street.carsAtPlace.Add(this);
+
+            street.countCarsPassingBy += 1;
+            street.countScore += score;
+            route.AddLast(street);
         }
     }
 }

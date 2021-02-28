@@ -24,7 +24,7 @@ namespace HashCode2021
                 lines.Add($"{place.id}");
                 lines.Add($"{place.schedules.Count}");
 
-                foreach (var schedule in place.schedules)
+                foreach (var schedule in place.schedules.OrderBy(s => s.order))
                 {
                     lines.Add($"{schedule.street.id} {schedule.time}");
                 }
@@ -43,7 +43,7 @@ namespace HashCode2021
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
             //if (rating.GetNewBest().Contains(file)) 
-            File.WriteAllLines(fileName, lines);
+                File.WriteAllLines(fileName, lines);
 
             return fileName;
         }

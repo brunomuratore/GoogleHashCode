@@ -10,7 +10,7 @@ namespace HashCode2021
     class Program
     {
         private static readonly HashSet<string> files = new HashSet<string> { "a.txt", "b.txt", "c.txt", "d.txt", "e.txt", "f.txt" };
-        //private static readonly HashSet<string> files = new HashSet<string> { "c.txt" };
+        //private static readonly HashSet<string> files = new HashSet<string> { "a.txt" };
 
         static void Main(string[] args)
         {

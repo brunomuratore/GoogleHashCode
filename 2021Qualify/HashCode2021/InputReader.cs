@@ -58,7 +58,7 @@ namespace HashCode2021
                 var score = 0;
                 foreach (var street in split.Skip(1))
                 {
-                    car.route.Add(streets[street]);
+                    car.AddToRoute(streets[street]);
                     score += streets[street].cost;
                 }
                 car.score = ((double)(duration - score) / (double)duration) / 1f;
@@ -71,7 +71,7 @@ namespace HashCode2021
 
 
 
-            return new Model(cars, places, duration, bonus);
+            return new Model(cars, places, duration, bonus, streets);
             // ================ CUSTOM INPUT READ END =========================
         }
     }
