@@ -15,7 +15,7 @@ namespace HashCode2021
             // ================ CUSTOM OUTPUT WRITE START =========================
             // Just fill "lines" variable with each line to be outputed on file
 
-            var placesWithSchedules = r.places.Where(p => p.schedules != null && p.schedules.Count > 0).ToList();
+            var placesWithSchedules = r.places.Values.Where(p => p.schedules != null && p.schedules.Count > 0).ToList();
 
             lines.Add(placesWithSchedules.Count.ToString());
 
@@ -24,7 +24,7 @@ namespace HashCode2021
                 lines.Add($"{place.id}");
                 lines.Add($"{place.schedules.Count}");
 
-                foreach (var schedule in place.schedules.OrderBy(s => s.order))
+                foreach (var schedule in place.schedules.Values.OrderBy(s => s.order))
                 {
                     lines.Add($"{schedule.street.id} {schedule.time}");
                 }

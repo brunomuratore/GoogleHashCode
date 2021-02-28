@@ -8,11 +8,11 @@ namespace HashCode2020.models
     public class Place
     {
         public int id;
-        public Dictionary<string, Street> inStreets = new Dictionary<string, Street>();
+        public List<Street> inStreets = new List<Street>();        
         public Dictionary<string, Street> outStreets = new Dictionary<string, Street>();
         public Dictionary<int, Place> inDestinations = new Dictionary<int, Place>();
         public Dictionary<int, Place> outDestinations = new Dictionary<int, Place>();
-        public List<Schedule> schedules = new List<Schedule>();
+        public Dictionary<string, Schedule> schedules = new Dictionary<string, Schedule>();
 
         private int rotation = 0;
         private Dictionary<int, Street> timers = new Dictionary<int, Street>();
@@ -34,9 +34,9 @@ namespace HashCode2020.models
         internal void CalculateSchedule()
         {
             timers.Clear();
-            rotation = schedules.Sum(x => x.time);
+            rotation = schedules.Values.Sum(x => x.time);
             var t = 0;
-            foreach(var s in schedules.OrderBy(s => s.order))
+            foreach(var s in schedules.Values.OrderBy(s => s.order))
             {
                 for (int i = 0; i < s.time; i++)
                 {
@@ -50,9 +50,9 @@ namespace HashCode2020.models
         internal void CalculateScheduleD()
         {
             timers.Clear();
-            rotation = schedules.Sum(x => x.time);
+            rotation = schedules.Values.Sum(x => x.time);
             var t = 0;
-            foreach (var s in schedules.Where(s => s.order != int.MaxValue).OrderBy(s => s.order))
+            foreach (var s in schedules.Values.Where(s => s.order != int.MaxValue).OrderBy(s => s.order))
             {                
                 timers.Add(s.order, s.street);             
 
@@ -62,7 +62,7 @@ namespace HashCode2020.models
 
         internal bool isSet(int module)
         {
-            return schedules.Exists(s => s.order == module);
+            return timers.ContainsKey(module);
         }
     }
 }

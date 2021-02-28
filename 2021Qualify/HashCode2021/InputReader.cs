@@ -44,7 +44,7 @@ namespace HashCode2021
                 streets.Add(name, street);
 
                 destPlace.inDestinations.Add(orig, originPlace);
-                destPlace.inStreets.Add(name, street);
+                destPlace.inStreets.Add(street);
 
                 originPlace.outDestinations.Add(dest, destPlace);
                 originPlace.outStreets.Add(name, street);
