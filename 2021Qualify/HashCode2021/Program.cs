@@ -9,11 +9,14 @@ namespace HashCode2021
 {
     class Program
     {
-        private static readonly HashSet<string> files = new HashSet<string> { "a.txt", "b.txt", "c.txt", "d.txt", "e.txt", "f.txt" };
-        //private static readonly HashSet<string> files = new HashSet<string> { "a.txt" };
+        //private static readonly HashSet<string> files = new HashSet<string> { "a.txt", "b.txt", "c.txt", "d.txt", "e.txt", "f.txt" };
+        private static readonly HashSet<string> files = new HashSet<string> { "d.txt" };
 
         static void Main(string[] args)
         {
+            var watch = new Stopwatch();
+            watch.Start();
+
             Console.WriteLine("HashCode 2021 - Br = Hu3^2\n");
             var ratingService = new Rating(files);
 
@@ -22,6 +25,7 @@ namespace HashCode2021
             {
                 L.LogA($"#{iteration}");
 
+                //Parallel.ForEach(files, file =>
                 foreach (var file in files)
                 {
                     L.Log($"Processing {file}");
@@ -43,6 +47,11 @@ namespace HashCode2021
 
                 //Utils.WriteSummary();
             }
+
+            watch.Stop();
+            Console.WriteLine($"Finished in {watch.ElapsedMilliseconds}ms");
+
+            Process.Start(@"../../../zip.bat");
 
             Console.ReadLine();
         }        

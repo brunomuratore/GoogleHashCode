@@ -28,7 +28,7 @@ namespace HashCode2020.models
 
         internal Street OpenStreet(int t)
         {
-            return timers[t % rotation];
+            return timers.GetValueOrDefault(t % rotation);
         }
 
         internal void CalculateSchedule()
@@ -47,9 +47,22 @@ namespace HashCode2020.models
             }
         }
 
+        internal void CalculateScheduleD()
+        {
+            timers.Clear();
+            rotation = schedules.Sum(x => x.time);
+            var t = 0;
+            foreach (var s in schedules.Where(s => s.order != int.MaxValue).OrderBy(s => s.order))
+            {                
+                timers.Add(s.order, s.street);             
+
+                t += s.time;
+            }
+        }
+
         internal bool isSet(int module)
         {
-            return timers.ContainsKey(module);
+            return schedules.Exists(s => s.order == module);
         }
     }
 }
