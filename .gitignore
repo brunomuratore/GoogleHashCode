@@ -7,4 +7,6 @@
 **/.vs/
 **/obj/
 **/source.zip
-**/bin/
+**/bin
+**/output/*.txt
+*.tar
