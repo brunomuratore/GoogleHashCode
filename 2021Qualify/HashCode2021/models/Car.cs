@@ -19,9 +19,9 @@ namespace HashCode2020.models
             this.id = id;
         }
 
-        internal void AddToRoute(Street street)
+        internal void AddToRoute(Street street, bool lastRoute)
         {
-            street.countCarsPassingBy += 1;
+            if (!lastRoute) street.countCarsPassingBy += 1;
             route.AddLast(street);
             originalRoute.AddLast(street);
         }

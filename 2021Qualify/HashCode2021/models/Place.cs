@@ -63,13 +63,16 @@ namespace HashCode2020.models
             return timers.ContainsKey(module);
         }
 
-        internal void Reset()
+        internal void Reset(bool resetScore = true)
         {
             timers.Clear();
-            schedules = schedules.Where(s => !schedulesToRemove.Contains(s.Value.street.id)).ToDictionary(k => k.Key, v => v.Value);
-            foreach(var s in schedules)
+            if(resetScore)
             {
-                s.Value.order = int.MaxValue;
+                schedules = schedules.Where(s => !schedulesToRemove.Contains(s.Value.street.id)).ToDictionary(k => k.Key, v => v.Value);
+                foreach (var s in schedules)
+                {
+                    s.Value.order = int.MaxValue;
+                }
             }
         }
     }

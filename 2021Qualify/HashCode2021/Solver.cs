@@ -46,7 +46,7 @@ namespace HashCode2021
             }
 
 
-            for (int i = 0; i < 2; i++) // Run a second time removing schedules that are never used
+            for (int i = 0; i < 1; i++) 
             {
                 m.cars.Values.ToList().ForEach(c => c.Reset());
                 m.places.Values.ToList().ForEach(c => c.Reset());
@@ -94,11 +94,6 @@ namespace HashCode2021
                         car.timeAtPlace = t + nextStreet.cost;
                         car.waiting = false;
                     }
-                }
-
-                foreach (var p in m.places.Values.Where(p => p.schedules.Values.Any(s => s.order == int.MaxValue)))
-                {
-                    p.schedulesToRemove = p.schedules.Values.Where(s => s.order == int.MaxValue).Select(s => s.street.id).ToHashSet();
                 }
             }
 

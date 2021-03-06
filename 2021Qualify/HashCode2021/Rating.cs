@@ -35,28 +35,29 @@ namespace HashCode2021
             // ================ CUSTOM SCORE CALCULATION START =========================
             // Just fill score variable
 
-            var m = InputReader.Read(file);
-            
+            r.cars.ToList().ForEach(c => c.Reset());
+            r.places.Values.ToList().ForEach(c => c.Reset(false));
+            r.streets.Values.ToList().ForEach(c => c.Reset());
+
             var score = 0;
 
-            foreach (var p in m.places.Values)
+            foreach (var p in r.places.Values)
             {
-                p.schedules = r.places[p.id].schedules;
                 p.CalculateSchedule();
             }
 
-            for (int t = 0; t <= m.duration; t++)
+            for (int t = 0; t <= r.duration; t++)
             {
-                foreach (var car in m.cars.Values)
+                foreach (var car in r.cars)
                 {
                     if (t < car.timeAtPlace) continue;
 
                     if (car.route.Count == 1)
                     {
                         // car arrived, add score
-                        score += m.bonus;
-                        score += m.duration - t;
-                        car.timeAtPlace = m.duration + 1;
+                        score += r.bonus;
+                        score += r.duration - t;
+                        car.timeAtPlace = r.duration + 1;
                         continue;
                     }
 
@@ -68,7 +69,7 @@ namespace HashCode2021
                     }
 
                     // verify if this car should move
-                    var place = m.places[street.dest];
+                    var place = r.places[street.dest];
                     var openStreet = place.OpenStreet(t);
                     if (openStreet?.id != street.id || street.carsAtPlace.Peek().id != car.id || street.lastCarHere == t) continue;
 

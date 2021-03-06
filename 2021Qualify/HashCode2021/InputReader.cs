@@ -56,9 +56,10 @@ namespace HashCode2021
                 var split = lines[i + 1 + S].Split(" ");
                 var car = new Car(i);
                 var score = 0;
+                var count = 1;
                 foreach (var street in split.Skip(1))
                 {
-                    car.AddToRoute(streets[street]);
+                    car.AddToRoute(streets[street], count ++ == split.Count() - 1);
                     score += streets[street].cost;
                 }
                 car.score = ((double)(duration - score) / (double)duration) / 1f;
