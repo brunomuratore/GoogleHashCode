@@ -9,7 +9,9 @@ namespace HashCode2021
 {
     class Program
     {
+        //private static readonly HashSet<string> files = new HashSet<string> { "a.txt", "b.txt", "c.txt", "d.txt" };
         private static readonly HashSet<string> files = new HashSet<string> { "a.txt", "b.txt", "c.txt", "d.txt", "e.txt", "f.txt" };
+        //private static readonly HashSet<string> files = new HashSet<string> { "e.txt", "f.txt" };
         //private static readonly HashSet<string> files = new HashSet<string> { "d.txt" };
 
         static void Main(string[] args)
@@ -38,14 +40,14 @@ namespace HashCode2021
                     var result = solver.Solve(model);
                     L.Log($"Calculated result");
 
-                    //var score = ratingService.Calculate(file, result);
-                    //L.Log($"Calculated score: {score}");
+                    var score = ratingService.Calculate(file, result);
+                    L.Log($"Calculated score: {score}");
 
                     var outputFile = OutputWriter.Write(file, result, ratingService);
                     L.Log($"Generated output: {outputFile}\n");
                 }
 
-                //Utils.WriteSummary();
+                Utils.WriteSummary();
             }
 
             watch.Stop();

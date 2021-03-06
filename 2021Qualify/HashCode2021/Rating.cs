@@ -34,66 +34,51 @@ namespace HashCode2021
         {
             // ================ CUSTOM SCORE CALCULATION START =========================
             // Just fill score variable
+
+            var m = InputReader.Read(file);
             
             var score = 0;
 
-            foreach (var car in r.cars) car.waiting = false;
-
-            for (int t = 0; t < r.seconds; t++)
+            foreach (var p in m.places.Values)
             {
-                foreach (var car in r.cars)
-                {
-                    if (car.timeAtPlace > t || car.finalRoute.Count == 1) continue;
+                p.schedules = r.places[p.id].schedules;
+                p.CalculateSchedule();
+            }
 
-                    var street = car.finalRoute.First();
+            for (int t = 0; t <= m.duration; t++)
+            {
+                foreach (var car in m.cars.Values)
+                {
+                    if (t < car.timeAtPlace) continue;
+
+                    if (car.route.Count == 1)
+                    {
+                        // car arrived, add score
+                        score += m.bonus;
+                        score += m.duration - t;
+                        car.timeAtPlace = m.duration + 1;
+                        continue;
+                    }
+
+                    var street = car.route.First();
                     if (!car.waiting)
                     {
                         car.waiting = true;
                         street.carsAtPlace.Enqueue(car);
                     }
 
-                    // Set new schedule for street if not previously set
-                    var place = r.places[street.dest];
-                    var streetLight = place.schedules[street.id];
-                    if (streetLight.order == int.MaxValue)
-                    {
-                        var totalLights = place.schedules.Count;
-                        var bestOrder = t % totalLights;
-                        while (place.isSet(bestOrder))
-                        {
-                            bestOrder += 1;
-                            if (bestOrder >= totalLights) bestOrder = 0;
-                        }
-                        streetLight.order = bestOrder;
-                        place.CalculateScheduleD();
-                    }
-                                        
                     // verify if this car should move
+                    var place = m.places[street.dest];
                     var openStreet = place.OpenStreet(t);
-                    if (openStreet?.id != street.id || (car.finalRoute.Count > 1 && street.carsAtPlace.Peek().id != car.id)) continue;
+                    if (openStreet?.id != street.id || street.carsAtPlace.Peek().id != car.id || street.lastCarHere == t) continue;
 
-                    car.finalRoute.RemoveFirst();
-
-                    if (car.finalRoute.Count > 1)
-                    {
-                        street.carsAtPlace.Dequeue();
-                        // move to next place             
-                        var nextStreet = car.finalRoute.First.Value;
-                        car.timeAtPlace = t + nextStreet.cost;
-
-                        car.waiting = false;
-                    }
-                    else
-                    {
-                        // car at last route, see if can finish and add score
-                        var lastRoute = car.finalRoute.First.Value;
-
-                        if (lastRoute.cost + t < r.seconds)
-                        {
-                            score += r.bonus;
-                            score += r.seconds - t - lastRoute.cost;
-                        }
-                    }
+                    // move to next place  
+                    car.route.RemoveFirst();
+                    street.carsAtPlace.Dequeue();
+                    street.lastCarHere = t;
+                    var nextStreet = car.route.First.Value;
+                    car.timeAtPlace = t + nextStreet.cost;
+                    car.waiting = false;
                 }
             }
             

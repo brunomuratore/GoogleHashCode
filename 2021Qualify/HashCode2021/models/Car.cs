@@ -7,8 +7,8 @@ namespace HashCode2020.models
     public class Car
     {
         public int id;
+        public LinkedList<Street> originalRoute = new LinkedList<Street>();
         public LinkedList<Street> route = new LinkedList<Street>();
-        public LinkedList<Street> finalRoute = new LinkedList<Street>();
         public double score = 0; // calculated at input
 
         public int timeAtPlace = 0;
@@ -21,12 +21,16 @@ namespace HashCode2020.models
 
         internal void AddToRoute(Street street)
         {
-            // if (route.Count == 0) street.carsAtPlace.Enqueue(this);
-
             street.countCarsPassingBy += 1;
-            street.countScore += score;
             route.AddLast(street);
-            finalRoute.AddLast(street);
+            originalRoute.AddLast(street);
+        }
+
+        public void Reset()
+        {
+            timeAtPlace = 0;
+            waiting = false;
+            route = new LinkedList<Street>(originalRoute);
         }
     }
 }

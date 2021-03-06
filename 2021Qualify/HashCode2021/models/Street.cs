@@ -12,9 +12,9 @@ namespace HashCode2020.models
         public int origin;
         public int dest;
         public double countCarsPassingBy = 0;
-        public double countScore = 0;
+        public double carsScore = 0;
         public Queue<Car> carsAtPlace = new Queue<Car>();
-        public Queue<Car> carsArrivingAtPlace = new Queue<Car>();
+        internal int lastCarHere = -1;
 
         public Street(string id, int cost, int origin, int dest)
         {
@@ -22,6 +22,12 @@ namespace HashCode2020.models
             this.cost = cost;
             this.origin = origin;
             this.dest = dest;
+        }
+
+        public void Reset()
+        {
+            lastCarHere = -1;
+            carsAtPlace.Clear();
         }
                 
     }

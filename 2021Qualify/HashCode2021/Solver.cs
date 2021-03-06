@@ -29,6 +29,7 @@ namespace HashCode2021
 
         private Result SolveD(Model m)
         {
+            var rnd = new Random();
             foreach (var place in m.places.Values)
             {
                 var streets = place.inStreets;
@@ -44,55 +45,64 @@ namespace HashCode2021
                 }
             }
 
-            var placesWithCars = m.places.Values.Where(p => p.totalCarsPassingByIntersec > 0).ToList();
 
-            for (int t = 0; t < m.duration; t++)
+            for (int i = 0; i < 2; i++) // Run a second time removing schedules that are never used
             {
-                foreach (var car in m.cars.Values)
+                m.cars.Values.ToList().ForEach(c => c.Reset());
+                m.places.Values.ToList().ForEach(c => c.Reset());
+                m.streets.Values.ToList().ForEach(c => c.Reset());
+
+                for (int t = 0; t <= m.duration; t++)
                 {
-                    if (car.timeAtPlace > t || car.route.Count == 1) continue;
-
-                    var street = car.route.First();
-                    if(!car.waiting)
+                    foreach (var car in m.cars.Values)
                     {
-                        car.waiting = true;
-                        street.carsAtPlace.Enqueue(car);
-                    }
+                        if (car.timeAtPlace > t || car.route.Count == 1) continue;
 
-                    // Set new schedule for street if not previously set
-                    var place = m.places[street.dest];
-                    var streetLight = place.schedules[street.id];
-                    if (streetLight.order == int.MaxValue)
-                    {
-                        var totalLights = place.schedules.Count;
-                        var bestOrder = t % totalLights;
-                        while (place.isSet(bestOrder))
+                        var street = car.route.First();
+
+                        if (!car.waiting) // Enqueue this car only one time
                         {
-                            bestOrder += 1;
-                            if (bestOrder >= totalLights) bestOrder = 0;
+                            car.waiting = true;
+                            street.carsAtPlace.Enqueue(car);
                         }
-                        streetLight.order = bestOrder;
-                        place.CalculateScheduleD();
-                    }
 
-                    // verify if this car should move
-                    var openStreet = place.OpenStreet(t);
-                    if (openStreet?.id != street.id || street.carsAtPlace.Peek().id != car.id) continue;
+                        // Set new schedule for street if not previously set
+                        var place = m.places[street.dest];
+                        var schedule = place.schedules[street.id];
+                        if (schedule.order == int.MaxValue) // Schedule not set to a order yet
+                        {
+                            var totalSchedules = place.schedules.Count;
+                            var bestOrder = t % totalSchedules;
+                            while (place.isSet(bestOrder))
+                            {
+                                bestOrder++;
+                                if (bestOrder >= totalSchedules) bestOrder = 0;
+                            }
+                            schedule.order = bestOrder;
+                            place.CalculateScheduleD();
+                        }
 
-                    street.carsAtPlace.Dequeue();
-                    car.route.RemoveFirst();
+                        // verify if this car should move
+                        var openStreet = place.OpenStreet(t);
+                        if (openStreet?.id != street.id || street.carsAtPlace.Peek().id != car.id || street.lastCarHere == t) continue;
 
-                    if (car.route.Count > 1)
-                    {
-                        // move to next place             
+                        // move to next place        
+                        car.route.RemoveFirst();
+                        street.carsAtPlace.Dequeue();
+                        street.lastCarHere = t;
                         var nextStreet = car.route.First.Value;
                         car.timeAtPlace = t + nextStreet.cost;
-
                         car.waiting = false;
                     }
                 }
+
+                foreach (var p in m.places.Values.Where(p => p.schedules.Values.Any(s => s.order == int.MaxValue)))
+                {
+                    p.schedulesToRemove = p.schedules.Values.Where(s => s.order == int.MaxValue).Select(s => s.street.id).ToHashSet();
+                }
             }
 
+            
 
             return new Result(m.places, m.duration, m.bonus, m.cars.Values.ToList(), m.streets);
         }
@@ -103,30 +113,34 @@ namespace HashCode2021
             
             HashSet<string> streetsWhereCarsStart = new HashSet<string>();
 
-            foreach (var car in m.cars)
+            foreach (var car in m.cars.Values)
             {
-                streetsWhereCarsStart.Add(car.Value.route.First.Value.id);
+                streetsWhereCarsStart.Add(car.route.First.Value.id);
+                foreach(var route in car.route)
+                {
+                    route.carsScore += car.score;
+                }
             }
 
             var rnd = new Random();
             foreach (var place in m.places.Values)
             {
                 var streets = place.inStreets;
-                var totalScore = streets.Select(s => s.countScore).Sum();
+                var totalScore = streets.Select(s => s.carsScore).Sum();
                 if (totalScore == 0) continue;
 
                 var times = new List<int>(); 
 
                 foreach (var street in streets)
                 {
-                    times.Add( (int) ((float)street.countScore / totalScore * 10F));
+                    times.Add( (int) ((float)street.carsScore / totalScore * 10F));
                 }
                                 
                 foreach (var street in streets)
                 {
-                    if (street.countScore == 0) continue;
+                    if (street.carsScore == 0) continue;
 
-                    var time = (int)((float)street.countScore / totalScore * 10F);
+                    var time = (int)((float)street.carsScore / totalScore * 10F);
                     if (time == 10) time = 1;
                     else
                     {

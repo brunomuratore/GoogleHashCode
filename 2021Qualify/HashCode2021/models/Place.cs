@@ -20,6 +20,7 @@ namespace HashCode2020.models
         //used by score
         public int curScheduleIndex = 0; //current green light
         public double totalCarsPassingByIntersec = 0;
+        internal HashSet<string> schedulesToRemove = new HashSet<string>();
 
         public Place(int id)
         {
@@ -51,18 +52,25 @@ namespace HashCode2020.models
         {
             timers.Clear();
             rotation = schedules.Values.Sum(x => x.time);
-            var t = 0;
             foreach (var s in schedules.Values.Where(s => s.order != int.MaxValue).OrderBy(s => s.order))
             {                
-                timers.Add(s.order, s.street);             
-
-                t += s.time;
+                timers.Add(s.order, s.street);          
             }
         }
 
         internal bool isSet(int module)
         {
             return timers.ContainsKey(module);
+        }
+
+        internal void Reset()
+        {
+            timers.Clear();
+            schedules = schedules.Where(s => !schedulesToRemove.Contains(s.Value.street.id)).ToDictionary(k => k.Key, v => v.Value);
+            foreach(var s in schedules)
+            {
+                s.Value.order = int.MaxValue;
+            }
         }
     }
 }

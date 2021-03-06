@@ -19,10 +19,13 @@ namespace HashCode2021
 
             lines.Add(placesWithSchedules.Count.ToString());
 
-            foreach(var place in placesWithSchedules)
+            // 1k on C
+            // .Where(s => s.order < int.MaxValue)
+
+            foreach (var place in placesWithSchedules)
             {
                 lines.Add($"{place.id}");
-                lines.Add($"{place.schedules.Count}");
+                lines.Add($"{place.schedules.Count()}");
 
                 foreach (var schedule in place.schedules.Values.OrderBy(s => s.order))
                 {
