@@ -35,9 +35,9 @@ namespace HashCode2021
             // ================ CUSTOM SCORE CALCULATION START =========================
             // Just fill score variable
 
-            r.cars.ToList().ForEach(c => c.Reset());
             r.places.Values.ToList().ForEach(c => c.Reset(false));
             r.streets.Values.ToList().ForEach(c => c.Reset());
+            r.cars.ToList().ForEach(c => c.Reset());
 
             var score = 0;
 
@@ -82,7 +82,7 @@ namespace HashCode2021
                     car.waiting = false;
                 }
             }
-            
+
             // ================ CUSTOM SCORE CALCULATION END =========================
 
             Print(file, score);

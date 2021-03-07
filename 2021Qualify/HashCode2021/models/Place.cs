@@ -20,7 +20,9 @@ namespace HashCode2020.models
         //used by score
         public int curScheduleIndex = 0; //current green light
         public double totalCarsPassingByIntersec = 0;
-        internal HashSet<string> schedulesToRemove = new HashSet<string>();
+        internal HashSet<string> schedulesToRemove = new HashSet<string>();        
+
+        private object tlock = new object();
 
         public Place(int id)
         {
@@ -29,49 +31,64 @@ namespace HashCode2020.models
 
         internal Street OpenStreet(int t)
         {
-            return timers.GetValueOrDefault(t % rotation);
+            lock (tlock)
+            {
+                return timers.GetValueOrDefault(t % rotation);
+            }            
         }
 
         internal void CalculateSchedule()
         {
-            timers.Clear();
-            rotation = schedules.Values.Sum(x => x.time);
-            var t = 0;
-            foreach(var s in schedules.Values.OrderBy(s => s.order))
+            lock (tlock)
             {
-                for (int i = 0; i < s.time; i++)
+                timers.Clear();
+                rotation = schedules.Values.Sum(x => x.time);
+                var t = 0;
+                foreach (var s in schedules.Values.OrderBy(s => s.order))
                 {
-                    timers.Add(i + t, s.street);
-                }
+                    for (int i = 0; i < s.time; i++)
+                    {
+                        timers.Add(i + t, s.street);
+                    }
 
-                t+= s.time;
+                    t += s.time;
+                }
             }
         }
 
         internal void CalculateScheduleD()
         {
-            timers.Clear();
-            rotation = schedules.Values.Sum(x => x.time);
-            foreach (var s in schedules.Values.Where(s => s.order != int.MaxValue).OrderBy(s => s.order))
-            {                
-                timers.Add(s.order, s.street);          
-            }
+            lock (tlock)
+            {
+                timers.Clear();
+                rotation = schedules.Values.Sum(x => x.time);
+                foreach (var s in schedules.Values.Where(s => s.order != int.MaxValue).OrderBy(s => s.order))
+                {
+                    timers.Add(s.order, s.street);
+                }
+            }            
         }
 
         internal bool isSet(int module)
         {
-            return timers.ContainsKey(module);
+            lock (tlock)
+            {
+                return timers.ContainsKey(module);
+            }
         }
 
         internal void Reset(bool resetScore = true)
         {
-            timers.Clear();
-            if(resetScore)
+            lock (tlock)
             {
-                schedules = schedules.Where(s => !schedulesToRemove.Contains(s.Value.street.id)).ToDictionary(k => k.Key, v => v.Value);
-                foreach (var s in schedules)
+                timers.Clear();
+                if (resetScore)
                 {
-                    s.Value.order = int.MaxValue;
+                    schedules = schedules.Where(s => !schedulesToRemove.Contains(s.Value.street.id)).ToDictionary(k => k.Key, v => v.Value);
+                    foreach (var s in schedules)
+                    {
+                        s.Value.order = int.MaxValue;
+                    }
                 }
             }
         }

@@ -29,8 +29,9 @@ namespace HashCode2020.models
         public void Reset()
         {
             timeAtPlace = 0;
-            waiting = false;
+            waiting = true;
             route = new LinkedList<Street>(originalRoute);
+            route.First.Value.carsAtPlace.Enqueue(this);
         }
     }
 }
